@@ -1,0 +1,30 @@
+{
+  "name": "ymzz-zhanzhen",
+  "private": true,
+  "version": "0.1.0",
+  "description": "晏銘湛箴 — Vibe Pay 參賽作品：把人說過的話當作潑出去的水，用量化+標籤注解，與 AI 輸出做星雲匹配",
+  "scripts": {
+    "dev": "pnpm --filter ui dev",
+    "build": "pnpm --filter ui build",
+    "preview": "pnpm --filter ui preview",
+    "test": "pnpm --filter ui test",
+    "tauri": "pnpm --filter desktop tauri"
+  },
+  "workspaces": [
+    "apps/ui",
+    "apps/desktop"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0",
+    "@playwright/test": "^1.48.0",
+    "playwright": "^1.48.0"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

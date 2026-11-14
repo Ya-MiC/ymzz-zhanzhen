@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/api/types.ts","./src/i18n/index.ts","./src/plugin-host/host.ts","./src/slots/canvasslot.tsx","./src/slots/navslot.tsx","./src/slots/panelslot.tsx","./src/slots/settingsslot.tsx","./src/store/ui.ts","./src/themes/contrast.test.ts","./src/themes/derive.ts","./src/themes/themes.ts"],"version":"5.6.3"}

@@ -1,0 +1,15 @@
+# 晏銘湛箴 — 動作詞表（config/action-words.txt，每行一詞）
+# 評分 actionability = clamp(命中個數 / 3)
+
+做
+建
+寫
+改
+買
+學
+去
+開始
+完成
+設計
+實作
+測試

@@ -1,0 +1,38 @@
+# Rust
+target/
+Cargo.lock
+*.rs.bak
+
+# Node / pnpm
+node_modules/
+.pnpm/
+dist/
+dist-tauri/
+*.env
+.env.local
+.env.*.local
+npm-debug.log*
+pnpm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tauri
+src-tauri/target/
+src-tauri/gen/
+target/
+
+# macOS app
+*.app/
+
+# Misc
+*.log
+coverage/

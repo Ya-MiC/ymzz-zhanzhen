@@ -1,0 +1,21 @@
+[package]
+name = "ymzz-core"
+version = "0.1.0"
+edition = "2021"
+
+# [阻塞項] rusqlite 與 rhai 不在本機快取，需網路取得。先以 std 僅保留介面，db.rs / scoring.rs 以 stub 編譯通過。
+# rusqlite = { version = "0.33", features = ["bundled"] }
+# rhai = "1.8"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+hmac = "0.12"
+hex = "0.4"
+toml = "1"
+thiserror = "1"
+uuid = { version = "1", features = ["v4"] }
+time = { version = "0.3", features = ["serde", "formatting", "parsing"] }
+
+[dev-dependencies]
