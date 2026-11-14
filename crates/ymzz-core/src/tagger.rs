@@ -68,3 +68,50 @@ pub fn auto_tags(text: &str, top: usize, action_words: &[String]) -> Vec<Tag> {
         .map(|(name, _)| Tag { id: None, name })
         .collect()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn cjk_bigrams_only_pairs_adjacent_cjk() {
+        let bg = cjk_bigrams("說出去的話 abc");
+        assert!(bg.contains(&"說出".to_string()));
+        assert!(bg.contains(&"出去".to_string()));
+        // 拉丁字母不產生雙元組
+        assert!(!bg.iter().any(|b| b.contains('a')));
+    }
+
+    #[test]
+    fn is_cjk_matches_basic_block() {
+        assert!(is_cjk('湛'));
+        assert!(is_cjk('水'));
+        assert!(!is_cjk('a'));
+        assert!(!is_cjk(' '));
+    }
+
+    #[test]
+    fn auto_tags_returns_at_most_top() {
+        let tags = auto_tags("把說過的話記下來，說過的話就是潑出去的水", 3, &[]);
+        assert!(tags.len() <= 3);
+    }
+
+    #[test]
+    fn rule_words_get_boosted() {
+        let words = vec!["開始".to_string()];
+        let with = auto_tags("今天開始做注解", 5, &words);
+        assert!(with.iter().any(|t| t.name == "開始"), "命中規則詞必須進榜");
+    }
+
+    #[test]
+    fn empty_text_gives_no_tags() {
+        let tags = auto_tags("", 3, &[]);
+        assert!(tags.is_empty());
+    }
+
+    #[test]
+    fn latin_words_lowercased() {
+        let tags = auto_tags("Rust Tauri Rust", 3, &[]);
+        assert!(tags.iter().any(|t| t.name == "rust"), "重複拉丁詞按頻率入榜且小寫");
+    }
+}

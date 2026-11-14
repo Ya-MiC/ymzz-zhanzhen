@@ -169,3 +169,96 @@ pub fn parse_json_array<P: AsRef<Path>>(path: P) -> Result<Vec<IngestItem>, Box<
     let items: Vec<IngestItem> = serde_json::from_str(&content)?;
     Ok(items)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn conn() -> DbConn {
+        DbConn { path: ":memory:".to_string() }
+    }
+
+    fn item(text: &str) -> IngestItem {
+        IngestItem {
+            text: text.to_string(),
+            source_platform: Some("test".to_string()),
+            source_tool: None,
+            session_id: None,
+            message_id: None,
+            project_id: None,
+            created_at: None,
+        }
+    }
+
+    #[test]
+    fn valid_batch_is_accepted() {
+        let c = conn();
+        let req = IngestRequest {
+            token: "tok".into(),
+            items: vec![item("第一句"), item("第二句"), item("第三句")],
+        };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 3);
+        assert_eq!(r.rejected, 0);
+        assert!(r.errors.is_empty());
+    }
+
+    #[test]
+    fn wrong_token_rejects_everything() {
+        let c = conn();
+        let req = IngestRequest { token: "bad".into(), items: vec![item("x")] };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 0);
+        assert_eq!(r.errors.len(), 1);
+    }
+
+    #[test]
+    fn empty_text_is_rejected() {
+        let c = conn();
+        let req = IngestRequest { token: "tok".into(), items: vec![item("   ")] };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 0);
+        assert_eq!(r.rejected, 1);
+        assert!(r.errors.iter().any(|e| e.contains("空文本")));
+    }
+
+    #[test]
+    fn oversized_item_is_rejected_at_64kb() {
+        let c = conn();
+        let big = "A".repeat(64 * 1024 + 1); // 超限 1 byte
+        let req = IngestRequest { token: "tok".into(), items: vec![item(&big)] };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 0);
+        assert_eq!(r.rejected, 1);
+        assert!(r.errors.iter().any(|e| e.contains("64KB")));
+    }
+
+    #[test]
+    fn exactly_64kb_passes() {
+        let c = conn();
+        let big = "B".repeat(64 * 1024); // 恰好上限
+        let req = IngestRequest { token: "tok".into(), items: vec![item(&big)] };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 1);
+    }
+
+    #[test]
+    fn batch_over_1000_items_is_refused() {
+        let c = conn();
+        let items: Vec<IngestItem> = (0..1001).map(|i| item(&format!("句{i}"))).collect();
+        let req = IngestRequest { token: "tok".into(), items };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 0);
+        assert!(r.errors.iter().any(|e| e.contains("1000")));
+    }
+
+    #[test]
+    fn bad_rfc3339_falls_back_to_now() {
+        let c = conn();
+        let mut it = item("時間錯也收");
+        it.created_at = Some("not-a-date".to_string());
+        let req = IngestRequest { token: "tok".into(), items: vec![it] };
+        let r = ingest(&c, &req, "tok");
+        assert_eq!(r.accepted, 1, "無效時間應回退為導入時間，不拒收");
+    }
+}
