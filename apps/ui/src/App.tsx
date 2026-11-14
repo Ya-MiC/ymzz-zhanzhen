@@ -1,27 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useUiStore } from '@/store/ui'
 import { themes, type ThemeId } from '@/themes/themes'
-import { LOCKED_COLORS } from '@/themes/derive'
 import NavSlot from '@/slots/NavSlot'
 import CanvasSlot from '@/slots/CanvasSlot'
 import PanelSlot from '@/slots/PanelSlot'
-import SettingsSlot from '@/slots/SettingsSlot'
+import SettingsPage from '@/pages/SettingsPage'
 
 export default function App() {
-  const { themeId, colorScheme, sidebarCollapsed, toggleSidebar, setColorScheme, contrast } = useUiStore((s) => ({
-    themeId: s.themeId,
-    colorScheme: s.colorScheme,
-    sidebarCollapsed: s.sidebarCollapsed,
-    toggleSidebar: s.toggleSidebar,
-    setColorScheme: s.setColorScheme,
-    contrast: s.contrast,
-  }))
+  const { themeId, colorScheme, sidebarCollapsed, toggleSidebar, setColorScheme } = useUiStore()
+  const [view, setView] = useState<'main' | 'settings'>('main')
 
   const theme = themes.find((t) => t.id === themeId as ThemeId) ?? themes[0]
-  const [bg, surface, raised, accent] = theme.colors
 
   // 根元素設定 data-* 以供 CSS 變數
   const rootClass = `palette-${themeId} mode-${colorScheme}`
+
+  if (view === 'settings') {
+    return (
+      <div className={`h-screen bg-white text-slate-900 font-sans ${rootClass}`}>
+        <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur flex items-center justify-between px-4 shrink-0">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setView('main')} className="min-h-[44px] px-3 rounded hover:bg-slate-100 text-sm">
+              ← 返回
+            </button>
+            <span className="font-semibold tracking-tight">設置</span>
+          </div>
+          <span className="text-xs text-slate-400">晏銘湛箴 · 無無即無</span>
+        </header>
+        <div className="h-[calc(100vh-4rem)]">
+          <SettingsPage />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={`h-screen bg-white text-slate-900 font-sans ${rootClass}`}>
@@ -66,9 +77,14 @@ export default function App() {
         </aside>
       </div>
 
-      {/* 底部設置浮層（簡化為固定按鈕進入設置） */}
+      {/* 底部：進入設置 */}
       <footer className="h-14 border-t border-slate-200 bg-white/80 flex items-center justify-end px-4 shrink-0">
-        <button className="px-4 py-2 rounded border border-slate-200 hover:bg-slate-50 text-sm">設置</button>
+        <button
+          onClick={() => setView('settings')}
+          className="min-h-[44px] px-4 rounded border border-slate-200 hover:bg-slate-50 text-sm"
+        >
+          設置
+        </button>
       </footer>
     </div>
   )
