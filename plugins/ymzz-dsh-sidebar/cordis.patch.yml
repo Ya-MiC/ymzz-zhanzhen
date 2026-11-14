@@ -1,0 +1,12 @@
+# ymzz-dsh-sidebar bundle patch
+#
+# `dsh.bundle.patch` layer of the published package: when installed through the
+# official CLI —
+#
+#   dsh plugin --profile <name> add git+https://github.com/Ya-MiC/ymzz-dsh-sidebar.git
+#
+# — the command appends this single `insert` (one plugin row) to the bundle
+# stack, exactly like a manual cordis.patch.yml mount line. No profile edits.
+- insert:
+    - id: ymzz-zhanzhen
+      name: ymzz-dsh-sidebar

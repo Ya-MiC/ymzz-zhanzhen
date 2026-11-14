@@ -1,0 +1,16 @@
+{
+  "id": "ymzz/ymzz-dsh-sidebar",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "description": "晏銘湛箴側邊欄：語錄流、量化評分、AI 注解與 Vibe Pay 用量，一行安裝重開即用。無無即無，zhanranchangji。",
+  "engines": {
+    "dsh": ">=0.1.7-alpha.1"
+  },
+  "contributes": {
+    "tools": [],
+    "skills": []
+  },
+  "client": {
+    "main": "./client.js"
+  }
+}
