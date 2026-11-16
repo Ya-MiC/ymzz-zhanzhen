@@ -1,6 +1,6 @@
 // MIT. Portable Windows shell. No custom registry, autorun, services, or scheduled tasks.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use std::{io::{BufRead,BufReader},process::{Child,Command,Stdio},sync::Mutex,time::Duration};
+use std::{io::{BufRead,BufReader,Read},process::{Child,Command,Stdio},sync::Mutex,time::Duration};
 use tauri::Manager;
 use tauri_plugin_opener::OpenerExt;
 struct RuntimeProcess(Mutex<Option<Child>>);
@@ -22,6 +22,8 @@ fn pick_workspace() -> windows::core::Result<Option<String>> {
 }
 fn main(){
  if std::env::args().any(|s|s=="--pick-workspace"){
+  // Parent stdin ownership prevents an orphan native picker if the app is closed abruptly.
+  if std::env::var_os("YMZZ_PICKER_PARENT_PIPE").is_some(){std::thread::spawn(||{let mut byte=[0u8;1];while std::io::stdin().read(&mut byte).unwrap_or(0)>0{}std::process::exit(0);});}
   #[cfg(windows)] {match pick_workspace(){Ok(path)=>println!("{}",serde_json::json!({"path":path})),Err(_)=>println!("{}",serde_json::json!({"path":null}))};}
   #[cfg(not(windows))] println!("{}",serde_json::json!({"path":null}));
   return;

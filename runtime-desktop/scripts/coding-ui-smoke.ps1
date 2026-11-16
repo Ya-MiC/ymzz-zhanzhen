@@ -17,6 +17,13 @@ function Wait-Round([string]$id,[int]$round,[string]$status=''){
  if(!$ready){throw "Coding GUI pipeline did not reach round $round state $status; actual $($task.state), error $($task.error)"};Start-Sleep -Milliseconds 500;return $task
 }
 function Screenshot([string]$name){$bounds=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds;$image=New-Object System.Drawing.Bitmap $bounds.Width,$bounds.Height;$g=[System.Drawing.Graphics]::FromImage($image);$g.CopyFromScreen($bounds.Location,[System.Drawing.Point]::Empty,$bounds.Size);$image.Save((Join-Path (Get-Location) "dist/smoke/$name.png"));$g.Dispose();$image.Dispose()}
+# Configure a local endpoint through the GUI, but NEVER call inference here.
+Click '模型設定'
+Click '啟用本機模型連線權限'
+$model=Find-Control '模型名稱'
+($model.GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern)).SetValue('offline-not-connected')
+Click '允許連接這台裝置上的模型'
+if((State).provider.model -ne 'offline-not-connected'){throw 'Actual GUI local-provider configuration failed'}
 Click '編碼工作區'
 Click '啟用編碼工作區（每批仍需授權）'
 # Open the actual native folder picker, then cancel without inspecting any private filesystem.
@@ -25,8 +32,7 @@ $condition=New-Object System.Windows.Automation.PropertyCondition([System.Window
 $deadline=(Get-Date).AddSeconds(15)
 do{$picker=[System.Windows.Automation.AutomationElement]::RootElement.FindFirst([System.Windows.Automation.TreeScope]::Children,$condition);if(!$picker){Start-Sleep -Milliseconds 200}}until($picker -or (Get-Date) -gt $deadline)
 if(!$picker){throw 'Native folder picker window did not open'}
-$cancelCondition=New-Object System.Windows.Automation.PropertyCondition([System.Windows.Automation.AutomationElement]::NameProperty,'Cancel')
-$cancel=$picker.FindFirst([System.Windows.Automation.TreeScope]::Descendants,$cancelCondition);if(!$cancel){throw 'Cannot cancel native picker'};($cancel.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern)).Invoke();Start-Sleep -Milliseconds 500
+($picker.GetCurrentPattern([System.Windows.Automation.WindowPattern]::Pattern)).Close();Start-Sleep -Milliseconds 500
 function Complete-Demo([bool]$accept){
  $before=@((State).coding.tasks).Count
  Click '建立離線程式修復示例'
@@ -59,7 +65,7 @@ function Complete-Demo([bool]$accept){
   $file=Join-Path (Join-Path (Join-Path $Data 'coding-examples') $task.workspace) 'calculator.mjs'
   if((Get-Content -Raw -Encoding utf8 $file) -ne "export function add(a, b) { return a - b; }`n"){throw 'Rollback did not restore original project bytes'}
  }
- @{task=$task;evidence=$evidence;nativeGui=$true;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativePickerOpenedAndCancelled=$true}|ConvertTo-Json -Depth 40|Set-Content -Encoding utf8 "dist/smoke/windows-coding-$accept.json"
+ @{task=$task;evidence=$evidence;nativeGui=$true;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativePickerOpenedAndCancelled=$true;providerConfiguredViaGuiWithoutInference=$true}|ConvertTo-Json -Depth 40|Set-Content -Encoding utf8 "dist/smoke/windows-coding-$accept.json"
 }
 Complete-Demo $true
 Complete-Demo $false
