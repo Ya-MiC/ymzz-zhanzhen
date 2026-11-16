@@ -9,9 +9,9 @@
 **[完整 DSH 應用、操作方法、真實證據與未完成界線 → applications/dsh/README.md](applications/dsh/README.md)**
 
 - 官方 https://github.com/deepseek-ai/deepseek-harness ，固定 `39163dd30f703a79079e2d2446545cff3c453738`，**21,632 原始檔完整保留**；CLI／Web／Electron Desktop／Desktop Host 一起建置，原版 407＋湛箴插件＝408 workspace。
-- 已實際通過完整上游 **8 個 artifacts build gates**；真正 `ctx.agents.create`／Agent Loop／Tool registry／ApprovalService／`ctx.skills`，不是另一套示範 shell。真實離線修復：讀檔→人工逐工具核准→修改→測試失敗→修復→測試通過→差異驗收／記憶。[實測證據](applications/dsh/evidence/full-dsh-web-task.json)。假模型明確標示，沒有 live／付費／NIM 推論。
+- 已實際通過 Linux **8 個 artifacts build gates** 與 [Windows 完整 build **10 個 gates**](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43836410889)（含 host/client aggregate checks）；真正 `ctx.agents.create`／Agent Loop／Tool registry／ApprovalService／`ctx.skills`，不是另一套示範 shell。真實離線修復：讀檔→人工逐工具核准→修改→測試失敗→修復→測試通過→差異驗收／記憶。[實測證據](applications/dsh/evidence/full-dsh-web-task.json)。假模型明確標示，沒有 live／付費／NIM 推論。
 - `cd applications/dsh` → `pnpm install:upstream` → `pnpm build` → `pnpm start`。保留完整原生聊天、工作區、模型設定、插件管理；先填暱稱、四套溫潤主題、使用你提供的原圖。
-- **尚不提供冒稱已通過的完整 DSH Windows 下載。** [新 Windows qualification](.github/workflows/full-dsh.yml) 以原版 `package:desktop:win:x64:dir --unsigned` 打包並做真正 GUI 任務測試；沒有成功結果就不稱完成。
+- **尚不提供冒稱已通過的完整 DSH Windows 下載。** [新 Windows qualification](.github/workflows/full-dsh.yml) 以原版 `package:desktop:win:x64:dir --unsigned` 打包並做真正 GUI 任務測試；2026-11-16 18:17 KST 已由官方 Electron packager 真正組出 `晏銘湛箴.exe`，但最後上游 smoke 還硬編碼舊 EXE 名稱而失敗，GUI 尚未驗收；修正後重驗，不把 build-only 當完成。
 - **具體授權阻擋：**[完整 production 掃描](applications/dsh/evidence/full-production-license-report.json) 664 個 package 找到 sharp/libvips 的 LGPL-3.0-or-later native runtime。這可依法商用，但不是 MIT／permissive，嚴格分發 gate 在替代或明確合規決策前阻止 EXE artifact 上傳。MPL-2.0 LibreOffice 亦保留原義務。先前「386／0 blocked」只屬下方舊相容層，不能套用完整 DSH。
 - 完整 DSH 版是 Electron，自帶 Chromium；不沿用舊 Tauri 的 WebView2 宣稱。不用 NSIS、不註冊 dsh://、不做自訂 registry persistence；不保證 Windows 本身零系統寫入。支付寶由你自行處理。
 

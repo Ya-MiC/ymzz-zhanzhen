@@ -39,6 +39,10 @@ jobs:
       - name: Real full DSH Electron Windows directory packaging (unsigned, no NSIS installer, no publishing)
         working-directory: applications/dsh/.worktree
         run: pnpm run package:desktop:win:x64:dir --unsigned
+      - name: Record actual EXE hashes, embedded icon and bundled Node/notices even if upstream smoke fails
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        shell: pwsh
+        run: ./applications/dsh/scripts/collect-package.ps1 -BuildRoot applications/dsh/.worktree
       - name: Actual packaged FULL DSH GUI + real agent/task/gate workflow in Chinese-space portable path
         shell: pwsh
         run: ./applications/dsh/scripts/windows-smoke.ps1 -BuildRoot applications/dsh/.worktree

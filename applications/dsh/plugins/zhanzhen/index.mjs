@@ -5,6 +5,16 @@ import {pathToFileURL} from 'node:url';
 import {randomUUID,createHash} from 'node:crypto';
 const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const ensure=(ok,code)=>{if(!ok)throw new Error(code)};
+// Desktop Host runs in Electron Node mode. Its process.execPath is the GUI EXE;
+// a sanitized test environment deliberately must not inherit Electron flags or
+// arbitrary parent variables. Use the official, separately bundled Node payload.
+export function resolveTestNode({environment=process.env,platform=process.platform,executable=process.execPath,electron=Boolean(process.versions.electron)}={}){
+ const root=environment.DSH_PRIMARY_RUNTIME;
+ if(!root){ensure(!electron,'BUNDLED_PRIMARY_NODE_REQUIRED');return executable}
+ const paths=platform==='win32'?path.win32:path.posix;
+ ensure(paths.isAbsolute(root)&&!(platform==='win32'&&root.startsWith('\\\\')),'PRIMARY_RUNTIME_LOCAL_PATH_REQUIRED');
+ return paths.join(root,'dependencies','node','bin',platform==='win32'?'node.exe':'node');
+}
 export const name='ymzz-zhanzhen';
 export const inject=['agents','llm','tools','workingDirectory','skills','approval','webServer'];
 export async function apply(ctx,config){
@@ -18,6 +28,7 @@ export async function apply(ctx,config){
  for(const task of Object.values(saved.tasks))if(['claimed','running','waiting-approval'].includes(task.state)){task.state='interrupted';task.error='重啟不會自動繼續。請驗收差異或還原。'}persist();
  const {Workspace}=await import(pathToFileURL(path.join(root,'runtime/src/coding/workspace.mjs')));
  const {runTest}=await import(pathToFileURL(path.join(root,'runtime/src/coding/test-tool.mjs')));
+ const testNode=resolveTestNode();ensure(fs.statSync(testNode).isFile(),'BUNDLED_PRIMARY_NODE_REQUIRED');
  const {exampleFiles}=await import(pathToFileURL(path.join(root,'runtime/src/coding/fixture.mjs')));
  const {LlmAdapter,createUserMessage}=await (runtime?import(pathToFileURL(path.join(runtime,'packages/llm/llm/lib/index.js'))):import('@deepseek-ai/dsh-llm'));
  const view=t=>({id:t.id,state:t.state,pendingWrite:!!t.pendingWrite,agentStatus:handles.get(t.id)?.agent.status||'idle',mode:t.mode,round:t.cursor||0,gates:t.gates||[],error:t.error||'',changed:Object.entries(t.changed||{}).map(([file,after])=>({path:file,before:t.baseline[file]?.text||'',after:after.text})),memory:!!saved.memory.find(m=>m.id===t.id)});
@@ -29,7 +40,7 @@ export async function apply(ctx,config){
   const before=w.read(a.path);ensure(t.read[a.path]?.hash===before.hash&&before.hash===a.expectedHash,'FILE_CONFLICT_OR_READ_REQUIRED');ensure(++t.writes<=8&&a.find&&before.text.split(a.find).length===2,'PATCH_REJECTED');
   t.baseline[a.path]??=before;const next=before.text.replace(a.find,()=>a.replace);t.pendingWrite={path:a.path,before:before.hash,after:hash(next),text:next};persist();const after=w.write(a.path,next,a.expectedHash);t.changed[a.path]=after;t.read[a.path]=after;t.revision++;delete t.pendingWrite;event(t.id,'patch',{path:a.path,before:before.hash,after:after.hash});return {path:a.path,hash:after.hash}
  });
- register('test',{path:{type:'string'}},['path'],async(a,exec,t,w)=>{ensure(a.path==='calculator.test.mjs'&&w.read(a.path).hash===hash(exampleFiles[a.path]),'FIXTURE_TEST_CHANGED');const before=snapshot(w),gate=await runTest(w,a.path,{signal:exec.signal,node:process.execPath});ensure(JSON.stringify(before)===JSON.stringify(snapshot(w)),'WORKSPACE_CHANGED_DURING_GATE');t.gateSnapshot=before;t.gates.push({passed:gate.passed,exitCode:gate.exitCode});t.gateRevision=t.revision;event(t.id,'gate',{passed:gate.passed,exitCode:gate.exitCode,outputHash:hash(gate.output)});return gate});
+ register('test',{path:{type:'string'}},['path'],async(a,exec,t,w)=>{ensure(a.path==='calculator.test.mjs'&&w.read(a.path).hash===hash(exampleFiles[a.path]),'FIXTURE_TEST_CHANGED');const before=snapshot(w),gate=await runTest(w,a.path,{signal:exec.signal,node:testNode});ensure(JSON.stringify(before)===JSON.stringify(snapshot(w)),'WORKSPACE_CHANGED_DURING_GATE');t.gateSnapshot=before;t.gates.push({passed:gate.passed,exitCode:gate.exitCode});t.gateRevision=t.revision;event(t.id,'gate',{passed:gate.passed,exitCode:gate.exitCode,outputHash:hash(gate.output)});return gate});
  // All approval decisions still traverse official DSH ApprovalService and its durable session events.
  ctx.on('tools/pre-execute',async(exec,next)=>saved.tasks[exec.agent?.id]&&exec.name.startsWith('ymzz_')?{kind:'ask',reason:'逐次核准湛箴工具；Node permission 不是 OS／網路沙盒。'}:next(),{prepend:true});
  ctx.on('approval/request',async(req,next)=>{

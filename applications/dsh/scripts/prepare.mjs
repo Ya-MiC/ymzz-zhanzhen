@@ -16,6 +16,7 @@ const changes=[],texts=new Map();function edit(file,from,to,reason){const origin
 edit('scripts/dev-web.ts',"spawnStage(supervisor, `tsc -b ${CLIENT_TYPE_PROGRAM} --watch`, 'tsc', [","spawnStage(supervisor, `tsc -b ${CLIENT_TYPE_PROGRAM} --watch`, process.execPath, [\n    join(repoRoot, 'node_modules/typescript/bin/tsc'),",'resolve pinned upstream TypeScript explicitly; do not inherit outer monorepo compiler');
 edit('apps/desktop/scripts/pack-local-packages.ts',"import { parseArgs } from 'node:util'","import { parseArgs } from 'node:util'\nimport { execa } from 'execa'\nimport { pnpmInvocation } from '../../../scripts/pnpm-invocation.ts'",'use official pnpm tarball packer for the extra product plugin');
 edit('apps/desktop/scripts/pack-local-packages.ts',"  const packed = await packFamilyMembers(root, releaseFamily('dsh'), destination, concurrency)","  const packed = await packFamilyMembers(root, releaseFamily('dsh'), destination, concurrency)\n  const ymzz = pnpmInvocation(['--dir', 'packages/ymzz/zhanzhen', 'pack', '--pack-destination', destination])\n  await execa(ymzz.command, ymzz.args, { cwd: root, stdio: 'inherit' })",'include genuine plugin in official private production package set; never publish it');
+edit('apps/desktop/scripts/smoke-packaged-runtime.ts',"join(application, 'DeepSeek Harness.exe')","join(application, '晏銘湛箴.exe')",'upstream packaged-runtime smoke must execute the actual branded Windows EXE, never a renamed wrapper or skipped smoke');
 edit('apps/web/index.html','<title>DSH Local Build</title>','<title>晏銘湛箴 · DSH</title>','actual product document title');
 edit('apps/web/index.html','type="image/svg+xml" href="/favicon-dark.svg"','type="image/png" href="/ymzz-product.png"','actual product dark favicon');
 edit('apps/web/index.html','type="image/svg+xml" href="/favicon.svg"','type="image/png" href="/ymzz-product.png"','actual product light favicon');
@@ -39,6 +40,9 @@ edit('apps/desktop/scripts/electron-builder-config.mjs',"const policy = packages
 edit('apps/desktop/scripts/electron-builder-config.mjs',"productName: 'DeepSeek Harness'","productName: '晏銘湛箴'",'product branding');
 edit('apps/desktop/scripts/electron-builder-config.mjs',"protocols: [{ name: 'DeepSeek Harness', schemes: ['dsh'] }]","protocols: []",'no distribution protocol association');
 for(const [src,to]of [['runtime/ui/brand/icon-512.png','apps/desktop/resources/icon-windows.png'],['runtime-desktop/assets/product.ico','apps/desktop/resources/tray-windows.ico']]){fs.copyFileSync(path.join(product,src),path.join(work,to));changes.push({file:to,reason:'actual user supplied product icon'})}
+// Carry the actual upstream MIT/copyright and original third-party notices into
+// assembled binaries too, not merely the immutable source archive.
+edit('apps/desktop/scripts/electron-builder-config.mjs',"    extraResources: [","    extraResources: [\n      { from: fileURLToPath(new URL('../../../LICENSE', import.meta.url)), to: 'licenses/deepseek-harness/LICENSE' },\n      { from: fileURLToPath(new URL('../../../THIRD_PARTY_NOTICES.md', import.meta.url)), to: 'licenses/deepseek-harness/THIRD_PARTY_NOTICES.md' },",'retain actual original DSH license/copyright and third-party notices inside portable app resources');
 // A real production dependency of the FULL web-app bundle, carried by the official package closure.
 const rel='packages/ymzz/zhanzhen',pkg=path.join(work,rel);fs.mkdirSync(pkg,{recursive:true});
 for(const f of ['index.mjs','ui.js','wenrun.css'])fs.copyFileSync(path.join(base,'plugins/zhanzhen',f),path.join(pkg,f));

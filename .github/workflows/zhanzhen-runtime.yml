@@ -2,8 +2,10 @@ name: Zhanzhen local runtime
 on:
   push:
     branches: [master]
+    paths-ignore: ['applications/dsh/**']
   pull_request:
     branches: [master]
+    paths-ignore: ['applications/dsh/**']
 permissions:
   contents: read
 jobs:
