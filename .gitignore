@@ -36,3 +36,12 @@ target/
 # Misc
 *.log
 coverage/
+
+# Additive local integration build outputs / private local task state
+/runtime-desktop/target/
+/runtime/dist/
+/runtime/node_modules/
+/runtime-desktop/node_modules/
+/runtime-desktop/node-LICENSE
+/dist/
+/.local-data/

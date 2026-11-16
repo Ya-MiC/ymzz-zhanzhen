@@ -1,0 +1,50 @@
+# 晏銘湛箴_無用之用 — 設定檔
+# 全部欄位都有內建預設值；這裡只覆寫需要調整的項目。
+
+[general]
+# 自主等級：observe（只記錄）| advise（給 brief，不動磁碟）| act（自動安裝/登記）
+mode = "act"
+# 日誌脫敏：true 時，寫入 state 的日誌不含 user_text / thinking 原文（只留雜湊與規則證據）
+log_redact = true
+
+[signals]
+# 雙通道權重：思考通道預設略高（它反映模型自己的能力缺口）
+user_weight = 1.0
+thinking_weight = 1.2
+# intent_score ≥ 此門檻才進入路由
+intent_threshold = 0.30
+
+[router]
+# 本地索引命中門檻（詞法相似度 0~1）
+local_min_score = 0.34
+# 線上搜索只送抽象關鍵詞，最多幾個詞
+online_query_max_words = 8
+
+[monitor]
+# 入池門檻：安裝量「嚴格大於」此值（1,000,000 不入、1,000,001 入）
+min_installs = 1000000
+# 輪詢間隔（秒）：預設 6 小時；API/頁面有 30-60 秒快取，不要高頻打
+interval_seconds = 21600
+# 抖動比例：實際間隔 = interval × (1 ± jitter_ratio)
+jitter_ratio = 0.10
+# 遲滯：連續 N 次低於門檻才標記 below_threshold
+hysteresis_rounds = 2
+# 池內 skill 安裝模式：lazy（首次使用才裝）| eager（入池即裝，需 mode=act）
+install_mode = "lazy"
+
+[sources]
+api_base = "https://skills.sh"
+leaderboard_url = "https://www.skills.sh/"
+per_page = 500
+max_pages = 20
+timeout_seconds = 30
+
+[installer]
+node_cmd = "npx"
+timeout_seconds = 300
+
+[local_roots]
+# 額外的本地 skill 根目錄（自動探測之外的）。用 Path.exists 驗證，不存在的會被略過並記錄。
+extra = []
+# 自動探測常見位置：~/.agents/skills、~/.claude/skills、~/.codex/skills、~/.cursor/skills 等
+auto_detect = true

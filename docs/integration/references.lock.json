@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://github.com/deepseek-ai/deepseek-harness",
+    "commit": "39163dd30f703a79079e2d2446545cff3c453738",
+    "license": "MIT",
+    "use": "官方 Everything-is-a-Plugin；實際使用 Cordis/Cosmokit MIT 內核，不捆綁 telemetry/full agent"
+  },
+  {
+    "url": "https://github.com/morluto/rea",
+    "commit": "ab16163061094a6c28e9133c9c618e0850c9cb2f",
+    "license": "MIT",
+    "use": "本機 MCP 分析，結構化 evidence/limitations；只研究，不捆綁分析器"
+  },
+  {
+    "url": "https://github.com/HuanLinOTO/dsh-plugin-better-sidebar-plugin-office",
+    "commit": "fbafdc6f8b1bb55a95fdd66f3f7ad9974b8aea75",
+    "license": "AGPL-3.0",
+    "use": "只研究 registerFileViewer 公開介面，不複製或執行"
+  },
+  {
+    "url": "https://github.com/tt-a1i/archify",
+    "commit": "a7ed6fd6657da90414831d1d42cf95987188750c",
+    "license": "Apache-2.0",
+    "use": "SVG 節點、compare receipt、原子驗證；未接引擎"
+  },
+  {
+    "url": "https://github.com/chuspeeism/dashi-taskboard",
+    "commit": "bc25451c5c49a14abb6c4e8250b62c626b007f8a",
+    "license": "Apache-2.0",
+    "use": "認領後執行→in_review，人工確認後 done；自有狀態機實作"
+  },
+  {
+    "url": "https://github.com/GoogleChrome/modern-web-guidance",
+    "commit": "4dd968349e54ca45a05dd5c818fb035c9054b022",
+    "license": "Apache-2.0",
+    "use": "讀取 forms/accessibility guidance；無自動執行第三方 CLI"
+  }
+]

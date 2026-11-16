@@ -1,0 +1,25 @@
+# Tauri + Rust + Vue
+/target/
+/src-tauri/target/
+/src-tauri/gen/
+/dist/
+/node_modules/
+/.venv/
+/venv/
+*.pyc
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Tauri icons (placeholders, replace with real assets)
+src-tauri/icons/

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-14T11:50:00Z",
+  "notes": "核心源必須安裝。審計狀態取自 skills.sh 頁面（擷取日 2026-11-14）：find-skills Gen Agent Trust Hub=Pass、Socket=Pass、Snyk=Warn（Warn 仍按業主要求必須安裝）。agent-browser、grill-me、hyperframes-cli 尚未取得審計資料，鎖定時標記 unaudited，入池後不自動執行其腳本。本專案永不自動執行第三方 skill 附帶腳本。",
+  "skills": [
+    {
+      "id": "vercel-labs/skills/find-skills",
+      "name": "find-skills",
+      "required": true,
+      "package_url": "https://github.com/vercel-labs/skills",
+      "install_command": "npx skills add https://github.com/vercel-labs/skills --skill find-skills",
+      "installer_args": ["--skill", "find-skills", "--yes", "--copy", "--json"],
+      "audit_at_lock_time": [
+        { "provider": "Gen Agent Trust Hub", "status": "pass" },
+        { "provider": "Socket", "status": "pass" },
+        { "provider": "Snyk", "status": "warn" }
+      ]
+    },
+    {
+      "id": "vercel-labs/agent-browser/agent-browser",
+      "name": "agent-browser",
+      "required": true,
+      "package_url": "https://github.com/vercel-labs/agent-browser",
+      "install_command": "npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser",
+      "installer_args": ["--skill", "agent-browser", "--yes", "--copy", "--json"],
+      "audit_at_lock_time": [],
+      "note": "本機安裝失敗（GitHub clone SSL 中斷），鎖定為 required，待網路恢復後自動重試"
+    },
+    {
+      "id": "mattpocock/skills/grill-me",
+      "name": "grill-me",
+      "required": true,
+      "package_url": "https://github.com/mattpocock/skills",
+      "install_command": "npx skills add https://github.com/mattpocock/skills --skill grill-me",
+      "installer_args": ["--skill", "grill-me", "--yes", "--copy", "--json"],
+      "audit_at_lock_time": [],
+      "note": "已安裝成功，來源 mattpocock/skills"
+    },
+    {
+      "id": "heygen-com/hyperframes/hyperframes-cli",
+      "name": "hyperframes-cli",
+      "required": true,
+      "package_url": "https://github.com/heygen-com/hyperframes",
+      "install_command": "npx skills add https://github.com/heygen-com/hyperframes --skill hyperframes-cli",
+      "installer_args": ["--skill", "hyperframes-cli", "--yes", "--copy", "--json"],
+      "audit_at_lock_time": [],
+      "note": "已安裝成功，來源 heygen-com/hyperframes"
+    }
+  ]
+}

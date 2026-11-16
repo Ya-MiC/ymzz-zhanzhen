@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": "Wuyong — Local MCP Resident Sub-Agent",
+    "description": "A resident sub-agent running as a local MCP / skill with high privileges. Discovers skills from skills.sh, manages the local skill pool, and tells the host agent which skill to use. Local-first routing: local → pool → online → none. Zero telemetry.",
+    "detail": "docs/DETAIL.md"
+  },
+  "commands": {
+    "doctor": "Check environment and core skill status",
+    "bootstrap": "Initialize state, install find-skills, run first monitor sync",
+    "hint": "Decide a single user/thinking event and output a Decision JSON",
+    "pool-list": "List skills in the dynamic pool",
+    "pool-sync": "Sync the dynamic pool from skills.sh",
+    "local-list": "List locally registered skills",
+    "watch": "Watch JSONL events from stdin and emit Decision per line"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "data": [
+    {
+      "id": "vercel-labs/skills/find-skills",
+      "slug": "find-skills",
+      "name": "find-skills",
+      "source": "vercel-labs/skills",
+      "installs": 4400000,
+      "sourceType": "github",
+      "installUrl": "https://github.com/vercel-labs/skills",
+      "url": "https://skills.sh/vercel-labs/skills/find-skills"
+    },
+    {
+      "id": "anthropics/skills/skill-creator",
+      "slug": "skill-creator",
+      "name": "skill-creator",
+      "source": "anthropics/skills",
+      "installs": 2000000,
+      "sourceType": "github",
+      "installUrl": "https://github.com/anthropics/skills",
+      "url": "https://skills.sh/anthropics/skills/skill-creator"
+    },
+    {
+      "id": "bad-owner/bad-repo/duplicate-skill",
+      "slug": "duplicate-skill",
+      "name": "duplicate-skill",
+      "source": "bad-owner/bad-repo",
+      "installs": 5000000,
+      "sourceType": "github",
+      "installUrl": "https://github.com/bad-owner/bad-repo",
+      "url": "https://skills.sh/bad-owner/bad-repo/duplicate-skill",
+      "isDuplicate": true
+    },
+    {
+      "id": "mid-owner/mid-repo/mid-skill",
+      "slug": "mid-skill",
+      "name": "mid-skill",
+      "source": "mid-owner/mid-repo",
+      "installs": 500000,
+      "sourceType": "github",
+      "installUrl": "https://github.com/mid-owner/mid-repo",
+      "url": "https://skills.sh/mid-owner/mid-repo/mid-skill"
+    },
+    {
+      "id": "fixture-owner/fixture-repo/fixture-plain-skill",
+      "slug": "fixture-plain-skill",
+      "name": "fixture-plain-skill",
+      "source": "fixture-owner/fixture-repo",
+      "installs": 1234,
+      "sourceType": "github",
+      "installUrl": "https://github.com/fixture-owner/fixture-repo",
+      "url": "https://skills.sh/fixture-owner/fixture-repo/fixture-plain-skill"
+    }
+  ],
+  "pagination": {
+    "page": 0,
+    "perPage": 500,
+    "total": 5,
+    "hasMore": true
+  }
+}

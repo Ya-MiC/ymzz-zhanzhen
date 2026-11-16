@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": "晏銘湛箴_無用之用（本地 MCP 常駐子代理）",
+    "description": "後臺常駐子代理，以本地 MCP / 技能形式運行，權限高、可直接幹活。從 skills.sh 動態發現技能、管理本地技能池，告訴主代理該用哪個技能。本地優先路由：本地 → 池 → 線上 → 回報缺口。零遙測。",
+    "detail": "docs/DETAIL.md"
+  },
+  "commands": {
+    "doctor": "檢查環境與核心技能狀態",
+    "bootstrap": "初始化 state、安裝 find-skills、首次監控同步",
+    "hint": "對單一用戶／思考事件做決策，輸出 Decision JSON",
+    "pool-list": "列出動態池內技能",
+    "pool-sync": "從 skills.sh 同步動態池",
+    "local-list": "列出本地已登記技能",
+    "watch": "從 stdin 讀 JSONL 事件，逐條輸出 Decision"
+  }
+}

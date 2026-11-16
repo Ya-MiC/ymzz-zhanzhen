@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>晏銘湛箴_無無即無 | 本地優先知識記憶與子智能體協作</title>
+<meta name="description" content="本地優先的個人知識記憶系統：記錄對話、代碼片段、決策與洞察，讓子智能體之間能互相直接接觸、梳理與協作，同時不上傳、不抓取用戶本地全部數據。MIT 開源。">
+
+<style>
+/* ===== 溫潤設計系統 · 應用層 tokens ===== */
+:root {
+  --hit: 44px;
+  --radius: 12px;
+  --fs-body: 14px;
+  --lh-body: 1.7;
+  --font-body: "Noto Sans SC Variable", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Noto Serif TC", "Songti TC", serif;
+
+  /* 家族 B · 淺色 · 陶土 */
+  --bg: #E8E3CC;
+  --surface: #B7C8A8;
+  --raised: #CBBF9E;
+  --accent: #CBBF9E;
+  --accent-2: #A38E7A;
+  --ink: #15181b;
+  --ink-soft: #363c41;
+  --on-accent: #221F14;
+
+  /* archify 多層背景紋理 */
+  --bg-grid: linear-gradient(rgba(20,23,26,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(20,23,26,.045) 1px,transparent 1px);
+  --bg-grid-size: 56px 56px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { text-wrap: pretty; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--accent-2); }
+
+.skip-link {
+  position: absolute; left: -9999px; top: var(--hit);
+  background: var(--accent); color: var(--on-accent);
+  padding: 8px 16px; z-index: 10000; border-radius: var(--radius);
+}
+.skip-link:focus { left: 12px; }
+
+header {
+  position: sticky; top: 0;
+  background: rgba(232,227,204,0.82);
+  backdrop-filter: blur(14px) saturate(1.15);
+  border-bottom: 1px solid rgba(20,23,26,0.14);
+  z-index: 100;
+}
+.header-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+}
+.emblem {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 14px;
+  min-width: var(--hit); min-height: var(--hit);
+}
+.nav { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.nav a {
+  font-size: 14px; padding: 8px 0; color: var(--ink);
+  position: relative;
+}
+.nav a::after {
+  content: ""; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--accent-2);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav a:hover::after, .nav a.active::after { width: 100%; }
+
+/* ===== Hero ===== */
+.hero { padding: 56px 20px 40px; max-width: 900px; margin: 0 auto; text-align: center; }
+.hero-eyebrow {
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent-2); margin-bottom: 16px; display: block;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 8vw, 56px);
+  line-height: 1.2; font-weight: 700;
+  margin: 0 0 24px; letter-spacing: -0.03em;
+}
+.hero p {
+  font-size: clamp(15px, 3vw, 18px);
+  color: var(--ink); max-width: 640px;
+  margin: 0 auto 32px; opacity: 0.9;
+}
+.hero-actions {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 0 20px; height: var(--hit); min-height: var(--hit);
+  border: 1px solid var(--raised); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  font-family: inherit; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn:hover { background: var(--raised); border-color: var(--accent-2); }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.btn.primary {
+  background: var(--accent); color: var(--on-accent); border-color: var(--accent);
+}
+
+/* ===== Section ===== */
+.section { padding: 56px 20px; }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.section-desc {
+  color: var(--ink); opacity: 0.75;
+  font-size: 15px; max-width: 700px;
+  margin: 0 auto 40px; text-align: center;
+}
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; max-width: 1000px; margin: 0 auto;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--raised);
+  border-radius: var(--radius); padding: 24px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover { border-color: var(--accent-2); transform: translateY(-4px); }
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 18px; margin-bottom: 10px;
+}
+.card p { font-size: 14px; opacity: 0.85; line-height: 1.6; }
+
+/* ===== SKILL.md 展示頁 ===== */
+.skill-page {
+  max-width: 760px; margin: 0 auto;
+}
+.skill-meta {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+  font-size: 12px; opacity: 0.7;
+}
+.skill-meta span {
+  background: var(--surface); border: 1px solid var(--raised);
+  padding: 4px 10px; border-radius: var(--radius);
+}
+.skill-body {
+  background: var(--surface); border: 1px solid var(--raised);
+  border-radius: var(--radius); padding: 32px;
+}
+.skill-body h2 {
+  font-family: var(--font-display); font-size: 22px;
+  margin: 24px 0 12px; color: var(--ink);
+}
+.skill-body h2:first-child { margin-top: 0; }
+.skill-body p { margin: 0 0 16px; line-height: 1.7; }
+.skill-body ul, .skill-body ol { margin: 0 0 16px 24px; }
+.skill-body li { margin: 4px 0; opacity: 0.9; }
+.skill-body code {
+  background: var(--raised); padding: 2px 6px; border-radius: 6px;
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: 0.9em; color: var(--ink);
+}
+.skill-body pre {
+  background: var(--raised); border: 1px solid var(--accent);
+  border-radius: var(--radius); padding: 16px;
+  overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.5;
+}
+.skill-body hr {
+  border: none; border-top: 1px solid var(--raised);
+  margin: 24px 0; opacity: 0.5;
+}
+
+/* ===== Watercolor fade-in ===== */
+@keyframes watercolor-in {
+  from { filter: blur(6px); opacity: 0; }
+  to { filter: blur(0); opacity: 1; }
+}
+.water-in { animation: watercolor-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.water-in:nth-child(2) { animation-delay: 30ms; }
+.water-in:nth-child(3) { animation-delay: 60ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+@media (max-width: 640px) {
+  .header-wrap { flex-direction: column; align-items: stretch; gap: 12px; }
+  .nav { gap: 16px; justify-content: center; }
+  .hero { padding: 40px 16px 24px; }
+  .skill-body { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#content" class="skip-link">跳到主要內容</a>
+
+<header>
+  <div class="header-wrap">
+    <div class="brand" aria-label="晏銘湛箴_無無即無">
+      <div class="emblem" aria-hidden="true">M</div>
+      <span>晏銘湛箴_無無即無</span>
+    </div>
+    <nav class="nav" aria-label="主選單">
+      <a href="https://github.com/Ya-MiC/yanming-official-website" target="_blank" rel="noopener">晏銘湛箴官網</a>
+      <a href="https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong" target="_blank" rel="noopener">無用之用</a>
+      <a href="https://github.com/Ya-MiC/ymzz-wuwong-ji-wung" target="_blank" rel="noopener">GitHub 倉庫</a>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+  <section class="hero">
+    <span class="hero-eyebrow water-in">本地優先知識記憶與子智能體協作 · 不全量採集用戶本地數據</span>
+    <h1 class="water-in">晏銘湛箴_無無即無</h1>
+    <p class="water-in">本地優先的個人知識記憶系統：記錄對話、代碼片段、決策與洞察，讓子智能體之間能互相直接接觸、梳理與協作，同時不上傳、不抓取用戶本地全部數據。</p>
+    <div class="hero-actions">
+      <a href="https://github.com/Ya-MiC/ymzz-wuwong-ji-wung" target="_blank" rel="noopener" class="btn primary">GitHub 倉庫</a>
+      <a href="#skill" class="btn">SKILL.md 展示</a>
+    </div>
+  </section>
+
+  <section class="section" id="skill">
+    <h2 class="section-title">Skill 展示</h2>
+    <p class="section-desc">以下為本倉庫的 SKILL.md 完整內容，作為官網技能索引。</p>
+
+    <div class="skill-page water-in">
+      <div class="skill-meta">
+        <span>無無即無 · wuwong-ji-wung</span>
+        <span>MIT</span>
+        <span>Tauri 2 + Rust + Vue</span>
+      </div>
+      <div class="skill-body">
+        <h2>晏銘湛箴_無無即無 (wuwong-ji-wung) 技能</h2>
+        <p>本地優先的個人知識記憶系統：記錄對話、代碼片段、決策與洞察，讓子智能體之間能互相直接接觸、梳理與協作，同時不上傳、不抓取用戶本地全部數據。</p>
+        <h3>Workflow</h3>
+        <ol>
+          <li><strong>知識節點建立</strong>：每個節點包含 id、session、turn、content、tags、references、created_at、updated_at。</li>
+          <li><strong>跨會話索引</strong>：當前會話、session-1420479c、session-2ae8976d 三個會話的知識節點互相可見。</li>
+          <li><strong>檢索與梳理</strong>：全文檢索（FTS5）、標籤過濾、跨會話 <code>references</code> 關聯查詢，避免重複建 wheel。</li>
+          <li><strong>子智能體協作</strong>：不同對話窗口中人類用戶說過的、子智能體學過的東西，全部能互相直接接觸和梳理清楚。</li>
+        </ol>
+        <h3>Guardrails</h3>
+        <ul>
+          <li>預設不連網；所有數據存在使用者本機；不改註冊表；乾淨卸載。</li>
+          <li>不全量掃描本地檔案，只留使用者主動確認片段。</li>
+          <li>不收集資料，不上傳任何使用者數據，不設遙測。</li>
+          <li>觸控熱區 ≥ 44px；連續熱區無死區；溫潤設計系統四套色票原色不得更動。</li>
+        </ul>
+        <hr>
+        <p><strong>來源</strong>：<a href="https://github.com/Ya-MiC/ymzz-wuwong-ji-wung/blob/main/SKILL.md" target="_blank" rel="noopener">GitHub ymzz-wuwong-ji-wung/SKILL.md</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="works">
+    <h2 class="section-title">姊妹倉庫</h2>
+    <p class="section-desc">晏銘湛箴的三個專案，視覺統一，互相跳轉。</p>
+    <div class="grid">
+      <div class="card water-in">
+        <h3>晏銘湛箴官網</h3>
+        <p>溫潤設計系統視覺識別與品牌白皮書 · GitHub Pages 預覽 · MIT</p>
+        <a href="https://github.com/Ya-MiC/yanming-official-website" target="_blank" rel="noopener" class="btn" style="margin-top:12px;width:fit-content">開啟官網</a>
+      </div>
+      <div class="card water-in">
+        <h3>無用之用</h3>
+        <p>動態技能池管理 · 技能從 skills.sh 排行榜全網查詢 · MIT</p>
+        <a href="https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong" target="_blank" rel="noopener" class="btn" style="margin-top:12px;width:fit-content">開啟官網</a>
+      </div>
+      <div class="card water-in">
+        <h3>無無即無（本倉庫）</h3>
+        <p>本地優先知識記憶與子智能體協作 · MIT</p>
+        <a href="#skill" class="btn" style="margin-top:12px;width:fit-content">SKILL.md 展示</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div style="max-width:1000px;margin:0 auto;text-align:center;opacity:0.6;font-size:12px;">
+      © 2026 晏銘湛箴 (Ya-MiC) · MIT License · 本站以 GitHub Pages 預覽，後續綁定 Cloudflare Pages 與自有域名
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
