@@ -1,0 +1,5 @@
+selectors 0.38.0 is used unchanged under MPL-2.0, not MIT.
+Source code: https://crates.io/api/v1/crates/selectors/0.38.0/download
+Repository at published commit: https://github.com/servo/stylo/tree/572ecba2d1600e7c3d490586692a209faf703baa/selectors
+Original files carry Mozilla Public License 2.0 headers.
+No GPL/AGPL license is substituted.

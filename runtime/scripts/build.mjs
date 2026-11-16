@@ -29,10 +29,10 @@ const ruleScript=`import ast,json,sys
 from pathlib import Path
 r=[]
 for f in sys.argv[1:]:
- tree=ast.parse(Path(f).read_text())
+ tree=ast.parse(Path(f).read_text(encoding="utf-8"))
  for n in tree.body:
   if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='USER_RULES' for t in n.targets): r.extend(ast.literal_eval(n.value))
-print(json.dumps(r,ensure_ascii=False))
+print(json.dumps(r,ensure_ascii=True))
 `;
 const python=process.platform==='win32'?'python':'python3';
 const rules=JSON.parse(execFileSync(python,['-c',ruleScript,...['rules_en.py','rules_zh.py'].map(f=>resolve(root,'imports/ymzz-wuyong-zhi-yong/src/wuyong/signals',f))],{encoding:'utf8'}));

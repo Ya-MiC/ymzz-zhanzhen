@@ -20,7 +20,7 @@
 7. 四套溫潤主題、48px 命中、鍵盤焦點、原生 dialog、Ctrl/Cmd+K、空／錯誤／離線提示、側欄與麵包屑。
 8. 可選本機 OpenAI 相容 provider，需分別啟用插件、設定 opt-in、按發送。只接受 loopback，不跑付費雲端／NIM，也沒有本次成功模型推論的宣稱。
 
-**固定離線文字盤點不是 OCR、語義理解、任意程式碼任務、完整遞迴自修正或模型推論。** 本次最小自修正只處理 BOM/換行與空輸入的有界重試，詳見測試。
+**固定離線文字盤點不是 OCR、語義理解、任意程式碼任務、完整遞迴自修正或模型推論。** 本次最小自修正只處理 BOM/換行的真實失敗→正規化→通過，以及空輸入的有界失敗重試，詳見測試。
 
 ## 本機開發（Node 24.22.1，Rust；不需要 Python 常駐）
 
@@ -109,3 +109,7 @@ YMZZ_DATA_DIR="$PWD/.local-data" YMZZ_CORE_EXECUTABLE="$PWD/target/debug/ymzz-ru
 This is a runnable first vertical slice, not a completed autonomous agent or a site redesign. It executes the official MIT DSH Cordis/Cosmokit plugin kernel at a pinned commit, new permission-gated YMZZ plugins, local SQLite tasks and confirmed memory, pinned Wuyong dispatch rules, and the existing Rust integrity core. A real deterministic task follows create → claim → run → gate → human review → explicitly confirmed memory. It is not live model inference.
 
 All original target files remain, and both unrelated ymzz-loop branch-head trees are preserved with file hashes. The actual target is Rust/React, not the FastAPI/Vue system described in the request. Wuwong is an upstream skeleton; its implemented memory adapter is new. See the full gap list above, exact source and skill locks, Windows CI proof requirements, license boundaries, and payment limitations. Windows portability is only claimed after the executable smoke and artifacts succeed; no release, merge, purchase, protection-rule change, or real payment is performed by this integration.
+
+## 補充測試與授權證據
+
+原 Loop 的非 Git-ref 依賴測試在獨立拷貝跑過 **76/76**；只排除會對目前 Git origin fetch product 的 product-branch 測試檔，避免在整合倉庫誤操作 remote。原始快照無修改。另有原 UI 225 筆解析後依賴授權清單（含 dev/build），以及 portable build 實際收集的 Rust/React/Scheduler/Zustand 授權／NOTICE 文本。MPL selectors 使用原授權，並提供未修改原碼下載／固定 commit；沒有重標 MIT。某些上游 package 未附根 LICENSE，另保留其明確 SPDX 聲明與官方標準條款，見 notices.lock.json。

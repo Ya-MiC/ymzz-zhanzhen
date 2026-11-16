@@ -1,0 +1,34 @@
+{
+  "checked_kst": "2026-11-16T15:58:50.098157+09:00",
+  "scope": "HTTP reachability only; not reciprocal navigation deployment proof",
+  "checks": [
+    {
+      "url": "https://ya-mic.github.io/ymzz-loop/",
+      "status": 200,
+      "final_url": "https://ya-mic.github.io/ymzz-loop/",
+      "bytes": 40571
+    },
+    {
+      "url": "https://bingce.yanmingx0215.filegear-sg.me/#onboarding",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://ya-mic.github.io/yanming-official-website/",
+      "status": 200,
+      "final_url": "https://ya-mic.github.io/yanming-official-website/",
+      "bytes": 21882
+    },
+    {
+      "url": "https://ya-mic.github.io/ymzz-wuyong-zhi-yong/",
+      "status": 200,
+      "final_url": "https://ya-mic.github.io/ymzz-wuyong-zhi-yong/",
+      "bytes": 11661
+    },
+    {
+      "url": "https://ya-mic.github.io/ymzz-wuwong-ji-wung/",
+      "status": 200,
+      "final_url": "https://ya-mic.github.io/ymzz-wuwong-ji-wung/",
+      "bytes": 12345
+    }
+  ]
+}

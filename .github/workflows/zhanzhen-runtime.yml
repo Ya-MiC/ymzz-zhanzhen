@@ -63,6 +63,7 @@ jobs:
       - run: npm run build --prefix runtime
       - run: npm test --prefix runtime
       - run: npm run build --prefix runtime-desktop
+      - run: python scripts/integration/collect_notices.py
       - name: Fetch public Node license for redistribution
         run: Invoke-WebRequest https://raw.githubusercontent.com/nodejs/node/v24.22.1/LICENSE -OutFile runtime-desktop/node-LICENSE
       - run: node runtime-desktop/scripts/portable.mjs
