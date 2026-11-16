@@ -2,7 +2,7 @@ name: Full DSH application qualification
 on:
   push:
     branches: [master, 'feat/zhanzhen-coding-loop-20261116']
-    paths: ['applications/dsh/**', 'runtime/**', 'runtime-desktop/assets/**', '.github/workflows/full-dsh.yml', 'core-skills.lock.json']
+    paths: ['applications/dsh/**', 'runtime/**', 'runtime-desktop/assets/**', '.github/workflows/full-dsh.yml', 'core-skills.lock.json', '!applications/dsh/evidence/**', '!applications/dsh/README.md', '!applications/dsh/image-codec/README.md']
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,6 +16,7 @@ jobs:
     env:
       CI: 'true'
       DSH_TELEMETRY_DISABLED: '1'
+      DSH_CLIENT_TITLE: '湛箴_ymzz'
       DSH_GATE_CONCURRENCY: '1'
       COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
     steps:
@@ -78,6 +79,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: zhanzhen-full-dsh-portable-windows-${{ github.sha }}
+          name: 湛箴_ymzz-full-dsh-portable-windows-${{ github.sha }}
           path: ${{ env.FULL_DSH_PORTABLE }}
           if-no-files-found: error

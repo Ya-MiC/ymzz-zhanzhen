@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/saucecontrol/Compact-ICC-Profiles",
+  "commit": "bdd84663061bc4ae95ca70decff54f581e27f702",
+  "license": "CC0-1.0",
+  "scope": "Only the required CMYK default profile, original readme and original license are included; not a full repository snapshot.",
+  "files": [
+    {
+      "path": "license",
+      "bytes": 6552,
+      "sha256": "469d87b5fa48f8aaf69e25f4fcac3a309c97dbb7d561b917638abdb640e004d9"
+    },
+    {
+      "path": "readme.md",
+      "bytes": 16066,
+      "sha256": "1a844dff76783493d3b1b81e4ec8b43b79a3f17ff52e162c393df17fda554949"
+    },
+    {
+      "path": "profiles/CGATS001Compat-v2-micro.icc",
+      "bytes": 8464,
+      "sha256": "73e1ba37d2bad5bab2a964f40a9eed96209666efc067c3322626214bbef234a0"
+    }
+  ]
+}

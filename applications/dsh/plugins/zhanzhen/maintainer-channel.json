@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "productId": "me.yanming.zhanzhen",
+  "mode": "verified-staging-only",
+  "maintainerPublicKey": null,
+  "manifestUrl": null,
+  "automaticPolling": false,
+  "liveChannelConfigured": false,
+  "reason": "No maintainer signing identity/channel has been supplied or published. Never replace this with an invented production key. Native DSH manual update APIs remain available; unsigned portable activation is not configured."
+}

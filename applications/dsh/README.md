@@ -1,4 +1,4 @@
-# 晏銘湛箴：完整 DSH 衍生應用（主產品）
+# 湛箴_ymzz：完整 DSH 衍生應用（主產品）
 
 <img src="../../runtime/ui/brand/icon-128.png" width="96" alt="使用者提供的湛箴原圖衍生尺寸">
 
@@ -6,11 +6,13 @@
 
 ## 最新實況：不能把 npm clean 當完整 binary clean
 
+最新本地通過 51 項來源／image／簽署更新／adversarial tests、原版 attachment 98 pass／1 inherited skip、完整 DSH web build 與真正 native clientBundle 建置；[本輪 Linux 實證](evidence/product-brand-linux.json)。下段較早的 Windows source hash 不等於新改名版本已驗收。
+
 Run [43839058173](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43839058173) 已完成：**真正官方 Windows 打包＋原版 runtime／Office smoke 通過**，不是舊 Tauri。實體 EXE 246,425,600 bytes，SHA256 `998ad3ca4e7566d2e33ef9b52426b4eBA2ea05db99eaeb7973f8204639831258`（大小寫無意義）；[原始 metadata／實體 EXE 提取原圖 icon](evidence/windows-27d05e41/)。GUI step 被本地 harness 的 boxed `IntPtr.Zero` truthiness 錯誤阻斷，並非已證明應用程式無法啟動；已改成顯式零值檢查並增加 regression，等待真正 GUI 重驗。不假稱 GUI pass、不提供未合格 EXE。
 
-已功能性替換唯一 production Sharp consumer：**16 codec 實測＋原版 attachment 98 pass／1 inherited skip**，完整四格式、EXIF、ICC、CMYK、alpha、resize、JPEG/WebP 仍工作。原版 Sharp fixtures 仍保留為 dev-only，完整上游 archive 一字未改。[替代實作／授權](image-codec/README.md)。[本輪實測與 OOM 界線](evidence/image-integration-linux.json)：changed attachment typecheck 通過；保留既有 dev server/watchers 時，額外 full host aggregate 曾 exit 137，未冒稱本輪完整 host aggregate 已過。
+已功能性替換唯一 production Sharp consumer：**19 codec 實測＋原版 attachment 98 pass／1 inherited skip**，完整四格式、EXIF、ICC、CMYK、alpha、resize、JPEG/WebP 仍工作。原版 Sharp fixtures 仍保留為 dev-only，完整上游 archive 一字未改。[替代實作／授權](image-codec/README.md)。[本輪實測與 OOM 界線](evidence/image-integration-linux.json)：changed attachment typecheck 通過；保留既有 dev server/watchers 時，額外 full host aggregate 曾 exit 137，未冒稱本輪完整 host aggregate 已過。
 
-目前 Linux npm closure 660／0 blocked／0 unresolved；47 Cargo dependencies 依實際 SPDX AND/OR 選 permissive grant、逐份 notices/checksum 隨包保留。
+目前 Linux npm closure 662／0 blocked／0 unresolved；48 Cargo dependencies 依實際 SPDX AND/OR 選 permissive grant、逐份 notices/checksum 隨包保留。
 
 **分發仍不合格：**完整 stock Electron 帶 LGPL FFmpeg，LibreOffice kit/engine 帶 MPL-2.0，不能因為替換 Sharp 就說「全部 MIT」。新 gate 另讀真正打包的 `app.asar`、unpacked image EXE、`ffmpeg.dll` 與 Chromium 原始 notices；有上述衝突就 fail closed，不上傳 binary。沒有移除影像、Office、Agent 或影音功能去讓 gate 變綠。以下較早的 Sharp 阻擋段落是歷史，以上最新證據優先。
 
@@ -101,3 +103,19 @@ Windows 的真實 production graph 證據已保存於 `evidence/windows-53d1c725
 ### 最新 Windows 實際進度（2026-11-16 18:18 KST）
 
 [Run 43836410889](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43836410889) **完整 10 個 upstream build gates 全過**（365.86s，包含 host/client aggregate typechecks），完整 tarball closure 含真正 `@yanming/dsh-zhanzhen` 插件，官方 Electron 44.7.0 packager 已實際組出 `win-unpacked/晏銘湛箴.exe` 並更新原生 PE 資源。最後原版 `smoke-packaged-runtime.ts` 仍硬編碼 `DeepSeek Harness.exe` 而 ENOENT；不是編譯失敗，也還不是 GUI 成功。已僅在衍生 build copy 修正 smoke 的產品執行檔名稱，不跳過原版 runtime/Office smoke。另依真實 `DSH_PRIMARY_RUNTIME` Host 合約讓工具使用隨包附帶的 `dependencies/node/bin/node.exe`，避免把 Electron GUI 的 `process.execPath` 當 Node 並在乾淨環境中啟動第二個 GUI；保持測試環境不繼承任意父程序變數。原版 MIT／copyright／THIRD_PARTY_NOTICES 亦明確加入 portable resources，而非只留在原始碼快照。新增測試涵蓋 Windows 中文／空白資源路徑、拒絕 UNC payload、拒絕 Electron 缺 Node payload 的假 fallback。
+
+## 2026-11-16 · t170/t171 current product correction
+
+Display/executable name is **湛箴_ymzz**; stable app ID `me.yanming.zhanzhen` and `湛箴資料` remain unchanged. The newest supplied PNG has SHA-256 `65b2af69825756700fe36ffad5b3d5a943b123364d611bd513df71d9c048be2d`, byte-identical to the already retained original; all PNG/ICO sizes derive from that real image. Native About preserves the exact requested meaning and the original DSH credit. Real native `clientBundle` factory + `ctx.slots` fill the pre-existing brand/footer seats; original component placement is not replaced with a dashboard.
+
+The latest completed historical run [43845429747](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43845429747) passed full build/package/runtime/Office and real GUI task execution; a genuine top-level UIA focus failure prevented final Models navigation. Source now invokes the original Account menu → Settings instead. [Raw evidence](evidence/windows-297caa0f/) does NOT claim a complete GUI pass or the final new-name build.
+
+### Reviewed update state — exact boundary
+
+Upstream exposes `dshDesktop.updates.status/open/channels`, a native update coordinator/schedule/journal and plugin management. The unsigned derivative has no mandatory remote update policy; automatic startup/focus/resume update checks are disabled in its build copy, not the immutable archive. Manual native interfaces remain.
+
+Our additive updater (`plugins/zhanzhen/updates.mjs`) verifies real Ed25519 signatures before selected-file reads; requires reviewed product/DSH/API/version/source/license metadata and exact bounded ZIP SHA/size; uses the native file picker; stages only opaque bytes in a product-owned directory and can roll back only that copy. It does not extract, execute, import remote code, install or restart. Test keys exist only ephemerally inside tests. The shipped channel has **no public key, URL or live release**, so the button is disabled with an honest error/status. This is **not yet production one-click installation** or a fabricated signed release channel.
+
+### Strict native-license blocker (not solved by the image adapter)
+
+Actual ASAR + native executable inspection finds `@deepseek-ai/libreoffice-kit`/engine 0.2.3 MPL-2.0 and stock Electron 44.7.0 `ffmpeg.dll` LGPL-2.1-or-later. Its actual bundled Chromium notices, DLL hash and exact package records are captured by the independent `packaged-licenses.mjs` gate. See [actual report](evidence/windows-297caa0f/packaged-production-license-report.json), [official Electron discussion](https://github.com/electron/electron/issues/34236), [Chromium FFmpeg source](https://chromium.googlesource.com/chromium/third_party/ffmpeg/). These are distinct from the now-clean npm graph and do not become MIT through the wrapper. We neither silently remove Office/media nor waive the permissive-only gate. Therefore no qualified binary/release is published. Release authorization now exists, but publication still requires an actually qualified exact commit and maintainer merge.

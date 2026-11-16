@@ -1,5 +1,6 @@
 // MIT. A real plugin loaded by the FULL official DSH application, not a second agent loop.
 import fs from 'node:fs';
+import {ReviewedUpdates} from './updates.mjs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {randomUUID,createHash} from 'node:crypto';
@@ -19,6 +20,7 @@ export const name='ymzz-zhanzhen';
 export const inject=['agents','llm','tools','workingDirectory','skills','approval','webServer'];
 export async function apply(ctx,config){
  const root=path.resolve(config.productRoot||path.join(import.meta.dirname,'product')),runtime=config.runtimeRoot&&path.resolve(config.runtimeRoot),data=path.resolve(config.dataDir||path.join(process.env.DSH_HOME||path.join(root,'.data'),'zhanzhen'));
+ const updates=new ReviewedUpdates({directory:path.join(data,'reviewed-updates'),channel:JSON.parse(fs.readFileSync(path.join(import.meta.dirname,'maintainer-channel.json'),'utf8')),currentDSHCommit:'39163dd30f703a79079e2d2446545cff3c453738'});
  fs.mkdirSync(data,{recursive:true,mode:0o700});const statePath=path.join(data,'tasks.json');
  const saved=fs.existsSync(statePath)?JSON.parse(fs.readFileSync(statePath,'utf8')):{tasks:{},nickname:'',memory:[],events:[]};
  const handles=new Map(),pending=new Map();
@@ -68,7 +70,7 @@ export async function apply(ctx,config){
   const handle=await ctx.agents.create({sessionId:id,meta:{cwd:directory},agentOptions:{provider:'ymzz-offline',model:id,maxTokens:1024},setup(agentCtx,agent){agentCtx.tools.restrict({allow:['ymzz_read','ymzz_patch','ymzz_test']});ctx.approval.setPolicy(agent,'ask')}});handles.set(id,handle);
   event(id,'dsh-agent-created',{engine:'@deepseek-ai/dsh-agent-loop',transport:'explicit deterministic fixture',liveInference:false});handle.agent.followup(createUserMessage({content:[{type:'text',text:'修正 add(2,3) 並以真實 node:test 驗證。此為明確的離線假模型示例。'}],source:{kind:'user'}}));void handle.agent.whenIdle().catch(()=>{t.state='failed';t.error='DSH_AGENT_FAILED';persist()});return {id}
  }
- const state=()=>({engine:'FULL official DeepSeek Harness',plugin:name,upstream:'39163dd30f703a79079e2d2446545cff3c453738',nickname:saved.nickname,skills:lock.skills.map(s=>s.id),tasks:Object.values(saved.tasks).map(view),pending:[...pending.values()].map(({settle,...p})=>({...p,proposal:saved.tasks[p.task]?.currentProposal})),evidenceValid:valid(),events:saved.events});
+ const state=()=>({engine:'FULL official DeepSeek Harness',plugin:name,upstream:'39163dd30f703a79079e2d2446545cff3c453738',nickname:saved.nickname,updates:updates.state(),skills:lock.skills.map(s=>s.id),tasks:Object.values(saved.tasks).map(view),pending:[...pending.values()].map(({settle,...p})=>({...p,proposal:saved.tasks[p.task]?.currentProposal})),evidenceValid:valid(),events:saved.events});
  const ui=fs.readFileSync(path.join(import.meta.dirname,'ui.js'),'utf8'),tokens=fs.readFileSync(path.join(root,'imports/ymzz-wenrun-design-skill/assets/tokens/tokens.css'),'utf8'),css=fs.readFileSync(path.join(import.meta.dirname,'wenrun.css'),'utf8');
  ctx.on('webserver/index-inject',table=>{table.push({kind:'global',name:'__YMZZ_DSH_BRAND__',value:'data:image/png;base64,'+fs.readFileSync(path.join(root,'runtime/ui/brand/icon-128.png')).toString('base64')},{kind:'style',text:tokens+'\n'+css},{kind:'script',placement:'body',text:ui})});
  ctx.effect(()=>ctx.webServer.register({kind:'prefix',path:'/ymzz',auth:'required',handler:async(req,res)=>{
@@ -76,6 +78,8 @@ export async function apply(ctx,config){
    if(req.method==='GET'&&url.pathname==='/ymzz/state')out=state();
    else{ensure(req.method==='POST'&&req.headers['x-ymzz-action']==='1'&&req.headers['sec-fetch-site']!=='cross-site','ACTION_REJECTED');let body='';for await(const b of req){body+=b;ensure(Buffer.byteLength(body)<=8192,'BODY_TOO_LARGE')}const input=JSON.parse(body||'{}');
     if(url.pathname==='/ymzz/profile'){ensure(typeof input.nickname==='string'&&input.nickname.trim()&&input.nickname.length<=60,'NICKNAME_INVALID');saved.nickname=input.nickname.trim();persist();out={ok:true}}
+    else if(url.pathname==='/ymzz/update/stage')out=await updates.stage(input);
+    else if(url.pathname==='/ymzz/update/rollback')out=await updates.rollback(input.consent);
     else if(url.pathname==='/ymzz/demo')out=await demo();
     else if(url.pathname==='/ymzz/approval'){const p=pending.get(input.id);ensure(p&&typeof input.allow==='boolean','APPROVAL_NOT_PENDING');event(p.task,'human-tool-approval',{tool:p.tool,allowed:input.allow});p.settle(input.allow?'allowed-once':'rejected');out={ok:true}}
     else if(url.pathname==='/ymzz/review'){const t=saved.tasks[input.id];ensure(t&&input.consent===true&&['accept','rollback','remember'].includes(input.action),'REVIEW_REQUIRED');const w=new Workspace(t.root);ensure(!handles.get(t.id)||handles.get(t.id).agent.status==='idle','DSH_AGENT_NOT_IDLE');

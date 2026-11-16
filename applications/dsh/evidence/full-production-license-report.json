@@ -1076,7 +1076,7 @@
       "license": "MIT",
       "selectedLicense": "MIT",
       "decision": "allowed-declared",
-      "via": "@deepseek-ai/dsh-web-app",
+      "via": "@yanming/dsh-zhanzhen",
       "notices": []
     },
     {
@@ -1229,7 +1229,7 @@
       "license": "MIT",
       "selectedLicense": "MIT",
       "decision": "allowed-declared",
-      "via": "@deepseek-ai/dsh-web-app",
+      "via": "@yanming/dsh-zhanzhen",
       "notices": []
     },
     {
@@ -5987,6 +5987,20 @@
       ]
     },
     {
+      "name": "loose-envify",
+      "version": "1.4.0",
+      "license": "MIT",
+      "selectedLicense": "MIT",
+      "decision": "allowed-declared",
+      "via": "react",
+      "notices": [
+        {
+          "file": "LICENSE",
+          "sha256": "4eb7543b08d955a6d23fcc224601d43ff566e775be918805e26210d7f6eb4893"
+        }
+      ]
+    },
+    {
       "name": "lowercase-keys",
       "version": "3.0.0",
       "license": "MIT",
@@ -6706,6 +6720,20 @@
         {
           "file": "LICENSE",
           "sha256": "37876d7de8bdf5e5b9b58a697ebc34044624e493e6f49eff5c938e5226dcac6b"
+        }
+      ]
+    },
+    {
+      "name": "react",
+      "version": "18.3.1",
+      "license": "MIT",
+      "selectedLicense": "MIT",
+      "decision": "allowed-declared",
+      "via": "@yanming/dsh-zhanzhen",
+      "notices": [
+        {
+          "file": "LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
         }
       ]
     },

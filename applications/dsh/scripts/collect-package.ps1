@@ -5,7 +5,7 @@ $proof=Join-Path (Split-Path $PSScriptRoot -Parent) 'evidence/windows';New-Item 
 $built=Get-ChildItem $BuildRoot -Recurse -Directory -Filter 'win-unpacked'|Select-Object -First 1
 $record=@{run=$env:GITHUB_RUN_ID;commit=$env:GITHUB_SHA;fullUpstream='39163dd30f703a79079e2d2446545cff3c453738';binaryAssembled=$false;nativeGUIVerified=$false;binaryDistributed=$false;scope='artifact metadata only; GUI proof is a separate file'}
 if($built){
- $exe=Join-Path $built.FullName '晏銘湛箴.exe'
+ $exe=Join-Path $built.FullName '湛箴_ymzz.exe'
  if(Test-Path $exe){
   & node (Join-Path $PSScriptRoot 'packaged-licenses.mjs') $built.FullName
   if($LASTEXITCODE -ne 0){throw 'Actual packaged dependency/license evidence collection failed'}

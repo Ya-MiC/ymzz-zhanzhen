@@ -6,8 +6,8 @@ Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes,System.Windows.Forms
 $proof=Join-Path (Split-Path $PSScriptRoot -Parent) 'evidence/windows';New-Item -ItemType Directory -Force $proof|Out-Null
 $built=Get-ChildItem $BuildRoot -Recurse -Directory -Filter 'win-unpacked'|Select-Object -First 1
 if(!$built){throw 'Official upstream Windows packaging did not produce win-unpacked'}
-$portable=Join-Path $env:RUNNER_TEMP '湛箴 中文 空格';Move-Item $built.FullName $portable
-$exe=Join-Path $portable '晏銘湛箴.exe';if(!(Test-Path $exe)){throw 'Actual branded FULL DSH EXE missing'}
+$portable=Join-Path $env:RUNNER_TEMP '湛箴_ymzz 中文 空格';Move-Item $built.FullName $portable
+$exe=Join-Path $portable '湛箴_ymzz.exe';if(!(Test-Path $exe)){throw 'Actual branded FULL DSH EXE missing'}
 $stateFile=Join-Path $portable '湛箴資料/dsh/zhanzhen/tasks.json'
 $p=Start-Process -FilePath $exe -ArgumentList '--force-renderer-accessibility' -PassThru
 function State {
@@ -26,6 +26,8 @@ try{
  $end=(Get-Date).AddSeconds(90);do{$p.Refresh();if($p.HasExited){throw 'FULL DSH EXE exited during GUI startup'};if($p.MainWindowHandle -eq [IntPtr]::Zero){Start-Sleep -Milliseconds 300}}until($p.MainWindowHandle -ne [IntPtr]::Zero -or (Get-Date) -gt $end)
  if($p.MainWindowHandle -eq [IntPtr]::Zero){throw 'Full Electron main window never started'};$Element=[System.Windows.Automation.AutomationElement]::FromHandle($p.MainWindowHandle)
  $nick=Find-Control '怎麼稱呼你？' ([System.Windows.Automation.ValuePattern]::Pattern);$nick.GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern).SetValue('湛箴 Windows 完整 DSH 驗收');Click '以暱稱開始使用完整 DSH'
+ Find-Control '湛箴_ymzz'|Out-Null
+ Find-Control '深淵的清澈的水，纂刻于竹篾上的痕，珍重微小，有所依據，立傳傳世'|Out-Null
  Screenshot 'full-dsh-onboarding'
  $approvals=0
  function Complete-Demo([bool]$accept){
@@ -44,13 +46,15 @@ try{
  $accepted=Complete-Demo $true;$rollback=Complete-Demo $false
  if(@((State).memory).Count -ne 1){throw 'Explicit DSH plugin memory confirmation was not persisted'}
  Screenshot 'full-dsh-task-board'
- Click '回到完整 DSH 工作區';Screenshot 'full-dsh-native-workspace'
+ @{accepted=$accepted;rollback=$rollback;approvals=$approvals;memoryConfirmed=@((State).memory).Count;engine='FULL official DeepSeek Harness';deterministicFakeTransport=$true;liveInference=$false}|ConvertTo-Json -Depth 30|Set-Content -Encoding utf8 (Join-Path $proof 'full-dsh-gui-task-checkpoint.json')
+ Click '回到完整 DSH 工作區';Find-Control '湛箴_ymzz 插件與驗證閘' ([System.Windows.Automation.InvokePattern]::Pattern)|Out-Null;Screenshot 'full-dsh-native-workspace'
  # Native upstream settings are retained. Configuration only: never enter credentials or make inference.
- $Element.SetFocus();[System.Windows.Forms.SendKeys]::SendWait('^,');Start-Sleep -Seconds 2
+ # The top-level Chromium UIA pane is not focusable. Use the REAL accessible native menu instead.
+ Click 'Account menu';Click 'Settings';Start-Sleep -Seconds 2
  $models=$null;foreach($label in @('Models','模型')){try{$models=Find-Control $label ([System.Windows.Automation.InvokePattern]::Pattern);break}catch{}}
  if(!$models){throw 'Original full DSH Models settings navigation missing'};$models.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern).Invoke();Start-Sleep -Seconds 1
  Screenshot 'full-dsh-native-model-settings'
- @{fullUpstreamApp=$true;engine='FULL official DeepSeek Harness Electron';upstream='39163dd30f703a79079e2d2446545cff3c453738';nativeGUI=$true;pluginLoadedViaProductionAssembly=$true;nicknameViaGUI=$true;approvals=$approvals;accepted=$accepted;rollback=$rollback;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativeModelSettingsOpened=$true;providerConfigured=$false;modelWorking=$false;unicodeSpacePortablePath=$true;exeSHA256=(Get-FileHash $exe -Algorithm SHA256).Hash;exeBytes=(Get-Item $exe).Length;actualUserIcon='Embedded by official electron-builder from original supplied PNG; resource file checked separately';customProtocolRegistration=$false;binaryDistribution='Blocked until BOTH workspace and actual portable/native permissive-license gates clear'}|ConvertTo-Json -Depth 30|Set-Content -Encoding utf8 (Join-Path $proof 'full-dsh-gui.json')
+ @{fullUpstreamApp=$true;engine='FULL official DeepSeek Harness Electron';upstream='39163dd30f703a79079e2d2446545cff3c453738';nativeGUI=$true;productDisplayName='湛箴_ymzz';nativeSidebarSlotPluginVerified=$true;originalDSHLayoutPreserved=$true;pluginLoadedViaProductionAssembly=$true;nicknameViaGUI=$true;approvals=$approvals;accepted=$accepted;rollback=$rollback;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativeModelSettingsOpened=$true;providerConfigured=$false;modelWorking=$false;unicodeSpacePortablePath=$true;exeSHA256=(Get-FileHash $exe -Algorithm SHA256).Hash;exeBytes=(Get-Item $exe).Length;actualUserIcon='Embedded by official electron-builder from original supplied PNG; resource file checked separately';customProtocolRegistration=$false;binaryDistribution='Blocked until BOTH workspace and actual portable/native permissive-license gates clear'}|ConvertTo-Json -Depth 30|Set-Content -Encoding utf8 (Join-Path $proof 'full-dsh-gui.json')
  "FULL_DSH_PORTABLE=$portable"|Out-File -Append -Encoding utf8 $env:GITHUB_ENV
 }catch{
  Screenshot 'full-dsh-failure'

@@ -13,3 +13,9 @@
 `codec-sources.lock.json`／`THIRD_PARTY_NOTICES.txt` 是 build 產生且隨包附帶的 provenance；binary 不進 Git。`evidence/image-codec-license-linux.json` 是實際 Linux build 記錄，Windows 會另產證據。npm graph clean 不覆蓋 Electron/LibreOffice 原生 payload；另有更嚴格 packaged gate，不能據此宣稱全產品 MIT 或已合格分發。
 
 English: A functional, bounded image-rs/moxcms/libwebp implementation of the real DSH attachment pipeline, not a disabled optional dependency or relabeled Sharp binary. Source archive and original fixture tests are retained. Actual transforms and regressions are tested; no claim of complete Sharp compatibility, OS isolation, Windows qualification, or an all-permissive Electron/Office product follows from a clean codec/npm audit.
+
+## CMYK / native brand follow-up
+
+Current codec contains 48 locked crates, plus the actual pinned CC0 default CMYK display profile from [saucecontrol/Compact-ICC-Profiles](https://github.com/saucecontrol/Compact-ICC-Profiles), commit `bdd84663061bc4ae95ca70decff54f581e27f702`. Its original license/readme/profile bytes and hashes are retained under `third_party/compact-icc-profiles`; this is explicitly a partial snapshot, not the entire profile repository. The build validates all bytes and includes them in source fingerprint and notices.
+
+19 real codec tests now include independently checked embedded-CMYK ICC RGB pixels, byte-identical output with the SAME profile used as explicit unprofiled fallback, and asymmetric EXIF pixel positions for all seven nontrivial rotations/mirrors. The fixture manually embeds and asserts the exact ICC bytes: Sharp's `withIccProfile` followed by CMYK output otherwise silently chooses a different profile. Do not claim all implicit CMYK defaults or all rendering engines are pixel-identical; moxcms and lcms interpolation can differ. All 98 upstream attachment assertions pass (one inherited skip unchanged).

@@ -8,12 +8,12 @@
   },
   "purpose": "actual permissive image-rs/libwebp runtime replacement; Sharp is development-only for independent upstream fixtures",
   "platform": "linux",
-  "sourceFingerprint": "38fa66cd069f63887fc579ee9274e7552089ba23d5fe61861a3e7ef5947e4e51",
+  "sourceFingerprint": "66c8e11da6290d8363f8e6bd5600a3214570a098400d2a03fe221be168e8056b",
   "adapterSha256": "10a7671563959a3b5698800886a1f5aec833831bc12d46b9e5c39d55204caa12",
   "binary": {
     "file": "bin/ymzz-dsh-image-codec",
-    "sha256": "55f813ebda6393a4d8eb713e011877ff893072a7bafb27cd2c4c3d6c8d2172a9",
-    "bytes": 3016568
+    "sha256": "3325cbfd0fc2aad118df19fe62ae0c3d02c2f49ebf2550f7d31a71718a44185c",
+    "bytes": 3228224
   },
   "packages": [
     {
@@ -537,6 +537,32 @@
         {
           "file": "Cargo.toml",
           "sha256": "5475de657d1c10b1c27f76a2d54fdd3162027705f663410b091294cd08482a72"
+        }
+      ]
+    },
+    {
+      "name": "jpeg-decoder",
+      "version": "0.3.2",
+      "checksum": "00810f1d8b74be64b13dbf3db89ac67740615d6c891f0e7b6179326533011a07",
+      "crateURL": "https://crates.io/crates/jpeg-decoder/0.3.2",
+      "repository": "https://github.com/image-rs/jpeg-decoder",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "selectedLicense": [
+        "MIT"
+      ],
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "notices": [
+        {
+          "file": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "file": "LICENSE-MIT",
+          "sha256": "22b83fb92a50418c7df9564b9c179fa2a0e74f293bc58b72dd7e218fc0902143"
+        },
+        {
+          "file": "Cargo.toml",
+          "sha256": "df53a3c85524171542fd8b551233ab71babb9b5eaf6f56e40fddf99b63c20188"
         }
       ]
     },
@@ -1264,6 +1290,29 @@
       ]
     }
   ],
+  "defaultCMYKProfile": {
+    "repository": "https://github.com/saucecontrol/Compact-ICC-Profiles",
+    "commit": "bdd84663061bc4ae95ca70decff54f581e27f702",
+    "license": "CC0-1.0",
+    "scope": "Only the required CMYK default profile, original readme and original license are included; not a full repository snapshot.",
+    "files": [
+      {
+        "path": "license",
+        "bytes": 6552,
+        "sha256": "469d87b5fa48f8aaf69e25f4fcac3a309c97dbb7d561b917638abdb640e004d9"
+      },
+      {
+        "path": "readme.md",
+        "bytes": 16066,
+        "sha256": "1a844dff76783493d3b1b81e4ec8b43b79a3f17ff52e162c393df17fda554949"
+      },
+      {
+        "path": "profiles/CGATS001Compat-v2-micro.icc",
+        "bytes": 8464,
+        "sha256": "73e1ba37d2bad5bab2a964f40a9eed96209666efc067c3322626214bbef234a0"
+      }
+    ]
+  },
   "vendoredNative": {
     "name": "libwebp",
     "license": "BSD-3-Clause",

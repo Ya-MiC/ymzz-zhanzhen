@@ -1,0 +1,75 @@
+{
+  "at": "2026-11-16 19:32 KST",
+  "status": "local-source-validation-not-Windows-release",
+  "upstream": "39163dd30f703a79079e2d2446545cff3c453738",
+  "sourcePreserved": 21632,
+  "frozenWorkspaceProjects": 409,
+  "checks": {
+    "nodeTests": {
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "includesCodecTests": 19,
+      "includesSignedUpdateTests": 14
+    },
+    "upstreamAttachment": {
+      "passed": 98,
+      "failed": 0,
+      "inheritedSkipped": 1
+    },
+    "fullDSHWebBuild": true,
+    "realUpstreamNativeClientBundleBuild": true,
+    "npmProduction": {
+      "count": 662,
+      "blocked": 0,
+      "unresolved": 0
+    }
+  },
+  "codec": {
+    "sourceFingerprint": "66c8e11da6290d8363f8e6bd5600a3214570a098400d2a03fe221be168e8056b",
+    "crates": 48,
+    "helperSHA256": "3325cbfd0fc2aad118df19fe62ae0c3d02c2f49ebf2550f7d31a71718a44185c",
+    "profile": {
+      "repository": "https://github.com/saucecontrol/Compact-ICC-Profiles",
+      "commit": "bdd84663061bc4ae95ca70decff54f581e27f702",
+      "license": "CC0-1.0",
+      "scope": "Only the required CMYK default profile, original readme and original license are included; not a full repository snapshot.",
+      "files": [
+        {
+          "path": "license",
+          "bytes": 6552,
+          "sha256": "469d87b5fa48f8aaf69e25f4fcac3a309c97dbb7d561b917638abdb640e004d9"
+        },
+        {
+          "path": "readme.md",
+          "bytes": 16066,
+          "sha256": "1a844dff76783493d3b1b81e4ec8b43b79a3f17ff52e162c393df17fda554949"
+        },
+        {
+          "path": "profiles/CGATS001Compat-v2-micro.icc",
+          "bytes": 8464,
+          "sha256": "73e1ba37d2bad5bab2a964f40a9eed96209666efc067c3322626214bbef234a0"
+        }
+      ]
+    }
+  },
+  "iconOriginalSHA256": "65b2af69825756700fe36ffad5b3d5a943b123364d611bd513df71d9c048be2d",
+  "providerConfigured": false,
+  "liveInference": false,
+  "updateMode": "signature-verified opaque staging only; no production key/channel/install/restart",
+  "notProven": [
+    "new-name Windows GUI",
+    "native permissive-only package",
+    "production updater installation",
+    "general-project bespoke bounded loop"
+  ],
+  "archifyClarityReference": {
+    "repository": "https://github.com/tt-a1i/archify",
+    "commit": "a7ed6fd6657da90414831d1d42cf95987188750c",
+    "inspected": [
+      "README.md",
+      "root structure"
+    ],
+    "copiedCode": false
+  }
+}

@@ -176,19 +176,26 @@ fn run(v: Value) -> Result<Value, String> {
         return Ok(json!({"decoded":true,"width":w,"height":h}));
     }
     if v["srgb"].as_bool().unwrap_or(false) {
-        if let Some(profile) = icc {
+        if let Some(profile) = icc.or_else(|| {
+            cmyk.then(|| {
+                include_bytes!(
+                    "../third_party/compact-icc-profiles/profiles/CGATS001Compat-v2-micro.icc"
+                )
+                .to_vec()
+            })
+        }) {
             let profile = ColorProfile::new_from_slice(&profile).map_err(err)?;
             let (layout, raw) = match profile.color_space {
                 DataColorSpace::Rgb => (Layout::Rgba, img.to_rgba8().into_raw()),
                 DataColorSpace::Gray => (Layout::Gray, img.to_luma8().into_raw()),
                 DataColorSpace::Cmyk => {
-                    let options = zune_core::options::DecoderOptions::default()
-                        .jpeg_set_out_colorspace(zune_core::colorspace::ColorSpace::CMYK);
-                    let mut d = zune_jpeg::JpegDecoder::new_with_options(
-                        zune_core::bytestream::ZCursor::new(&b),
-                        options,
-                    );
-                    (Layout::Rgba, d.decode().map_err(err)?)
+                    let mut d = jpeg_decoder::Decoder::new(Cursor::new(&b));
+                    let raw = d.decode().map_err(err)?;
+                    need(
+                        d.info()
+                            .is_some_and(|i| i.pixel_format == jpeg_decoder::PixelFormat::CMYK32),
+                    )?;
+                    (Layout::Rgba, raw)
                 }
                 _ => return Err("UNSUPPORTED_ICC_COLORSPACE".into()),
             };

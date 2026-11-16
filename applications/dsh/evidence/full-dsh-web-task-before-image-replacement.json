@@ -1,0 +1,770 @@
+{
+  "testedAtKST": "2026-11-16T17:49:07.847352+09:00",
+  "fullUpstreamApp": true,
+  "upstream": "39163dd30f703a79079e2d2446545cff3c453738",
+  "pnpm": "11.28.5",
+  "buildArtifacts": "8 gates passed",
+  "engine": "FULL official DeepSeek Harness",
+  "plugin": "ymzz-zhanzhen",
+  "approvals": [
+    "ymzz_read",
+    "ymzz_read",
+    "ymzz_patch",
+    "ymzz_test",
+    "ymzz_patch",
+    "ymzz_test",
+    "ymzz_read",
+    "ymzz_read",
+    "ymzz_patch",
+    "ymzz_test",
+    "ymzz_patch",
+    "ymzz_test"
+  ],
+  "liveInference": false,
+  "deterministicFixture": true,
+  "tasks": [
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "state": "accepted",
+      "pendingWrite": false,
+      "agentStatus": "idle",
+      "mode": "offline-fixture",
+      "round": 8,
+      "gates": [
+        {
+          "passed": false,
+          "exitCode": 1
+        },
+        {
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "error": "",
+      "changed": [
+        {
+          "path": "calculator.mjs",
+          "before": "export function add(a, b) { return a - b; }\n",
+          "after": "export function add(a, b) { return a + b; }\n"
+        }
+      ],
+      "memory": true
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "state": "rolled-back",
+      "pendingWrite": false,
+      "agentStatus": "idle",
+      "mode": "offline-fixture",
+      "round": 8,
+      "gates": [
+        {
+          "passed": false,
+          "exitCode": 1
+        },
+        {
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "error": "",
+      "changed": [
+        {
+          "path": "calculator.mjs",
+          "before": "export function add(a, b) { return a - b; }\n",
+          "after": "export function add(a, b) { return a + b; }\n"
+        }
+      ],
+      "memory": false
+    },
+    {
+      "id": "5ac5c71f-ba2f-4f2a-8b30-b5b0806575d2",
+      "state": "interrupted",
+      "pendingWrite": false,
+      "agentStatus": "idle",
+      "mode": "offline-fixture",
+      "round": 2,
+      "gates": [],
+      "error": "TOOL_NOT_APPROVED",
+      "changed": [],
+      "memory": false
+    }
+  ],
+  "adversarial": [
+    "unauthenticated route blocked",
+    "cross-site mutation blocked",
+    "invalid nickname rejected",
+    "unknown approval rejected",
+    "review requires human consent",
+    "post-gate test edit blocks acceptance",
+    "duplicate memory rejected",
+    "denied tool cancels native agent without writes"
+  ],
+  "evidenceValid": true,
+  "events": [
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "dsh-agent-created",
+      "payload": {
+        "engine": "@deepseek-ai/dsh-agent-loop",
+        "transport": "explicit deterministic fixture",
+        "liveInference": false
+      },
+      "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "a9257bdfc3471918151646347bf775c85813b27849ea4fa16de3dfde9720a394"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "a9257bdfc3471918151646347bf775c85813b27849ea4fa16de3dfde9720a394",
+      "hash": "9626114adca0cbefa2b62605c62e764124e2647fec727bf035abeb3649253d68"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.mjs",
+        "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+      },
+      "prev": "9626114adca0cbefa2b62605c62e764124e2647fec727bf035abeb3649253d68",
+      "hash": "c99b62fe96e563b7e068c2e6012bc3d30b06b79865a9c0b4e34df01a9f7a5a90"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "c99b62fe96e563b7e068c2e6012bc3d30b06b79865a9c0b4e34df01a9f7a5a90",
+      "hash": "56764aa6991fceba7b788ee92b7f30c922dfaa1a6e9cfa507e27100e27f07d32"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667"
+      },
+      "prev": "56764aa6991fceba7b788ee92b7f30c922dfaa1a6e9cfa507e27100e27f07d32",
+      "hash": "53b9f5a2c2fe96d9704cac40fde92261f705bff690a26557068d66838b0103ee"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "53b9f5a2c2fe96d9704cac40fde92261f705bff690a26557068d66838b0103ee",
+      "hash": "18de177b470bfe673f7015c83fc959a867731863d277fe2b6cf4374a5cd063ee"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "gate",
+      "payload": {
+        "passed": false,
+        "exitCode": 1,
+        "outputHash": "ad324970ea1411a2ebdd5074feb3c5c687458c732b0d06631117aa27fd6a3f13"
+      },
+      "prev": "18de177b470bfe673f7015c83fc959a867731863d277fe2b6cf4374a5cd063ee",
+      "hash": "fff23ea5c09d5d504f9f82093ab3cbc71e4c3a509bdaa6e7574527f1a07b61d1"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "fff23ea5c09d5d504f9f82093ab3cbc71e4c3a509bdaa6e7574527f1a07b61d1",
+      "hash": "b6fdc2482a1ace9d8111a1efc718f3e60e4e1ba7de1b5c993ed2f6cf207a4e5b"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+        "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      },
+      "prev": "b6fdc2482a1ace9d8111a1efc718f3e60e4e1ba7de1b5c993ed2f6cf207a4e5b",
+      "hash": "94e1e7cc0273125adce23b1fc5cb8c18a1e328a782feb1da092681d65731b6e9"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "94e1e7cc0273125adce23b1fc5cb8c18a1e328a782feb1da092681d65731b6e9",
+      "hash": "18a18d1afa3769b09643096c5d0681d86307df9098cde2e8675e3e5cad158204"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "gate",
+      "payload": {
+        "passed": true,
+        "exitCode": 0,
+        "outputHash": "423426cd76abd5fd7601f695fc672a21e1ec591711f980d6b51d6d331fbfc06e"
+      },
+      "prev": "18a18d1afa3769b09643096c5d0681d86307df9098cde2e8675e3e5cad158204",
+      "hash": "2327a088ec0ac0bb787b666920915208ce733ade51a62f72f117ea8e1d0b7eb8"
+    },
+    {
+      "id": "f5807fb1-88e9-4dd0-80e9-f6a85dbe2368",
+      "kind": "dsh-loop-completed",
+      "payload": {
+        "gates": [
+          {
+            "passed": false,
+            "exitCode": 1
+          },
+          {
+            "passed": true,
+            "exitCode": 0
+          }
+        ],
+        "revision": 2
+      },
+      "prev": "2327a088ec0ac0bb787b666920915208ce733ade51a62f72f117ea8e1d0b7eb8",
+      "hash": "73553e6753b271ab17f849e6a4f61d16eb4451db40d80cb5acb71afc1d99d2c3"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "dsh-agent-created",
+      "payload": {
+        "engine": "@deepseek-ai/dsh-agent-loop",
+        "transport": "explicit deterministic fixture",
+        "liveInference": false
+      },
+      "prev": "73553e6753b271ab17f849e6a4f61d16eb4451db40d80cb5acb71afc1d99d2c3",
+      "hash": "33e9a311c607a05dbf78e8ca33277c04837c20e03284f1e12aabca3486a83a8a"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "33e9a311c607a05dbf78e8ca33277c04837c20e03284f1e12aabca3486a83a8a",
+      "hash": "fc1da5176ae394f5e9bc18a806d22ef12d3ff0d48830de3f8c481636c9dcc40b"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.mjs",
+        "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+      },
+      "prev": "fc1da5176ae394f5e9bc18a806d22ef12d3ff0d48830de3f8c481636c9dcc40b",
+      "hash": "0fb6a84e9793744967607deee99916eabf3d7cd7266dab0e79667c4964e0b170"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "0fb6a84e9793744967607deee99916eabf3d7cd7266dab0e79667c4964e0b170",
+      "hash": "99c3bc505c049889ac772543cd51f3c841ea6de84e13d194becd1a583cfb1ac0"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.test.mjs",
+        "hash": "f7e4718aa06b25cb3d53bf8983df792cb74fda069f7ac34614bf5afff6cb9abf"
+      },
+      "prev": "99c3bc505c049889ac772543cd51f3c841ea6de84e13d194becd1a583cfb1ac0",
+      "hash": "e58166f09f9c49821167147fcde807df3ce1cd3f936c3023f8e57d3ec7213385"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "e58166f09f9c49821167147fcde807df3ce1cd3f936c3023f8e57d3ec7213385",
+      "hash": "4886612d24937109d605171440246f6213ad88037f11fa85fa7c49375c0829a7"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667"
+      },
+      "prev": "4886612d24937109d605171440246f6213ad88037f11fa85fa7c49375c0829a7",
+      "hash": "8c2a5521b8db8d707fc2e647987cae5ed27972c987a2cbbe1ea56c8dfac5fff2"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "8c2a5521b8db8d707fc2e647987cae5ed27972c987a2cbbe1ea56c8dfac5fff2",
+      "hash": "3a7c82cace52f0a6998d585771f13d8ee77718b4a2d1da0635aabe6fdd9f6a75"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "gate",
+      "payload": {
+        "passed": false,
+        "exitCode": 1,
+        "outputHash": "ff055135c7346c0db30a1ab35e46e2f5eacfc833af7e228a7ec46c78ec452179"
+      },
+      "prev": "3a7c82cace52f0a6998d585771f13d8ee77718b4a2d1da0635aabe6fdd9f6a75",
+      "hash": "2e427fa5c889d7e12b3b2dc61a2afbc63242a63b247b211f2afa578953db7c05"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "2e427fa5c889d7e12b3b2dc61a2afbc63242a63b247b211f2afa578953db7c05",
+      "hash": "bdfce7e41e7d1afe55b29470fd4a61dd58202e6b2846cae14a0e44c0510894f2"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+        "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      },
+      "prev": "bdfce7e41e7d1afe55b29470fd4a61dd58202e6b2846cae14a0e44c0510894f2",
+      "hash": "eded7d6db1459b6e26b5351ceafb7d22a5bbf41189636f9a20ff0d9315f0adf2"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "eded7d6db1459b6e26b5351ceafb7d22a5bbf41189636f9a20ff0d9315f0adf2",
+      "hash": "f1bbd90e3967d9d4cd1c492e747c71922b29ace26fba0a9d84b103ab32f3a65f"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "gate",
+      "payload": {
+        "passed": true,
+        "exitCode": 0,
+        "outputHash": "0bcc17594c63efc70c4b81dddb5f003a98211566bcfdeefc574a4dc76e9f296e"
+      },
+      "prev": "f1bbd90e3967d9d4cd1c492e747c71922b29ace26fba0a9d84b103ab32f3a65f",
+      "hash": "ad50215d7edb7b2758242e4b65834fe2b9a13d72baa38cc6da257a8a1b31ead0"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "dsh-loop-completed",
+      "payload": {
+        "gates": [
+          {
+            "passed": false,
+            "exitCode": 1
+          },
+          {
+            "passed": true,
+            "exitCode": 0
+          }
+        ],
+        "revision": 2
+      },
+      "prev": "ad50215d7edb7b2758242e4b65834fe2b9a13d72baa38cc6da257a8a1b31ead0",
+      "hash": "f70791d4af18f6cc0bcfcfecdcc41c3d1539831f9784de96367f410551a2bdc7"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "accepted",
+      "payload": {
+        "files": [
+          "calculator.mjs"
+        ]
+      },
+      "prev": "f70791d4af18f6cc0bcfcfecdcc41c3d1539831f9784de96367f410551a2bdc7",
+      "hash": "9fec11176c533e9fef88fd9225531dd66d4547cc756a6ed888ac14d055b114bf"
+    },
+    {
+      "id": "fd78235e-aa6c-4958-9f83-f8512d7a0a9b",
+      "kind": "memory-confirmed",
+      "payload": {},
+      "prev": "9fec11176c533e9fef88fd9225531dd66d4547cc756a6ed888ac14d055b114bf",
+      "hash": "ade25ed4023ddb8abc3e89e70f665f58e48eea49fa31859cb8dd337eb8d5cb69"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "dsh-agent-created",
+      "payload": {
+        "engine": "@deepseek-ai/dsh-agent-loop",
+        "transport": "explicit deterministic fixture",
+        "liveInference": false
+      },
+      "prev": "ade25ed4023ddb8abc3e89e70f665f58e48eea49fa31859cb8dd337eb8d5cb69",
+      "hash": "e5a0fb61822e353f2e1ecc0bdb19acbcef512c137f3004c40f95ad0bccfecece"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "e5a0fb61822e353f2e1ecc0bdb19acbcef512c137f3004c40f95ad0bccfecece",
+      "hash": "ac17fea93cf4fb3786d54d91dd6272f1e313a03f9bdabc8def94497a7d269754"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.mjs",
+        "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+      },
+      "prev": "ac17fea93cf4fb3786d54d91dd6272f1e313a03f9bdabc8def94497a7d269754",
+      "hash": "771f3b2c058007ee9c1c21ec17d7c0659c74f523db9dbb5b9fdca9a7f3e8b7aa"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "771f3b2c058007ee9c1c21ec17d7c0659c74f523db9dbb5b9fdca9a7f3e8b7aa",
+      "hash": "10266750b87d095d6ce4bfdce9dc5d75d5d47ef5948665d032ba6c66bb669dce"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.test.mjs",
+        "hash": "f7e4718aa06b25cb3d53bf8983df792cb74fda069f7ac34614bf5afff6cb9abf"
+      },
+      "prev": "10266750b87d095d6ce4bfdce9dc5d75d5d47ef5948665d032ba6c66bb669dce",
+      "hash": "bb0af76432367415af2b196654a30b30e3bae17fe0c5a6679428390b53821e31"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "bb0af76432367415af2b196654a30b30e3bae17fe0c5a6679428390b53821e31",
+      "hash": "876a3a50bfbaf3163af221f14a3957757c1263c9fd3b02a90ab4e63ba53b41a5"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667"
+      },
+      "prev": "876a3a50bfbaf3163af221f14a3957757c1263c9fd3b02a90ab4e63ba53b41a5",
+      "hash": "73071540908ec81aa8dbfe337fddc86be7a0d31c97cfed01698e9f00d00ee80e"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "73071540908ec81aa8dbfe337fddc86be7a0d31c97cfed01698e9f00d00ee80e",
+      "hash": "1b85aae5ac570de4381d7905d92360de4d52826a513202f3f0e988ae86b5bc64"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "gate",
+      "payload": {
+        "passed": false,
+        "exitCode": 1,
+        "outputHash": "37d62478cc3e046ba38cf67b59caba5053126b488ec7cc66700e6664ae211634"
+      },
+      "prev": "1b85aae5ac570de4381d7905d92360de4d52826a513202f3f0e988ae86b5bc64",
+      "hash": "0b33a55cf958e02ed182c7bebd99d70e07c7a17c76ef66969057bbfea9e2f3c5"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "0b33a55cf958e02ed182c7bebd99d70e07c7a17c76ef66969057bbfea9e2f3c5",
+      "hash": "d89940fed4fbb1fb593ca00e4fb8d3b37bf257f0b3a2332ab8696ce30c67f9a2"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+        "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      },
+      "prev": "d89940fed4fbb1fb593ca00e4fb8d3b37bf257f0b3a2332ab8696ce30c67f9a2",
+      "hash": "cca45d0edc3d922fcbe204494e31bf074ed3c2d9f05f73ffb579a0008dcc6035"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "cca45d0edc3d922fcbe204494e31bf074ed3c2d9f05f73ffb579a0008dcc6035",
+      "hash": "d4b3bec10dc164c0bfe8d8eb573f7551c0c0bd1a276be1d4bdaba4f14463001f"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "gate",
+      "payload": {
+        "passed": true,
+        "exitCode": 0,
+        "outputHash": "917db8030aa6890930b2c4c5dc1c3be1a55592cfcde0fd683a6f5fb5970ebcd4"
+      },
+      "prev": "d4b3bec10dc164c0bfe8d8eb573f7551c0c0bd1a276be1d4bdaba4f14463001f",
+      "hash": "aeef7c7abfbf84762fc9ddec99abcc3d988702a626eef1250d06a2284e4ba840"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "dsh-loop-completed",
+      "payload": {
+        "gates": [
+          {
+            "passed": false,
+            "exitCode": 1
+          },
+          {
+            "passed": true,
+            "exitCode": 0
+          }
+        ],
+        "revision": 2
+      },
+      "prev": "aeef7c7abfbf84762fc9ddec99abcc3d988702a626eef1250d06a2284e4ba840",
+      "hash": "2a1f69243c6296ce1337406af719193a8be852a4fb9fb9352558e3936a61ef63"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "accepted",
+      "payload": {
+        "files": [
+          "calculator.mjs"
+        ]
+      },
+      "prev": "2a1f69243c6296ce1337406af719193a8be852a4fb9fb9352558e3936a61ef63",
+      "hash": "283395a0428bbdafbfb59d110a31a434598f2bd9c769cb4dfb1b1002470904d8"
+    },
+    {
+      "id": "fb1391ea-6082-4d90-9680-351453161a08",
+      "kind": "memory-confirmed",
+      "payload": {},
+      "prev": "283395a0428bbdafbfb59d110a31a434598f2bd9c769cb4dfb1b1002470904d8",
+      "hash": "bd47928148d56c7afc35de90cb839c20486b4d0d5e914be5b8677086acce5e0f"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "dsh-agent-created",
+      "payload": {
+        "engine": "@deepseek-ai/dsh-agent-loop",
+        "transport": "explicit deterministic fixture",
+        "liveInference": false
+      },
+      "prev": "bd47928148d56c7afc35de90cb839c20486b4d0d5e914be5b8677086acce5e0f",
+      "hash": "5746d84de1de90537e05588daaf0445a2cad5b64e543acbe99d5e76e716a6f5b"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "5746d84de1de90537e05588daaf0445a2cad5b64e543acbe99d5e76e716a6f5b",
+      "hash": "7ea05e5851d1e1737ba5dfd632c5b5efd535200d01c46a0d0010030062b1a91a"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.mjs",
+        "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+      },
+      "prev": "7ea05e5851d1e1737ba5dfd632c5b5efd535200d01c46a0d0010030062b1a91a",
+      "hash": "6a219d8675c422b1480aaaba7f845f7b8ca1887589eee9946baca369a57bdadd"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": true
+      },
+      "prev": "6a219d8675c422b1480aaaba7f845f7b8ca1887589eee9946baca369a57bdadd",
+      "hash": "4ac9f4584b49c92438b83befd51f6aef7651217b98704cafd454d749faa413a8"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "read",
+      "payload": {
+        "path": "calculator.test.mjs",
+        "hash": "f7e4718aa06b25cb3d53bf8983df792cb74fda069f7ac34614bf5afff6cb9abf"
+      },
+      "prev": "4ac9f4584b49c92438b83befd51f6aef7651217b98704cafd454d749faa413a8",
+      "hash": "c1fed9cdfe116d8a65b278e5b573de752cea8051827572d589ba61d103ef22b3"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "c1fed9cdfe116d8a65b278e5b573de752cea8051827572d589ba61d103ef22b3",
+      "hash": "b6433cca9e4c581cbb176d374bc4bdb8141ce2dfe7ab41b704b36460f1d0a119"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667"
+      },
+      "prev": "b6433cca9e4c581cbb176d374bc4bdb8141ce2dfe7ab41b704b36460f1d0a119",
+      "hash": "ba7adfdd2b2888f52fcbab81509e275d83fc68bbc32d153704672dc24f3ba0f5"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "ba7adfdd2b2888f52fcbab81509e275d83fc68bbc32d153704672dc24f3ba0f5",
+      "hash": "60cdc8dfc702dac929739409e0c17160942d3a3d24ff2b1b1870e0639ab8f5ec"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "gate",
+      "payload": {
+        "passed": false,
+        "exitCode": 1,
+        "outputHash": "e59193f69020390411ad61a96a2146728bcad2e46a6720d42af5f7c01d099d8b"
+      },
+      "prev": "60cdc8dfc702dac929739409e0c17160942d3a3d24ff2b1b1870e0639ab8f5ec",
+      "hash": "758dd8da7959c099c7f4a5a90c2804598f73440a48e0547ceb469153aca5eff3"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_patch",
+        "allowed": true
+      },
+      "prev": "758dd8da7959c099c7f4a5a90c2804598f73440a48e0547ceb469153aca5eff3",
+      "hash": "4e8ad825247b9c405c0b63aae7d334cfb98319a4dc6929f8573653213bac7278"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "patch",
+      "payload": {
+        "path": "calculator.mjs",
+        "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+        "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      },
+      "prev": "4e8ad825247b9c405c0b63aae7d334cfb98319a4dc6929f8573653213bac7278",
+      "hash": "b98cf54de06dcb141791899e22f7785c1c2f0d7c046640ddbe330ecbdf94f065"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_test",
+        "allowed": true
+      },
+      "prev": "b98cf54de06dcb141791899e22f7785c1c2f0d7c046640ddbe330ecbdf94f065",
+      "hash": "25818bbba5c74f045f43e6ab1bbc01e64d8af91a3da577483042a67450ef3632"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "gate",
+      "payload": {
+        "passed": true,
+        "exitCode": 0,
+        "outputHash": "65cedfdfb175838c12018cd9431156942c46bdcfd758ed1f2a641e2d2d683e76"
+      },
+      "prev": "25818bbba5c74f045f43e6ab1bbc01e64d8af91a3da577483042a67450ef3632",
+      "hash": "73fa6b6c68f9e39e7d8d6cc82ffa55433b14e502c66d310a20e6ae3c061a06a4"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "dsh-loop-completed",
+      "payload": {
+        "gates": [
+          {
+            "passed": false,
+            "exitCode": 1
+          },
+          {
+            "passed": true,
+            "exitCode": 0
+          }
+        ],
+        "revision": 2
+      },
+      "prev": "73fa6b6c68f9e39e7d8d6cc82ffa55433b14e502c66d310a20e6ae3c061a06a4",
+      "hash": "aa9894e913be1bb23f36a29ad6458a3223256b52ddccd474a0e66bbfb2e7481c"
+    },
+    {
+      "id": "bbeced40-f449-40a0-9af6-062658868513",
+      "kind": "rolled-back",
+      "payload": {
+        "files": [
+          "calculator.mjs"
+        ]
+      },
+      "prev": "aa9894e913be1bb23f36a29ad6458a3223256b52ddccd474a0e66bbfb2e7481c",
+      "hash": "1751beef6e4a47beb1ffc6e901eedf05a345d0b2b7f60babf028c703c82343b0"
+    },
+    {
+      "id": "5ac5c71f-ba2f-4f2a-8b30-b5b0806575d2",
+      "kind": "dsh-agent-created",
+      "payload": {
+        "engine": "@deepseek-ai/dsh-agent-loop",
+        "transport": "explicit deterministic fixture",
+        "liveInference": false
+      },
+      "prev": "1751beef6e4a47beb1ffc6e901eedf05a345d0b2b7f60babf028c703c82343b0",
+      "hash": "8c952c23d103dd81b6343b9b834f0f602265335b2a55a83e943511b4baca0423"
+    },
+    {
+      "id": "5ac5c71f-ba2f-4f2a-8b30-b5b0806575d2",
+      "kind": "human-tool-approval",
+      "payload": {
+        "tool": "ymzz_read",
+        "allowed": false
+      },
+      "prev": "8c952c23d103dd81b6343b9b834f0f602265335b2a55a83e943511b4baca0423",
+      "hash": "d39d0a954892dabc9eaed59bc6785a5e0fc50d5bd6502879bbfafb909711d09d"
+    }
+  ]
+}
