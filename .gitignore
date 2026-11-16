@@ -45,3 +45,8 @@ coverage/
 /runtime-desktop/node-LICENSE
 /dist/
 /.local-data/
+
+# Full DSH immutable upstream and separate derivative build copy.
+applications/dsh/.worktree/
+applications/dsh/.data/
+applications/dsh/.cache/

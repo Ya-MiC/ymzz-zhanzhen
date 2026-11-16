@@ -1,12 +1,41 @@
+# 主產品方向修正：完整官方 DSH 衍生應用
+
+依最新要求，主產品必須是**完整 DeepSeek Harness 應用＋真正 DSH 插件**，不是只抽 Cordis 的獨立 Tauri runtime。完整官方上游已固定並保留在 [`applications/dsh/upstream`](applications/dsh/upstream)，原始 21,632 檔（含追蹤 dotfiles／symlink）、MIT／第三方 notices 不改；衍生建置在獨立 `.worktree`，不寫入上游倉庫。
+
+**目前正在整合／驗收完整 DSH。下方獨立 portable 只是保留的相容實驗，不能當作本次完整 DSH 交付，也不能據此宣稱完整 DSH Windows 已完成。** 原有程式、文件及成果保留不刪。支付寶接入由使用者自行處理。
+
+## 現在可跑的主產品
+
+**[完整 DSH 應用、操作方法、真實證據與未完成界線 → applications/dsh/README.md](applications/dsh/README.md)**
+
+- 官方 https://github.com/deepseek-ai/deepseek-harness ，固定 `39163dd30f703a79079e2d2446545cff3c453738`，**21,632 原始檔完整保留**；CLI／Web／Electron Desktop／Desktop Host 一起建置，原版 407＋湛箴插件＝408 workspace。
+- 已實際通過完整上游 **8 個 artifacts build gates**；真正 `ctx.agents.create`／Agent Loop／Tool registry／ApprovalService／`ctx.skills`，不是另一套示範 shell。真實離線修復：讀檔→人工逐工具核准→修改→測試失敗→修復→測試通過→差異驗收／記憶。[實測證據](applications/dsh/evidence/full-dsh-web-task.json)。假模型明確標示，沒有 live／付費／NIM 推論。
+- `cd applications/dsh` → `pnpm install:upstream` → `pnpm build` → `pnpm start`。保留完整原生聊天、工作區、模型設定、插件管理；先填暱稱、四套溫潤主題、使用你提供的原圖。
+- **尚不提供冒稱已通過的完整 DSH Windows 下載。** [新 Windows qualification](.github/workflows/full-dsh.yml) 以原版 `package:desktop:win:x64:dir --unsigned` 打包並做真正 GUI 任務測試；沒有成功結果就不稱完成。
+- **具體授權阻擋：**[完整 production 掃描](applications/dsh/evidence/full-production-license-report.json) 664 個 package 找到 sharp/libvips 的 LGPL-3.0-or-later native runtime。這可依法商用，但不是 MIT／permissive，嚴格分發 gate 在替代或明確合規決策前阻止 EXE artifact 上傳。MPL-2.0 LibreOffice 亦保留原義務。先前「386／0 blocked」只屬下方舊相容層，不能套用完整 DSH。
+- 完整 DSH 版是 Electron，自帶 Chromium；不沿用舊 Tauri 的 WebView2 宣稱。不用 NSIS、不註冊 dsh://、不做自訂 registry persistence；不保證 Windows 本身零系統寫入。支付寶由你自行處理。
+
+English: Primary product = the complete pinned official DSH app plus genuine plugins. Real build/agent/tool evidence is linked above. The native image-engine license gate currently blocks binary distribution; no successful full-DSH Windows package is claimed. Earlier Tauri results below are retained compatibility history, not the current product.
+
+---
+
+## 保留：先前獨立 runtime 相容實驗（非主產品）
+
 # 湛箴 · 你的本機編碼工作區
 
 <img src="runtime/ui/brand/icon-128.png" alt="使用者提供的湛箴產品圖標" width="96">
 
 **不是只有文件盤點：現在可以讓模型提出程式修改，逐批授權，執行真實單元測試，根據失敗修正，再由你驗收或還原。**
 
-- Windows portable：本次編碼 GUI／原生資料夾選擇器與實際任務驗收正在 CI 執行；最新成功產物會在此更新，不以舊盤點包冒充新版。
+- **[下載 Windows x64 portable ZIP](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986/artifacts/14206723927)** · **[真實 Windows GUI／編碼任務 CI 通過](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986)**（程式版 `77b4c58`，2026-11-16 17:04 KST）。此為新版編碼產品，不是先前只有文件驗證的包。
 - 無需安裝 Node/Python；需要現有 **WebView2**。無 MSI／NSIS、無自訂註冊表持久化、無遙測；尚未簽章，SmartScreen 可能提示。
 - 產品圖標使用你提供的原圖，未另畫替代品；四套精確溫潤主題。UI 使用原生表單／dialog 與固定 commit 的 **Lucide ISC** 圖示，原 React MIT 工作區仍保留。
+
+### 下載與打開
+
+Actions artifact 下載需要 GitHub 登入。解開 artifact ZIP；若內有 `ymzz-zhanzhen-windows-x64-portable.zip`，再解開一次。把**完整資料夾**放在可寫入位置，雙擊 `ymzz-zhanzhen.exe`，不要只搬單一 exe。模型需你另行下載並啟動本機服務；離線示例不需要模型。
+
+資料庫、工作示例及 WebView 資料預設留在同資料夾的 `data/`。關閉程式後，可備份或移除整個 portable 資料夾；不會替你移除外部專案。WebView2／Windows 仍可能維護系統層快取或註冊表，不承諾作業系統零寫入。
 
 ### 打開後就能做
 
@@ -14,6 +43,20 @@
 2. 按「建立離線程式修復示例」：新建中文／空白工作資料夾，**明確是假模型**；讀檔、修改、故意失敗測試、回饋修正、通過測試都走真實工具管線。
 3. 每批審查檔案及工具；執行程式碼另行同意。通過後檢查完整前後差異，**驗收保留或還原**；想記住結果再明確確認。
 4. 連接自己的模型：在「模型設定」啟用本機連線，填 Ollama／LM Studio 的 OpenAI 相容 base URL 與已下載模型名；用原生資料夾選擇器選專案，再輸入需求。**未設定模型會清楚阻止執行，不假裝已推論。** 本次沒有付費／NIM／live inference。
+
+### 已實際驗證，不靠 build-only 宣稱
+
+- **40** runtime/provider/保留支付回歸＋**28** Rust＋**21** 原 UI 測試；原 UI production build、來源校驗 **1220** 份原始匯入檔、resolved license 掃描 **386** 筆／0 blocked。
+- Windows 中文／空白目錄完整 portable 啟動；GUI 暱稱、模型設定（未呼叫推論）、原生資料夾 picker 開啟／取消。
+- 第一個 GUI 編碼任務：真實單元測試 **exit 1 → 修正 → exit 0 → 人工差異驗收 → 明確記憶**；第二個任務同管線通過後**還原原檔位元組**。兩份證據鏈均有效。
+- [原始 Windows proof JSON／雜湊／截圖](docs/coding/evidence/windows-77b4c58/) · [Linux 同工具管線證據](docs/coding/evidence/linux-coding-loop.json)。模型為明確的 deterministic fake transport，檔案修改和 Node 測試是真實的；未把假模型包成真推論。
+- portable 內層 ZIP SHA-256：`7e628c423e7f5356bbc7d49fc6416478c6e2da289ffc50af450eb15e382d2b49`。下載固定已驗證程式版；後續僅證據／文件更新不改此包。
+
+![Windows 真實產品圖標與暱稱引導](docs/coding/evidence/windows-77b4c58/windows-onboarding.png)
+
+![Windows 真實程式差異與人工驗收](docs/coding/evidence/windows-77b4c58/windows-coding-diff.png)
+
+截圖未美化，來自 Windows runner；畫面系統鐘為 UTC，以上驗證時間已換算 KST。
 
 ### 誠實的能力範圍
 
@@ -26,6 +69,8 @@
 [編碼工具與安全設計](docs/coding/README.md) · [完整歷史要求／全部連結](docs/integration/COVERAGE.md) · [圖標來源](docs/integration/product-icon.lock.json) · [UI 授權](docs/integration/ui-components.lock.json)
 
 ### English
+
+[Download the verified Windows x64 portable](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986/artifacts/14206723927) (GitHub sign-in required). Extract both ZIP layers if needed and run `ymzz-zhanzhen.exe` with its bundled files. Existing WebView2 is required; Node/Python installation is not. Unsigned portable, no installer or release. GUI onboarding, native picker, provider settings, real failing→repaired passing tests, explicit acceptance/memory and a separate rollback all passed on Windows. Runtime 40 / Rust 28 / existing UI 21 checks passed. Data stays under portable `data/`; local models are not bundled.
 
 A usable bounded local coding workspace: provider plan → explicit workspace selection → per-batch tool approval → real file read/write/patch → bounded Node unit tests → failure feedback and repair → human diff acceptance or rollback → optional confirmed memory. The offline demonstration uses a clearly labeled deterministic fake model through the same provider/tool pipeline, not live inference. Bring your own local OpenAI-compatible model. Native Windows picker, supplied product icon, exact Wenrun themes, no custom registry persistence or telemetry. This is not an OS/network sandbox or an unrestricted coding agent. Alipay is now user-managed; no new payment implementation.
 

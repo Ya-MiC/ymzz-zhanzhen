@@ -1,0 +1,16 @@
+{
+  "upstream": "39163dd30f703a79079e2d2446545cff3c453738",
+  "node": "24.22.1 full official SDK",
+  "pnpm": "11.28.5",
+  "workspaceProjects": 408,
+  "completedAtKST": "2026-11-16T17:46:38+09:00",
+  "command": "pnpm run build:artifacts",
+  "gates": ["native addon", "Host Typert", "host compiler", "Host bundle", "Desktop bundle", "client compiler", "Client bundle", "Web build"],
+  "passed": 8,
+  "failed": 0,
+  "clientArtifactsRecorded": 379,
+  "dev": {"command": "pnpm run dev:web --poll --patch <product-owned overlay> --no-open --skip-build --port 3088", "healthyAtKST": "2026-11-16T17:47:46+09:00", "clientPluginsWatched": 96, "linkedLibrariesWatched": 5, "compilerErrors": 0},
+  "noLiveInference": true,
+  "windowsFullAppQualified": false,
+  "distributionLicenseCleared": false
+}

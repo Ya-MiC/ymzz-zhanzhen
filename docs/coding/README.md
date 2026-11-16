@@ -22,7 +22,7 @@ Node permission model 不是惡意程式隔離邊界，沒有網路封鎖；測�
 
 ## 驗證
 
-本地 40 項 runtime/provider/原支付回歸測試通過，其中新增 20 項 coding／adversarial checks；Rust 28、原 UI 21。Windows workflow 實際啟動完整 portable、原生資料夾選擇器，GUI 建示例／逐批核准／真失敗→修正→通過／驗收記憶，以及第二個任務還原；CI 結果與下載以主 README 更新的成功產物為準。
+本地 40 項 runtime/provider/原支付回歸測試通過，其中新增 20 項 coding／adversarial checks；Rust 28、原 UI 21。Windows workflow 實際啟動完整 portable、原生資料夾選擇器，GUI 建示例／逐批核准／真失敗→修正→通過／驗收記憶，以及第二個任務還原；已於 [Windows CI 43827972986](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986)（程式版 `77b4c58`，2026-11-16 17:04 KST）全部通過。[未修改的原始 proof、截圖與二進位 hash](evidence/windows-77b4c58/provenance.json)；下載以主 README 固定的已驗證產物為準。
 
 官方 Node 權限語義：https://nodejs.org/docs/latest-v24.x/api/cli.html#--allow-fs-read 。Lucide ISC 五個原始 SVG 的 commit/hash/license 位於 `docs/integration/ui-components.lock.json`。新碼 MIT，原授權保持。Windows 新增的直接 `windows 0.62.2` API 依賴原已在 lock 中（MIT OR Apache-2.0）；resolved 掃描 386 筆、0 blocked，實際 notice 收集 254 packages。產品圖標原圖及 PNG/ICO 衍生來源另鎖，不冒稱他人美術改成 MIT。
 

@@ -1,0 +1,60 @@
+name: Full DSH application qualification
+on:
+  push:
+    branches: [master, 'feat/zhanzhen-coding-loop-20261116']
+    paths: ['applications/dsh/**', 'runtime/**', 'runtime-desktop/assets/**', '.github/workflows/full-dsh.yml', 'core-skills.lock.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: full-dsh-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  windows-full-application:
+    runs-on: windows-latest
+    timeout-minutes: 70
+    env:
+      CI: 'true'
+      DSH_TELEMETRY_DISABLED: '1'
+      DSH_GATE_CONCURRENCY: '1'
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Enable official pinned pnpm through Corepack
+        shell: pwsh
+        run: |
+          npm install --global corepack@0.35.1
+          corepack enable
+      - name: Verify all pinned upstream bytes and prepare additive derivative
+        run: node applications/dsh/scripts/prepare.mjs
+      - name: Install FULL 408-project upstream workspace with reviewed lifecycle scripts disabled
+        working-directory: applications/dsh/.worktree
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Real full DSH Electron Windows directory packaging (unsigned, no NSIS installer, no publishing)
+        working-directory: applications/dsh/.worktree
+        run: pnpm run package:desktop:win:x64:dir --unsigned
+      - name: Actual packaged FULL DSH GUI + real agent/task/gate workflow in Chinese-space portable path
+        shell: pwsh
+        run: ./applications/dsh/scripts/windows-smoke.ps1 -BuildRoot applications/dsh/.worktree
+      - name: Scan actual full production dependency graph
+        if: always()
+        run: node applications/dsh/scripts/licenses.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-dsh-qualification-${{ github.sha }}
+          path: |
+            applications/dsh/evidence/windows/
+            applications/dsh/evidence/full-production-license-report.json
+          if-no-files-found: error
+      - name: Fail closed before distributing any restricted native runtime
+        run: node applications/dsh/scripts/licenses.mjs --enforce
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: zhanzhen-full-dsh-portable-windows-${{ github.sha }}
+          path: ${{ env.FULL_DSH_PORTABLE }}
+          if-no-files-found: error

@@ -1,0 +1,20 @@
+{
+  "name": "ymzz-full-dsh-application",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Product-owned wrapper of the complete pinned official MIT DSH app; upstream and third parties retain their licenses",
+  "packageManager": "pnpm@11.28.5",
+  "engines": { "node": ">=24.9.0" },
+  "scripts": {
+    "prepare:source": "node scripts/prepare.mjs",
+    "install:upstream": "node scripts/run.mjs install",
+    "dev": "node scripts/run.mjs dev",
+    "start": "node scripts/run.mjs web",
+    "build": "node scripts/run.mjs build",
+    "desktop": "node scripts/run.mjs desktop",
+    "package:windows": "node scripts/run.mjs package",
+    "test": "node --test tests/*.test.mjs",
+    "licenses": "node scripts/licenses.mjs --enforce"
+  }
+}
