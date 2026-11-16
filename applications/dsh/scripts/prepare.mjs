@@ -31,6 +31,11 @@ process.env.DSH_AGENTS_HOME = join(app.getPath('userData'), 'agents')
 process.env.DSH_TELEMETRY_DISABLED = '1'
 let focusPrimaryWindow = (): void => {}`,'portable product-local profile and skill pool; telemetry disabled');
 edit('apps/desktop/src/main.ts',"if (!enteredWorkspace && needsWelcome({ loggedIn: state.loggedIn, hasApiKey: state.hasApiKey }))", "if (!enteredWorkspace && process.env.YMZZ_REQUIRE_ACCOUNT_WELCOME === '1' && needsWelcome({ loggedIn: state.loggedIn, hasApiKey: state.hasApiKey }))",'nickname-first plugin onboarding, account welcome remains opt-in');
+// Upstream unsigned macOS already omits the remote mandatory-update service. Apply
+// that same offline/unsigned policy to our Windows portable derivative; no invented
+// HTTPS endpoint, release credential, or update service is configured.
+edit('apps/desktop/scripts/desktop-package-environment.mjs',"if (target.platform !== 'darwin' || !options.unsigned) resolveDesktopPolicyEnvironment(environment)","if (!options.unsigned) resolveDesktopPolicyEnvironment(environment)",'unsigned portable build has no mandatory remote update service; signed policy unchanged');
+edit('apps/desktop/scripts/electron-builder-config.mjs',"const policy = packagesMacOS && unsigned ? undefined : resolveDesktopPolicyEnvironment(env)","const policy = unsigned ? undefined : resolveDesktopPolicyEnvironment(env)",'omit mandatory remote-update metadata for unsigned portable builds on Windows too');
 edit('apps/desktop/scripts/electron-builder-config.mjs',"productName: 'DeepSeek Harness'","productName: '晏銘湛箴'",'product branding');
 edit('apps/desktop/scripts/electron-builder-config.mjs',"protocols: [{ name: 'DeepSeek Harness', schemes: ['dsh'] }]","protocols: []",'no distribution protocol association');
 for(const [src,to]of [['runtime/ui/brand/icon-512.png','apps/desktop/resources/icon-windows.png'],['runtime-desktop/assets/product.ico','apps/desktop/resources/tray-windows.ico']]){fs.copyFileSync(path.join(product,src),path.join(work,to));changes.push({file:to,reason:'actual user supplied product icon'})}
