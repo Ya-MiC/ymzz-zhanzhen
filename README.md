@@ -1,3 +1,5 @@
+> 主產品已移至 [湛箴_ymzz](https://github.com/Ya-MiC/ymzz)；本倉庫所有既有內容保留。
+
 # 晏銘湛箴_湛箴（ymzz-zhanzhen）
 
 **我的本機 VibeCoding 智能體：三十輻共一轂，Skill 是可換的輻。**
