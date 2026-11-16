@@ -44,7 +44,7 @@ for slug in ["Ya-MiC/ymzz-wuyong-zhi-yong", "Ya-MiC/ymzz-wuwong-ji-wung", "Ya-Mi
     records.append(snapshot(slug,"HEAD","imports/"+slug.split("/")[1]))
 # The actual MIT DSH plugin kernel and its dependency, NOT its telemetry/browsers/paid providers.
 records.append(snapshot("deepseek-ai/deepseek-harness", "HEAD", "imports/deepseek-harness", ["LICENSE", "README.md", "THIRD_PARTY_NOTICES.md", "vendor/cordis", "vendor/cosmokit"]))
-(ROOT/"docs/integration/sources.lock.json").write_text(json.dumps(records, ensure_ascii=False, indent=2)+"\n")
+(ROOT/"docs/integration/sources.lock.json").write_text(json.dumps(records, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
 # Actual locally installed skill contents, not CLI instructions or empty stubs.
 skills=[
 ("find-skills","vercel-labs/skills","skills/find-skills","MIT"),
@@ -81,5 +81,5 @@ for name,slug,path,license in skills:
     rec["copied"]=sum("sha256" in x for x in rec["files"])
     rec["excluded"]=sum("excluded" in x for x in rec["files"])
     locked.append(rec)
-(ROOT/"core-skills.lock.json").write_text(json.dumps({"schema":1,"scope":"product-only","designAuthority":"ymzz-wenrun-design-skill; other skills cannot override tokens","skills":locked},ensure_ascii=False,indent=2)+"\n")
+(ROOT/"core-skills.lock.json").write_text(json.dumps({"schema":1,"scope":"product-only","designAuthority":"ymzz-wenrun-design-skill; other skills cannot override tokens","skills":locked},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 print(json.dumps([{k:r[k] for k in ["repository","commit","copied","excluded"]} for r in records+locked],indent=2))

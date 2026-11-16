@@ -5,7 +5,7 @@
 > 首個可執行整合切片，並非完整產品交付。原有程式碼／功能／頁面／連結全部保留。新碼 MIT；第三方維持原授權。
 
 - **真的會運作**：DSH 官方 MIT Cordis 插件內核 → 明確權限 → 無用之用規則調度 → 鎖定技能池 → Rust 文件驗證 → SQLite 任務與證據鏈 → 人工驗收 → 確認後記憶。
-- **先離線驗證，再談智能**：17 項新 runtime/支付測試、4 項新 Rust gate 測試與原倉庫回歸；離線文件任務不冒稱模型推論。四套溫潤配色、暱稱先行、檔案選擇器、48px 熱區。
+- **先離線驗證，再談智能**：18 項新 runtime/支付測試、4 項新 Rust gate 測試與原倉庫回歸；離線文件任務不冒稱模型推論。四套溫潤配色、暱稱先行、檔案選擇器、48px 熱區。
 - **Windows**：[構建與可執行 smoke](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/workflows/zhanzhen-runtime.yml) 只有真 GUI/core 離線任務成功才產生 portable ZIP；初始提交時尚待 CI，不拿 YAML 冒充成功。不是 MSI，不會偷偷安裝 Node/Python。尚無這個新 runtime 的手機發行包。
 - **有界限的 DSH 衍生**：已核實 [官方原碼](https://github.com/deepseek-ai/deepseek-harness)，本切片實際編譯其 Cordis/Cosmokit，不假裝移植了完整 DSH Agent Loop。
 - **來源完整可追**：Loop `product` 318 檔＋獨立 `main` 103 檔，另外保留三個模組；[逐檔來源 SHA、排除清單](docs/integration/sources.lock.json)。原目標實際是 Rust/React，不是規格所述 FastAPI/Vue。

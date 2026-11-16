@@ -50,7 +50,7 @@ for manifest in ['Cargo.toml','runtime-desktop/Cargo.toml']:
   if p['source'] is None and not expr and (ROOT/'LICENSE').is_file():expr='MIT (workspace root LICENSE)'
   records.append({'ecosystem':'cargo','scope':manifest,'name':p['name'],'version':p['version'],'license':expr,'allowed':expr=='MIT (workspace root LICENSE)' or permissive(expr)})
 for manifest in ['runtime/package-lock.json','runtime-desktop/package-lock.json']:
- for name,p in json.loads((ROOT/manifest).read_text())['packages'].items():
+ for name,p in json.loads((ROOT/manifest).read_text(encoding="utf-8"))['packages'].items():
   if not name:continue
   expr=p.get('license');records.append({'ecosystem':'npm','scope':manifest,'name':name,'version':p.get('version'),'license':expr,'allowed':permissive(expr)})
 failed=[r for r in records if not r['allowed']]

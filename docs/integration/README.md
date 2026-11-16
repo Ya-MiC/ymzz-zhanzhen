@@ -64,7 +64,7 @@ YMZZ_DATA_DIR="$PWD/.local-data" YMZZ_CORE_EXECUTABLE="$PWD/target/debug/ymzz-ru
 |溫潤|d33fb4bae0af86d30891c273103a9659552a926a|67 檔 + 1 個 symlink 排除記錄|
 |官方 DSH|39163dd30f703a79079e2d2446545cff3c453738|28 檔，明確僅內核提取|
 
-這不是保留所有 Git objects/歷史提交的 mirror；`.git`、未跟蹤檔案、私密匯出、憑證與研究私料不會匯入。Loop 兩個 HEAD 的 tracked 檔案本次 421/421 已複製，**不表示所有來源零排除**。溫潤的 `.cursor/skills/ymzz-wenrun-design` symlink 不作實體複製；完整 SKILL 本身已在來源樹。所有原倉庫保持不變；不在匯入快照裡改導覽而破壞原檔。
+[Loop 歷史盤點](loop-history-inventory.json) 列出 product 22 個、main 46 個可達提交與 main-only/product-only 路徑；兩條歷史沒有共同祖先。這不是保留所有 Git objects/歷史提交內容的 mirror；`.git`、未跟蹤檔案、私密匯出、憑證與研究私料不會匯入。Loop 兩個 HEAD 的 tracked 檔案本次 421/421 已複製，**不表示所有來源零排除**。溫潤的 `.cursor/skills/ymzz-wenrun-design` symlink 不作實體複製；完整 SKILL 本身已在來源樹。所有原倉庫保持不變；不在匯入快照裡改導覽而破壞原檔。
 
 ## 技能池：真實內容、鎖定與限制
 

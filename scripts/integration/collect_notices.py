@@ -31,7 +31,7 @@ for name in ['react','react-dom','zustand']:
    if not dependency.is_dir():continue
    info=dependency/'package.json'
    if not info.is_file():continue
-   pkg=json.loads(info.read_text());dest=OUT/'ui'/(pkg['name'].replace('/','-')+'-'+pkg['version']);dest.mkdir(parents=True,exist_ok=True)
+   pkg=json.loads(info.read_text(encoding="utf-8"));dest=OUT/'ui'/(pkg['name'].replace('/','-')+'-'+pkg['version']);dest.mkdir(parents=True,exist_ok=True)
    files=[f for f in dependency.iterdir() if f.is_file() and not f.is_symlink() and f.name.lower().startswith(('license','notice','copying'))]
    for f in files:shutil.copyfile(f,dest/f.name)
    index.append({'name':pkg['name'],'version':pkg['version'],'spdx':pkg.get('license'),'texts':[str((dest/f.name).relative_to(OUT)) for f in files]})
