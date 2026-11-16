@@ -1,0 +1,29 @@
+{
+  "repository": "https://github.com/lucide-icons/lucide",
+  "commit": "55782beff3a0133df79c417eb68f96e8f19e2404",
+  "license": "ISC",
+  "scope": "Five unchanged SVG icons only; native accessible HTML forms/dialogs use existing authoritative Wenrun tokens. Preserved original React UI retains its MIT notices.",
+  "files": [
+    {
+      "path": "icons/code-xml.svg",
+      "sha256": "a6d2110227be375be21da7324d3c09262c1bf019d06bdeab356d515342ab7cce"
+    },
+    {
+      "path": "icons/folder-open.svg",
+      "sha256": "ee57452b40e71df310214091dd9da1941a397c83197b8ff8d7ae66dd4242578b"
+    },
+    {
+      "path": "icons/settings-2.svg",
+      "sha256": "06d06c191bd7eb28afaf9d40acb5c49ef69448fdeda91801d9823d7c440a4e10"
+    },
+    {
+      "path": "icons/list-checks.svg",
+      "sha256": "08d26ab05aaf724222c4c0cd5a19d5eae753b2a5fff0eb2d81759dde11bac6b6"
+    },
+    {
+      "path": "icons/message-square.svg",
+      "sha256": "5812a3be783fdcd73efd2b6026e03131e4b8c6649e7d52aa2dc7bf2e2023a59d"
+    }
+  ],
+  "licenseSha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+}

@@ -1,0 +1,42 @@
+{
+  "testedAt": "2026-11-16T18:57:46.110209+09:00",
+  "zone": "KST",
+  "fullDSHSource": "39163dd30f703a79079e2d2446545cff3c453738",
+  "preservedSourceFiles": 21632,
+  "workspaceProjects": 409,
+  "dedicatedImageTests": {
+    "passed": 16,
+    "failed": 0
+  },
+  "sourceLicenseResourceContracts": {
+    "passed": 16,
+    "failed": 0
+  },
+  "originalUpstreamAttachmentTests": {
+    "files": 10,
+    "passed": 98,
+    "inheritedSkipped": 1,
+    "failed": 0,
+    "command": "pnpm exec vitest run packages/attachment/attachment-local/tests"
+  },
+  "changedAttachmentTypecheck": {
+    "passed": true,
+    "command": "node node_modules/typescript/bin/tsc -p packages/attachment/attachment-local/tsconfig.json --noEmit"
+  },
+  "broadConcurrentHostAggregate": {
+    "passed": false,
+    "exit": 137,
+    "reason": "Shared box memory pressure with required existing dev watchers retained; no claim of full new-head host aggregate success. Windows full chain must requalify independently."
+  },
+  "preservedDevServerPID": 114520,
+  "npmProductionGraph": {
+    "packages": 660,
+    "blocked": 0,
+    "unresolved": 0,
+    "sharpOrImgPresent": false
+  },
+  "codecCargoPackages": 47,
+  "liveInference": false,
+  "windowsNewHeadQualified": false,
+  "binaryDistributed": false
+}

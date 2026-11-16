@@ -48,10 +48,22 @@ try {
  $env:YMZZ_SMOKE_TOKEN=$token
  node runtime/scripts/installed-smoke.mjs
  if ($LASTEXITCODE -ne 0) { throw 'Installed runtime offline task failed' }
+ ./runtime-desktop/scripts/coding-ui-smoke.ps1 -Element $element -Origin $env:YMZZ_SMOKE_ORIGIN -Token $token -Data $data
  if (!(Test-Path "$data/zhanzhen.sqlite")) { throw 'No persistent database' }
  # Verify the window is still alive after the true Rust evaluation and evidence checks.
  $process.Refresh(); if ($process.HasExited -or $process.MainWindowHandle -eq 0) { throw 'GUI did not survive offline task' }
  @{'guiWindow'= $true; 'core'= 'ymzz-core/integrity'; 'portableRelocation'= $true; 'nodeFromBundle'= $true; 'registryInstaller'= $false; 'guiNicknameClick'= $true} | ConvertTo-Json | Set-Content -Encoding utf8 dist/smoke/windows-proof.json
+} catch {
+ # Only synthetic CI data is present. Preserve actual GUI failure evidence, never the bearer token.
+ try {
+  New-Item -ItemType Directory -Force 'dist/smoke' | Out-Null
+  $bounds=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+  $image=New-Object System.Drawing.Bitmap $bounds.Width,$bounds.Height
+  $g=[System.Drawing.Graphics]::FromImage($image);$g.CopyFromScreen($bounds.Location,[System.Drawing.Point]::Empty,$bounds.Size)
+  $image.Save((Join-Path (Get-Location) 'dist/smoke/windows-failure.png'));$g.Dispose();$image.Dispose()
+  if($element){$controls=$element.FindAll([System.Windows.Automation.TreeScope]::Descendants,[System.Windows.Automation.Condition]::TrueCondition);$items=@();foreach($c in $controls){$items+=@{name=$c.Current.Name;type=$c.Current.ControlType.ProgrammaticName;offscreen=$c.Current.IsOffscreen}};$items|ConvertTo-Json -Depth 4|Set-Content -Encoding utf8 dist/smoke/gui-controls.json}
+ } catch { Write-Warning 'Could not capture GUI failure diagnostics' }
+ throw
 } finally {
  if (!$process.HasExited) { $process.CloseMainWindow() | Out-Null; if (!$process.WaitForExit(15000)) { Stop-Process -Id $process.Id -Force } }
  Remove-Item Env:YMZZ_SMOKE_TOKEN -ErrorAction SilentlyContinue

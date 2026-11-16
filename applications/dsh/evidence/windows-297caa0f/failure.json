@@ -1,0 +1,6 @@
+{
+  "fullUpstreamApp": true,
+  "binaryDistributed": false,
+  "liveInference": false,
+  "error": "Exception calling \"SetFocus\" with \"0\" argument(s): \"Target element cannot receive focus.\""
+}

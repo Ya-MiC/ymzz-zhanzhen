@@ -1,0 +1,299 @@
+{
+  "nativePickerOpenedAndCancelled": true,
+  "nativeGui": true,
+  "evidence": {
+    "valid": true,
+    "events": [
+      {
+        "seq": 9,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "created",
+        "payload": {
+          "input_sha256": "cfd6b943321006b150b1ef4a06cdf4dba55f3e294d41772e68e666b07185f25b"
+        },
+        "previous": "b6e0dec45ae96969cd7d63dd4d77de2571792d5beba0649b704ef3d0fea7f041",
+        "hash": "56b6117b2b379035d6c2af6afd424a74d7968ad4ced7d83e1c41f4b3a362d169"
+      },
+      {
+        "seq": 10,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "claimed",
+        "payload": {
+          "owner": "coding-agent"
+        },
+        "previous": "56b6117b2b379035d6c2af6afd424a74d7968ad4ced7d83e1c41f4b3a362d169",
+        "hash": "609758893c29d2857d5c6fc9190e06e4b1e845e593837b0eb99951e07d86eaee"
+      },
+      {
+        "seq": 11,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "workspace-consent",
+        "payload": {
+          "workspaceId": "a5465665-533a-47d7-8ff2-d826206490fd",
+          "mode": "offline-demo"
+        },
+        "previous": "609758893c29d2857d5c6fc9190e06e4b1e845e593837b0eb99951e07d86eaee",
+        "hash": "547cb1b1a14b9b27cd63737990d38ae8cd3e38b709d9b5611dcffb5918f291b3"
+      },
+      {
+        "seq": 12,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 1,
+          "mode": "offline-demo",
+          "plan_hash": "74affe620a3710c5688dd5f2610dbf0226dc1e93a5ea86d313bb0f553e78a3d1",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "547cb1b1a14b9b27cd63737990d38ae8cd3e38b709d9b5611dcffb5918f291b3",
+        "hash": "b29e5c789988496d471f4b48f40a0bc048416a5051c254cf83ed05fe8a0f05de"
+      },
+      {
+        "seq": 13,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "824e015a-4333-4939-910f-51e98bf937ff",
+          "proposal_hash": "214ea193db68702b0c5df4c50ae52b5b3388463075fe243e22bf1fd217adf7da",
+          "testConsent": false
+        },
+        "previous": "b29e5c789988496d471f4b48f40a0bc048416a5051c254cf83ed05fe8a0f05de",
+        "hash": "bb69c202ac9da4fe405edbc062d23ccd44b44e45bb9ba633193ff74c47f558b3"
+      },
+      {
+        "seq": 14,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "file-read",
+        "payload": {
+          "path": "calculator.mjs",
+          "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+        },
+        "previous": "bb69c202ac9da4fe405edbc062d23ccd44b44e45bb9ba633193ff74c47f558b3",
+        "hash": "41795466a47bad49adc5cc4fc6278e7454014c71a0aca7dde3b0aed2dbc45d73"
+      },
+      {
+        "seq": 15,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "file-read",
+        "payload": {
+          "path": "calculator.test.mjs",
+          "hash": "f7e4718aa06b25cb3d53bf8983df792cb74fda069f7ac34614bf5afff6cb9abf"
+        },
+        "previous": "41795466a47bad49adc5cc4fc6278e7454014c71a0aca7dde3b0aed2dbc45d73",
+        "hash": "a79c042d47d37769b7b1cf3a700f50d165335251d3aa15ae1083efd07f04eb1e"
+      },
+      {
+        "seq": 16,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 2,
+          "mode": "offline-demo",
+          "plan_hash": "69c43b272e9b13e007520741d928c0e417847d7534be0a79a67f79a14cf5533a",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "a79c042d47d37769b7b1cf3a700f50d165335251d3aa15ae1083efd07f04eb1e",
+        "hash": "97aa843cde1f91a3f4fe31989576123183b0f7896a0c486eec92a4be1df22d0b"
+      },
+      {
+        "seq": 17,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "c224fe3d-da8b-46ac-916c-92cecc8e4251",
+          "proposal_hash": "6ee1088b34e2d13fa31652d3349fb540b760c169fe928ea2094d748c852b651f",
+          "testConsent": true
+        },
+        "previous": "97aa843cde1f91a3f4fe31989576123183b0f7896a0c486eec92a4be1df22d0b",
+        "hash": "b28e7afb0087e87c43e27ade36bcd3a143ae1b22bcd1b9ed89d9142a392c649c"
+      },
+      {
+        "seq": 18,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "file-change",
+        "payload": {
+          "path": "calculator.mjs",
+          "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+          "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+          "revision": 1
+        },
+        "previous": "b28e7afb0087e87c43e27ade36bcd3a143ae1b22bcd1b9ed89d9142a392c649c",
+        "hash": "8ac286d9914674432f74271e24220c44546d708b08c22c5e69a13767bce61143"
+      },
+      {
+        "seq": 19,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-gate",
+        "payload": {
+          "passed": false,
+          "exitCode": 1,
+          "reason": "exited",
+          "output_hash": "ef8063d389903bcab045dc5e973b1e04310c96440dd9de30b4ae92ed47f25d53",
+          "command": [
+            "bundled-node",
+            "--permission",
+            "calculator.test.mjs"
+          ],
+          "networkIsolation": false
+        },
+        "previous": "8ac286d9914674432f74271e24220c44546d708b08c22c5e69a13767bce61143",
+        "hash": "e0235e92ff029979898f47b5d63923a6df5b7cf3eb341dd91e4239e650ddf8ef"
+      },
+      {
+        "seq": 20,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 3,
+          "mode": "offline-demo",
+          "plan_hash": "0975e9f0fb314cada7bd270b65b17d757ff8342f55cce90e360c632d2ebc8fc1",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "e0235e92ff029979898f47b5d63923a6df5b7cf3eb341dd91e4239e650ddf8ef",
+        "hash": "6acd26ba10c14b475c7a649c6d02baf41f9b58040a949dd30f3883e12fa313c1"
+      },
+      {
+        "seq": 21,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "ad045565-dbcb-4c1b-a998-4797a6545105",
+          "proposal_hash": "b56fb2777a467da26880c53a6c3697f0e2ef0e933ece09da3db44122978e72a3",
+          "testConsent": true
+        },
+        "previous": "6acd26ba10c14b475c7a649c6d02baf41f9b58040a949dd30f3883e12fa313c1",
+        "hash": "aa8a46167cb97b009c5a6a6f8bb456ea16583d2148467b6a48218a1dc6b787c8"
+      },
+      {
+        "seq": 22,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "file-change",
+        "payload": {
+          "path": "calculator.mjs",
+          "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+          "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e",
+          "revision": 2
+        },
+        "previous": "aa8a46167cb97b009c5a6a6f8bb456ea16583d2148467b6a48218a1dc6b787c8",
+        "hash": "a33819bd8aa6912e5c941b475149ec2b58fd5a7ff95abea6989f6e9c5f2d96e5"
+      },
+      {
+        "seq": 23,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-gate",
+        "payload": {
+          "passed": true,
+          "exitCode": 0,
+          "reason": "exited",
+          "output_hash": "41795f9e72e353e01ca5fa8971d80e07e9911cdfcf039ce5afc5b0c2847b3bf1",
+          "command": [
+            "bundled-node",
+            "--permission",
+            "calculator.test.mjs"
+          ],
+          "networkIsolation": false
+        },
+        "previous": "a33819bd8aa6912e5c941b475149ec2b58fd5a7ff95abea6989f6e9c5f2d96e5",
+        "hash": "50b891ec93328487c96ae4db0fada88aa079f8a8e12043dd084fe8596dd57de2"
+      },
+      {
+        "seq": 24,
+        "task": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 4,
+          "mode": "offline-demo",
+          "plan_hash": "f5f329f5daa6461060f30ba6f712ed057f51b64629d7b9376110c95c76907e50",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "50b891ec93328487c96ae4db0fada88aa079f8a8e12043dd084fe8596dd57de2",
+        "hash": "db41a07e059448d6fa8881777be21d238be934b96c121c0b0077a1bb17a89b76"
+      }
+    ]
+  },
+  "task": {
+    "id": "1b89d27b-d345-471a-a2ba-1aa764aaa713",
+    "workspace": "程式 修復 qu70uv",
+    "goal": "修復 add(2,3)，讓單元測試通過。",
+    "mode": "offline-demo",
+    "state": "done",
+    "round": 4,
+    "used": 6,
+    "writes": 2,
+    "revision": 2,
+    "gateRevision": 2,
+    "changed": {
+      "calculator.mjs": {
+        "exists": true,
+        "text": "export function add(a, b) { return a + b; }\n",
+        "hash": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      }
+    },
+    "proposal": null,
+    "lastGate": {
+      "passed": true,
+      "exitCode": 0,
+      "reason": "exited",
+      "output": "TAP version 13\n# Subtest: adds two numbers\nok 1 - adds two numbers\n  ---\n  duration_ms: 0.7519\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 8.1792\n",
+      "command": [
+        "bundled-node",
+        "--permission",
+        "calculator.test.mjs"
+      ],
+      "networkIsolation": false
+    },
+    "timeline": [
+      {
+        "role": "assistant",
+        "round": 1,
+        "text": "離線假模型：先閱讀示例與測試。"
+      },
+      {
+        "role": "assistant",
+        "round": 2,
+        "text": "離線假模型：故意提出錯誤修正，驗證失敗回饋。"
+      },
+      {
+        "role": "tool",
+        "round": 2,
+        "text": "真實測試失敗，回饋模型提出修正",
+        "output": "TAP version 13\n# Subtest: adds two numbers\nnot ok 1 - adds two numbers\n  ---\n  duration_ms: 1.5023\n  type: 'test'\n  location: 'D:\\\\a\\\\_temp\\\\zhanzhen-smoke-data\\\\coding-examples\\\\程式 修復 qu70uv\\\\calculator.test.mjs:4:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    6 !== 5\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 5\n  actual: 6\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> ([workspace]/calculator.test.mjs:4:36)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.start (node:internal/test_runner/test:1262:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 8.2886\n"
+      },
+      {
+        "role": "assistant",
+        "round": 3,
+        "text": "離線假模型：依真實失敗測試修正為加法。"
+      },
+      {
+        "role": "tool",
+        "round": 3,
+        "text": "真實測試通過",
+        "output": "TAP version 13\n# Subtest: adds two numbers\nok 1 - adds two numbers\n  ---\n  duration_ms: 0.7519\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 8.1792\n"
+      },
+      {
+        "role": "assistant",
+        "round": 4,
+        "text": "離線假模型：真實測試已通過，等待人工 diff 驗收。"
+      }
+    ],
+    "pendingWrite": null,
+    "reviewHash": "641f1e47203de258b8be5ef83b3daa9ef933fa6369180800e6cca6e3f97ccc39",
+    "diff": [
+      {
+        "path": "calculator.mjs",
+        "before": "export function add(a, b) { return a - b; }\n",
+        "after": "export function add(a, b) { return a + b; }\n",
+        "beforeHash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "afterHash": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      }
+    ]
+  },
+  "deterministicFakeTransport": true,
+  "providerConfiguredViaGuiWithoutInference": true,
+  "liveInference": false,
+  "actualNodeTests": true
+}

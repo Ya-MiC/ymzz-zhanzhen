@@ -1,0 +1,318 @@
+{
+  "sourceCommit": "ef43e51",
+  "verifiedAtKST": "2026-11-16 16:51:44 KST",
+  "mode": "deterministic fake provider transport / real tools / no live inference",
+  "task": {
+    "id": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+    "workspace": "程式 修復 UINQMk",
+    "goal": "修復 add(2,3) 並通過真實單元測試",
+    "mode": "offline-demo",
+    "state": "done",
+    "round": 4,
+    "used": 6,
+    "writes": 2,
+    "revision": 2,
+    "gateRevision": 2,
+    "changed": {
+      "calculator.mjs": {
+        "exists": true,
+        "text": "export function add(a, b) { return a + b; }\n",
+        "hash": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      }
+    },
+    "proposal": null,
+    "lastGate": {
+      "passed": true,
+      "exitCode": 0,
+      "reason": "exited",
+      "output": "TAP version 13\n# Subtest: adds two numbers\nok 1 - adds two numbers\n  ---\n  duration_ms: 0.522041\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 6.385066\n",
+      "command": [
+        "bundled-node",
+        "--permission",
+        "calculator.test.mjs"
+      ],
+      "networkIsolation": false
+    },
+    "timeline": [
+      {
+        "role": "assistant",
+        "round": 1,
+        "text": "離線假模型：先閱讀示例與測試。"
+      },
+      {
+        "role": "assistant",
+        "round": 2,
+        "text": "離線假模型：故意提出錯誤修正，驗證失敗回饋。"
+      },
+      {
+        "role": "tool",
+        "round": 2,
+        "text": "真實測試失敗，回饋模型提出修正",
+        "output": "TAP version 13\n# Subtest: adds two numbers\nnot ok 1 - adds two numbers\n  ---\n  duration_ms: 1.136512\n  type: 'test'\n  location: '[workspace]/calculator.test.mjs:4:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    6 !== 5\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 5\n  actual: 6\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> ([workspace]/calculator.test.mjs:4:36)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.start (node:internal/test_runner/test:1262:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 10.280816\n"
+      },
+      {
+        "role": "assistant",
+        "round": 3,
+        "text": "離線假模型：依真實失敗測試修正為加法。"
+      },
+      {
+        "role": "tool",
+        "round": 3,
+        "text": "真實測試通過",
+        "output": "TAP version 13\n# Subtest: adds two numbers\nok 1 - adds two numbers\n  ---\n  duration_ms: 0.522041\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 6.385066\n"
+      },
+      {
+        "role": "assistant",
+        "round": 4,
+        "text": "離線假模型：真實測試已通過，等待人工 diff 驗收。"
+      }
+    ],
+    "pendingWrite": null,
+    "reviewHash": "641f1e47203de258b8be5ef83b3daa9ef933fa6369180800e6cca6e3f97ccc39",
+    "diff": [
+      {
+        "path": "calculator.mjs",
+        "before": "export function add(a, b) { return a - b; }\n",
+        "after": "export function add(a, b) { return a + b; }\n",
+        "beforeHash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+        "afterHash": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e"
+      }
+    ]
+  },
+  "evidence": {
+    "valid": true,
+    "events": [
+      {
+        "seq": 1,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "created",
+        "payload": {
+          "input_sha256": "cfd6b943321006b150b1ef4a06cdf4dba55f3e294d41772e68e666b07185f25b"
+        },
+        "previous": "",
+        "hash": "4c63e8621c8e9eaec542545d9d5514cbe70122fe2f46f3fe8893d456f3c62ba1"
+      },
+      {
+        "seq": 2,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "claimed",
+        "payload": {
+          "owner": "coding-agent"
+        },
+        "previous": "4c63e8621c8e9eaec542545d9d5514cbe70122fe2f46f3fe8893d456f3c62ba1",
+        "hash": "7106fd72fe580356255434cecb5cb0da01541c073ab253014b197c97db4eceee"
+      },
+      {
+        "seq": 3,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "workspace-consent",
+        "payload": {
+          "workspaceId": "7e3a8b9c-7eb6-4dfb-ac42-bd20cd04eeab",
+          "mode": "offline-demo"
+        },
+        "previous": "7106fd72fe580356255434cecb5cb0da01541c073ab253014b197c97db4eceee",
+        "hash": "8fbb6a398b4c741962068ca620b1f5cd7c2afdd034a13b9fa8114e779f44d9ad"
+      },
+      {
+        "seq": 4,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 1,
+          "mode": "offline-demo",
+          "plan_hash": "74affe620a3710c5688dd5f2610dbf0226dc1e93a5ea86d313bb0f553e78a3d1",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "8fbb6a398b4c741962068ca620b1f5cd7c2afdd034a13b9fa8114e779f44d9ad",
+        "hash": "1cb3747f87791e1bf48c8a292f680fbfee34cd4a8e38c620c013dfea4ff7f7e6"
+      },
+      {
+        "seq": 5,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "384aa29e-7d18-4c68-aa13-2e15667c031b",
+          "proposal_hash": "214ea193db68702b0c5df4c50ae52b5b3388463075fe243e22bf1fd217adf7da",
+          "testConsent": true
+        },
+        "previous": "1cb3747f87791e1bf48c8a292f680fbfee34cd4a8e38c620c013dfea4ff7f7e6",
+        "hash": "70129ed5e8c2e0487e041827deac39c20de4bd05a7f01931ee3c45432438639c"
+      },
+      {
+        "seq": 6,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "file-read",
+        "payload": {
+          "path": "calculator.mjs",
+          "hash": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f"
+        },
+        "previous": "70129ed5e8c2e0487e041827deac39c20de4bd05a7f01931ee3c45432438639c",
+        "hash": "c106754a8fcb25c1f9f34270fe9bedd8f4fadbff16b63b4ba11a4267342f375d"
+      },
+      {
+        "seq": 7,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "file-read",
+        "payload": {
+          "path": "calculator.test.mjs",
+          "hash": "f7e4718aa06b25cb3d53bf8983df792cb74fda069f7ac34614bf5afff6cb9abf"
+        },
+        "previous": "c106754a8fcb25c1f9f34270fe9bedd8f4fadbff16b63b4ba11a4267342f375d",
+        "hash": "2e69b2af5317062a9cf26f6a58a58d1ed8d4628dc890c6696ba254c8954a2683"
+      },
+      {
+        "seq": 8,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 2,
+          "mode": "offline-demo",
+          "plan_hash": "69c43b272e9b13e007520741d928c0e417847d7534be0a79a67f79a14cf5533a",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "2e69b2af5317062a9cf26f6a58a58d1ed8d4628dc890c6696ba254c8954a2683",
+        "hash": "7f8706f4a17dd7ef3b791f9caefffeb9f6fe55dc4fcfe97d9d2fc52f3774ad20"
+      },
+      {
+        "seq": 9,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "27905a53-2dfd-4045-8883-3441a64fd901",
+          "proposal_hash": "6ee1088b34e2d13fa31652d3349fb540b760c169fe928ea2094d748c852b651f",
+          "testConsent": true
+        },
+        "previous": "7f8706f4a17dd7ef3b791f9caefffeb9f6fe55dc4fcfe97d9d2fc52f3774ad20",
+        "hash": "070d0e6dedd0b04edbe1a94d924d7ff9678364c4164852553ca9d49811e90f77"
+      },
+      {
+        "seq": 10,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "file-change",
+        "payload": {
+          "path": "calculator.mjs",
+          "before": "1ede7a44da5464fef7aea5b514ee532ec0ff93089311caf491946e1bcba94d4f",
+          "after": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+          "revision": 1
+        },
+        "previous": "070d0e6dedd0b04edbe1a94d924d7ff9678364c4164852553ca9d49811e90f77",
+        "hash": "a64a306273f6da6131dc824be1dc51ba40de2ae35c97a8ac62b9742b1aea01a9"
+      },
+      {
+        "seq": 11,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-gate",
+        "payload": {
+          "passed": false,
+          "exitCode": 1,
+          "reason": "exited",
+          "output_hash": "430b0eb7dd4fbc568899a5d0e4b360bcdfda15f16211145c5b6611afb7028659",
+          "command": [
+            "bundled-node",
+            "--permission",
+            "calculator.test.mjs"
+          ],
+          "networkIsolation": false
+        },
+        "previous": "a64a306273f6da6131dc824be1dc51ba40de2ae35c97a8ac62b9742b1aea01a9",
+        "hash": "ac08151e4b139629f326151c955e1488a80f901b7407943d8f843b349a810b81"
+      },
+      {
+        "seq": 12,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 3,
+          "mode": "offline-demo",
+          "plan_hash": "0975e9f0fb314cada7bd270b65b17d757ff8342f55cce90e360c632d2ebc8fc1",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "ac08151e4b139629f326151c955e1488a80f901b7407943d8f843b349a810b81",
+        "hash": "a3a3a1d201bdd1801eb0d2e009b8bef52dcb62be8ad623827eaf5c2a9202d6e9"
+      },
+      {
+        "seq": 13,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "tool-consent",
+        "payload": {
+          "proposal": "a5d1d7bd-e848-4a57-8a0a-91ef345b7929",
+          "proposal_hash": "b56fb2777a467da26880c53a6c3697f0e2ef0e933ece09da3db44122978e72a3",
+          "testConsent": true
+        },
+        "previous": "a3a3a1d201bdd1801eb0d2e009b8bef52dcb62be8ad623827eaf5c2a9202d6e9",
+        "hash": "d119ef760be714b3f577993d14d467deddc0c4c5cc4dcfbd773612260f24fe19"
+      },
+      {
+        "seq": 14,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "file-change",
+        "payload": {
+          "path": "calculator.mjs",
+          "before": "f2d8645e9d41dd6af37b0454dfdeb26499ed48a9b0da7436647dbf9128cbc667",
+          "after": "76f26bd292166033d02e77bdb8fe6aec01e915ccb8cb3f93b8971f9dcd78250e",
+          "revision": 2
+        },
+        "previous": "d119ef760be714b3f577993d14d467deddc0c4c5cc4dcfbd773612260f24fe19",
+        "hash": "bb0040bdaa7327f24f4381152c2e51752e5623b2f91bfb49b66008796453bc2f"
+      },
+      {
+        "seq": 15,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-gate",
+        "payload": {
+          "passed": true,
+          "exitCode": 0,
+          "reason": "exited",
+          "output_hash": "86c605e050bec420bbb610ebfbfd3ad3702e76bb1b30af7b42bcf09f791cd4a3",
+          "command": [
+            "bundled-node",
+            "--permission",
+            "calculator.test.mjs"
+          ],
+          "networkIsolation": false
+        },
+        "previous": "bb0040bdaa7327f24f4381152c2e51752e5623b2f91bfb49b66008796453bc2f",
+        "hash": "c9b0db9425c88f632e0214fc6e6a7d3a0b337103f3e1253434bd982247599d19"
+      },
+      {
+        "seq": 16,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-plan",
+        "payload": {
+          "round": 4,
+          "mode": "offline-demo",
+          "plan_hash": "f5f329f5daa6461060f30ba6f712ed057f51b64629d7b9376110c95c76907e50",
+          "transport": "deterministic-fixture",
+          "localProviderResponse": false
+        },
+        "previous": "c9b0db9425c88f632e0214fc6e6a7d3a0b337103f3e1253434bd982247599d19",
+        "hash": "154bca4ae53b37796cb5f6512b4edbd5e3e173dfaf0780b7e404582d00e6e3eb"
+      },
+      {
+        "seq": 17,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "coding-accepted",
+        "payload": {
+          "reviewHash": "641f1e47203de258b8be5ef83b3daa9ef933fa6369180800e6cca6e3f97ccc39",
+          "changes": 1
+        },
+        "previous": "154bca4ae53b37796cb5f6512b4edbd5e3e173dfaf0780b7e404582d00e6e3eb",
+        "hash": "e34b0e0a68be847d4a677fcd1483c27783bb569bab58488c79e70898f7a702be"
+      },
+      {
+        "seq": 18,
+        "task": "265e6757-b52e-4590-9c67-2cb8ee42140f",
+        "kind": "remembered",
+        "payload": {
+          "id": "57f50e94-a937-4e26-ae80-f305def2e625",
+          "text_sha256": "e8370d1ff2779f746f23f131338fc3468cc750af03d220a4c8cc929514c0df04"
+        },
+        "previous": "e34b0e0a68be847d4a677fcd1483c27783bb569bab58488c79e70898f7a702be",
+        "hash": "6e48cbf4ecfc48fd09a796f4f6695da21cf22bec3fe9b2e79f9dbaa8149b080e"
+      }
+    ]
+  }
+}

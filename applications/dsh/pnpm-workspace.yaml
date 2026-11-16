@@ -1,0 +1,2 @@
+# Product wrapper workspace is isolated from both the legacy application and the complete upstream workspace.
+packages: []

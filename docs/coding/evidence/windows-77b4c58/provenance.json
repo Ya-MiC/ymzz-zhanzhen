@@ -1,0 +1,52 @@
+{
+  "codeCommit": "77b4c58ac82dcb99319cf1efc311fc1c039d589f",
+  "run": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986",
+  "completedAtKST": "2026-11-16 17:04 KST",
+  "portableArtifact": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986/artifacts/14206723927",
+  "proofArtifact": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43827972986/artifacts/14207795678",
+  "portableZip": {
+    "file": "ymzz-zhanzhen-windows-x64-portable.zip",
+    "bytes": 44915548,
+    "sha256": "7e628c423e7f5356bbc7d49fc6416478c6e2da289ffc50af450eb15e382d2b49",
+    "entries": 1110
+  },
+  "executables": {
+    "node.exe": {
+      "sha256": "d702daa815eabbff763c7d3808e235cf031cf2ca70211b56847bc72f51e240e5",
+      "bytes": 93915464,
+      "machine": "AMD64 (0x8664)"
+    },
+    "ymzz-zhanzhen.exe": {
+      "sha256": "c7d7778762f8b376c285b598fbfce34cfd4a4308b8931b518f961a13092a9bba",
+      "bytes": 9425920,
+      "machine": "AMD64 (0x8664)"
+    }
+  },
+  "proofFiles": {
+    "windows-onboarding.png": "d90da5de0c6a76de821edbfd804821036b68b626995071addea4e53a3adb4740",
+    "windows-coding-False.json": "ed5c027766ad59630bc53742f68f289467bf37e8a04233163efccca800106fe1",
+    "windows-coding-True.json": "aaada9bae04321e63535bf303f45889a31a18379dc5dcf4382c308e2b6d7aceb",
+    "windows-coding-workspace.png": "e079de0070506af156c019ae78bc432b3796df767b2d645d58215325e191db07",
+    "windows-coding-diff.png": "1bbc1fd03330508bf68957fb72a07715c6a00bef32736391021c53db1a1a1db3",
+    "offline-evidence.json": "933cb265e6b642fdedc4663a21e9e6ccdda459cdf865aa920808d1110381e1bf",
+    "windows-proof.json": "2e126b7f649a3fab1a8a380b60a1ee813fe1cbcccd7cc9c13732d0acfb7d219f"
+  },
+  "assertedBySuccessfulWorkflow": [
+    "native Windows GUI nickname onboarding",
+    "actual user icon embedded in PE and rendered in onboarding",
+    "Chinese-space portable relocation with bundled Node and Rust core",
+    "native folder picker opens and cancels",
+    "local provider configured through GUI without inference",
+    "GUI approvals execute real failing Node test then repaired passing test",
+    "GUI diff acceptance and explicit persistent memory",
+    "second GUI task rollback restores exact original calculator bytes",
+    "SQLite persistence and valid evidence chains"
+  ],
+  "notClaimed": [
+    "live model inference or installed model",
+    "OS/network sandbox for arbitrary plugins or untrusted tests",
+    "code signing, installer or release publication",
+    "no Windows/WebView2 system-managed registry or caches",
+    "payment integration: now user-managed"
+  ]
+}

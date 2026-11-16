@@ -1,0 +1,17 @@
+{
+  "isWindowsPE": true,
+  "actualPEIconExtracted": true,
+  "exeBytes": 246425600,
+  "originalDshNoticesBundled": true,
+  "binaryAssembled": true,
+  "originalUserDerivedResourceIconMatches": true,
+  "originalDshLicenseBundled": true,
+  "binaryDistributed": false,
+  "fullUpstream": "39163dd30f703a79079e2d2446545cff3c453738",
+  "commit": "297caa0f4acaa018da9c4177016bcb3ab676e73c",
+  "scope": "artifact metadata only; GUI proof is a separate file",
+  "nativeGUIVerified": false,
+  "primaryNodeBundled": true,
+  "exeSHA256": "B1490D2208F6DEA0786C6D72A286834A512078B86E2A2429E5C06E2EBBF3DF12",
+  "run": "43845429747"
+}

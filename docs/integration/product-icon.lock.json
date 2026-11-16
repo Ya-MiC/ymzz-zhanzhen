@@ -1,0 +1,11 @@
+{
+  "source": "User-supplied product icon t168u; no generated substitute",
+  "originalFile": "runtime/ui/brand/product-icon-original.png",
+  "sha256": "65b2af69825756700fe36ffad5b3d5a943b123364d611bd513df71d9c048be2d",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "derivatives": "Pillow LANCZOS, transparent square canvas, unchanged art. Original retained byte-for-byte.",
+  "windowsIco": "runtime-desktop/assets/product.ico"
+}

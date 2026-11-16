@@ -1,0 +1,1 @@
+Original product artwork supplied by the user in t168u. Original bytes and SHA256 preserved in docs/integration/product-icon.lock.json. PNG/ICO sizes are resampled derivatives, not generated replacement art. This notice does not relabel third-party artwork as MIT.

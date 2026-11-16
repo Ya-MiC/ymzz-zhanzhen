@@ -1,0 +1,33 @@
+// MIT. Native accessible controls + Wenrun tokens, actual persisted task conversation and human approvals.
+export function codingUI({h,p,button,field,api,refresh,open,dialog,getState,setView}){
+ let selected=localStorage.getItem('coding-workspace')||'';
+ const labels={'coding-ready':'等待規劃','coding-planning':'模型規劃中','coding-proposed':'等待工具授權','coding-executing':'執行已核准工具','coding-review':'等待差異驗收','coding-failed':'已停止，請檢查或還原','coding-rolled-back':'已還原',done:'已驗收'};
+ const checkbox=(id,label)=>{const input=h('input',{id,type:'checkbox'});return {input,node:h('label',{class:'choice',for:id},input,label)};};
+ async function action(path,body,id){await api('coding/'+path,body);await refresh();if(id){const task=getState().coding?.tasks.find(t=>t.id===id);if(task)detail(task);}}
+ function render(main){const state=getState();if(!state.coding){main.append(h('div',{class:'hero'},h('h2',{},'從一句需求，到可審查的程式修改。'),p('本機模型先規劃，你核准每批工具；程式修改、測試、失敗回饋與驗收都留在這台裝置。'),button('啟用編碼工作區（每批仍需授權）',async()=>{await api('plugins',{id:'coding',enabled:true,consent:true});await refresh();},{class:'primary'})));return;}
+  const data=state.coding;const workspace=h('select',{id:'coding-workspace-select','aria-label':'已授權的工作區',onChange:e=>{selected=e.target.value;localStorage.setItem('coding-workspace',selected);}});workspace.append(h('option',{value:''},'先選擇一個工作區'),...data.workspaces.map(w=>h('option',{value:w.id},w.label+(w.example?' · 離線示例':''))));workspace.value=selected;
+  const goal=h('textarea',{id:'coding-goal',rows:3,maxlength:3000,value:localStorage.getItem('coding-goal')||'',onInput:e=>localStorage.setItem('coding-goal',e.target.value),placeholder:'例如：修正加法函式，讓既有單元測試通過。不要填入金鑰或私人憑證。'});
+  const consent=checkbox('workspace-consent','我同意讀取此資料夾內的允許檔案名稱，並把核准讀取的內容傳給我設定的本機模型。');
+  main.append(h('div',{class:'hero coding-intro'},h('img',{class:'product-portrait',src:'/brand/icon-128.png',alt:'你提供的湛箴產品圖標'}),h('div',{},h('h2',{},'一起把想法，寫成可以運作的東西。'),p('先選資料夾、連接本機模型；或直接試用完整離線修復流程。沒有設定模型時，不會假裝正在推論。'))),
+   h('div',{class:'card'},h('h2',{},'1 · 你的工作區'),h('div',{class:'row'},workspace,button('選擇我的專案資料夾',async()=>{const w=await api('coding/pick',{});selected=w.id;localStorage.setItem('coding-workspace',selected);await refresh();})),p('原生資料夾選擇器，不需輸入路徑。首版每個工作區最多 64 個小型文字檔；隱藏／憑證／建置目錄不會納入。'),field('2 · 你想完成什麼？',goal),consent.node,
+    h('div',{class:'row'},button('請本機模型規劃',async()=>{if(!data.providerConfigured){setView('provider');return;}const t=await api('coding/create',{workspaceId:selected,goal:goal.value,mode:'local-provider',consent:consent.input.checked});await action('plan',{id:t.id},t.id);},{class:'primary'}),button('模型連線設定',()=>setView('provider'))),p(data.providerConfigured?(data.providerStatus?.status==='valid-plan-received'?'已從所選本機服務收到可用的工具規劃；不代表模型結果必然正確。':'已儲存本機 provider 設定；尚未在這裡驗證模型可用。'):'尚未設定本機模型。可以先試離線示例，或到模型設定連接 Ollama／LM Studio。')),
+   h('div',{class:'card'},h('h2',{},'不連模型，也能親自驗證整條工具管線'),p('此示例明確使用確定性假模型，並非真推論。它會建立新的中文／空白資料夾，故意提出一次錯誤修改，執行真 Node 單元測試，再根據失敗提出修正；每批都等你核准。'),button('建立離線程式修復示例',async()=>{const w=await api('coding/example',{});selected=w.id;localStorage.setItem('coding-workspace',selected);const t=await api('coding/create',{workspaceId:w.id,goal:'修復 add(2,3)，讓單元測試通過。',mode:'offline-demo',consent:true});await action('plan',{id:t.id},t.id);},{class:'primary'})),h('h2',{},'持續進行的編碼對話'));
+  if(!data.tasks.length)main.append(p('還沒有編碼任務。先建立離線示例，或選擇你自己的專案。'));
+  for(const task of [...data.tasks].reverse())main.append(h('article',{class:'card'},h('h3',{},task.goal),p(task.workspace+' · '+labels[task.state]),h('span',{class:'pill'},task.mode==='offline-demo'?'離線假模型 · 真檔案／真測試':'本機 provider · 每次連線仍可能失敗'),button('開啟對話與工具審查',()=>detail(task))));
+ }
+ function detail(task){const body=h('div',{},h('p',{class:'pill'},labels[task.state]+' · '+(task.mode==='offline-demo'?'離線假模型，非真推論':'本機模型')),p('工作區：'+task.workspace+' · 規劃 '+task.round+'/6 · 工具 '+task.used+'/16'));
+  for(const m of task.timeline||[])body.append(h('article',{class:'message '+m.role},h('strong',{},m.role==='assistant'?'湛箴 · 規劃':'工具 · 真實回饋'),p(m.text),m.output?h('details',{},h('summary',{},'查看已限量的測試輸出'),h('pre',{},m.output)):null));
+  if(task.error)body.append(h('p',{class:'error'},'已停止：'+task.error+'。不會自動繼續修改檔案。'));
+  if(task.proposal){const proposal=task.proposal;body.append(h('h3',{},'工具提案 · 尚未執行'),p(proposal.warning));for(const t of proposal.tools){const text=t.type==='patch'?'- '+t.find+'\n+ '+t.replace:t.type==='write'?t.content:t.type==='test'?'bundled-node --permission --test-reporter=tap '+t.path+'\n唯讀允許清單、3 秒、輸出上限；沒有 OS／網路隔離。':'只讀取你核准的這個相對檔案。';body.append(h('article',{class:'card'},h('strong',{},t.type+' · '+t.path),h('pre',{},text)));}
+   if(proposal.testFiles?.length)body.append(h('details',{},h('summary',{},'此批測試可讀取的確切檔案／版本'),h('pre',{},proposal.testFiles.map(f=>f.path+' · '+(f.hash||'此批新建')).join('\n'))));const files=checkbox('approve-tools','我已檢查上述工具及檔案修改，僅核准此批提案。');body.append(files.node);const tests=checkbox('approve-tests','我信任此專案測試程式碼並同意執行。Node 權限不是安全沙盒，測試可能使用網路。');if(proposal.tools.some(t=>t.type==='test'))body.append(tests.node);
+   body.append(button('核准並執行這批工具',()=>action('approve',{id:task.id,proposalId:proposal.id,proposalHash:proposal.hash,consent:files.input.checked,testConsent:tests.input.checked},task.id),{class:'primary'}));
+  }
+  if(task.diff?.length){body.append(h('h3',{},'實際修改差異（本任務開始 → 現在）'));for(const d of task.diff)body.append(h('details',{open:''},h('summary',{},d.path),h('div',{class:'diff-grid'},h('section',{},h('h4',{},'修改前'),h('pre',{},d.before)),h('section',{},h('h4',{},'修改後'),h('pre',{},d.after)))));}
+  if(task.state==='coding-review'){const check=checkbox('accept-code','我已檢查差異及測試結果，同意保留這次修改。');body.append(p('測試已通過，但這不是安全／正確性的保證。只有你驗收後才算完成。'),check.node,button('驗收並保留修改',()=>action('review',{id:task.id,accepted:true,reviewHash:task.reviewHash,consent:check.input.checked},task.id),{class:'primary'}));}
+  if(task.state==='coding-ready')body.append(button('開始模型規劃',()=>action('plan',{id:task.id},task.id)));
+  if(!['done','coding-rolled-back'].includes(task.state)){const rollback=checkbox('rollback-code','我同意還原此任務的修改；若檔案被其他程式變更，請拒絕覆蓋。');body.append(rollback.node,button('還原本任務修改',()=>action('rollback',{id:task.id,consent:rollback.input.checked},task.id)));}
+  if(task.state==='done')body.append(button(getState().plugins.find(p=>p.id==='memory')?.enabled?'確認記住這次編碼結果':'啟用本機記憶並確認記住結果',async()=>{if(!getState().plugins.find(p=>p.id==='memory')?.enabled)await api('plugins',{id:'memory',enabled:true,consent:true});await api('remember',{id:task.id,text:task.goal+'；本機測試通過，使用者已驗收。',consent:true});dialog.close();await refresh();}));
+  open(task.goal,body);
+ }
+ return {render,detail};
+}

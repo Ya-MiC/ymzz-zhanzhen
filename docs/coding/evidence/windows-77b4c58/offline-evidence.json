@@ -1,0 +1,162 @@
+{
+  "task": {
+    "id": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+    "title": "請使用 find-skills 技能檢查本機文件",
+    "input": "Windows portable task\n湛箴 evidence",
+    "state": "review",
+    "owner": "local-agent",
+    "result": {
+      "engine": "ymzz-core/integrity",
+      "gate_passed": true,
+      "gate_reason": "PASS",
+      "input_hash": "d8d74eadb6c7ecdc9d1e895626756cc25160512bdc63e6cce34fed2fc6e594c0",
+      "kind": "offline-text-inventory",
+      "lines": 2,
+      "row_hash": "439a7cd90c3ddd6c552f9d23b340009fe5145d67a3fc3b6d4ab9d32a4b2bf390",
+      "words": 5,
+      "mode": "deterministic-offline-not-model-inference",
+      "recorded": "2026-11-16 17:03 首爾時間 (UTC+9)"
+    }
+  },
+  "chain": {
+    "valid": true,
+    "events": [
+      {
+        "seq": 1,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "created",
+        "payload": {
+          "input_sha256": "876822ff042c1960ff8b39c1b67695ec6a89278671cfe5b4e94ae756669b7218"
+        },
+        "previous": "",
+        "hash": "56fac251af27fbe42608aa09d90f8b6ffa6ef8f2ab4f5ac8f758bf038442d2ab"
+      },
+      {
+        "seq": 2,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "claimed",
+        "payload": {
+          "owner": "local-agent"
+        },
+        "previous": "56fac251af27fbe42608aa09d90f8b6ffa6ef8f2ab4f5ac8f758bf038442d2ab",
+        "hash": "676ca264e8fa363bc21dffd46d4af5ea8f4e1b1a3db32f6ec0dad410ea125bc1"
+      },
+      {
+        "seq": 3,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "running",
+        "payload": {
+          "owner": "local-agent"
+        },
+        "previous": "676ca264e8fa363bc21dffd46d4af5ea8f4e1b1a3db32f6ec0dad410ea125bc1",
+        "hash": "fff7747cd541e7dae66a46325299a162f7f031170555306db46f13453f2f6e60"
+      },
+      {
+        "seq": 4,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "dispatch",
+        "payload": {
+          "route": "local",
+          "source": "ymzz-wuyong-zhi-yong/signals",
+          "thinking_available": false,
+          "triggers": [
+            {
+              "id": "zh_skill_word",
+              "score": 0.3,
+              "hint": "提到 skill／技能"
+            }
+          ],
+          "candidates": [
+            {
+              "id": "find-skills",
+              "license": "MIT",
+              "commit": "af860243b8c68053b3b5151e3732b9322933674d",
+              "excluded": 0
+            }
+          ],
+          "skill": {
+            "id": "find-skills",
+            "commit": "af860243b8c68053b3b5151e3732b9322933674d",
+            "text_sha256": "c00eeea0e13e74fe4a9d84ba0a8542205a1b736d65f13134fe1a6647eb14976f"
+          }
+        },
+        "previous": "fff7747cd541e7dae66a46325299a162f7f031170555306db46f13453f2f6e60",
+        "hash": "6df402e10ebc5baccedb44e7b4356643833fdc957da6ebf675191fcba0767ad6"
+      },
+      {
+        "seq": 5,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "gate",
+        "payload": {
+          "attempt": 1,
+          "result": {
+            "engine": "ymzz-core/integrity",
+            "gate_passed": true,
+            "gate_reason": "PASS",
+            "input_hash": "d8d74eadb6c7ecdc9d1e895626756cc25160512bdc63e6cce34fed2fc6e594c0",
+            "kind": "offline-text-inventory",
+            "lines": 2,
+            "row_hash": "439a7cd90c3ddd6c552f9d23b340009fe5145d67a3fc3b6d4ab9d32a4b2bf390",
+            "words": 5
+          }
+        },
+        "previous": "6df402e10ebc5baccedb44e7b4356643833fdc957da6ebf675191fcba0767ad6",
+        "hash": "432b5259e564a1a60cffa822f770c9ff28e67e5277f4c3b524123199833aa56a"
+      },
+      {
+        "seq": 6,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "review",
+        "payload": {
+          "engine": "ymzz-core/integrity",
+          "gate_passed": true,
+          "gate_reason": "PASS",
+          "input_hash": "d8d74eadb6c7ecdc9d1e895626756cc25160512bdc63e6cce34fed2fc6e594c0",
+          "kind": "offline-text-inventory",
+          "lines": 2,
+          "row_hash": "439a7cd90c3ddd6c552f9d23b340009fe5145d67a3fc3b6d4ab9d32a4b2bf390",
+          "words": 5,
+          "mode": "deterministic-offline-not-model-inference",
+          "recorded": "2026-11-16 17:03 首爾時間 (UTC+9)"
+        },
+        "previous": "432b5259e564a1a60cffa822f770c9ff28e67e5277f4c3b524123199833aa56a",
+        "hash": "b25203e72d9ffb8bda71743e313cbce8c22dcdd1c19b9befa1ae51bccef951ed"
+      },
+      {
+        "seq": 7,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "done",
+        "payload": {
+          "engine": "ymzz-core/integrity",
+          "gate_passed": true,
+          "gate_reason": "PASS",
+          "input_hash": "d8d74eadb6c7ecdc9d1e895626756cc25160512bdc63e6cce34fed2fc6e594c0",
+          "kind": "offline-text-inventory",
+          "lines": 2,
+          "row_hash": "439a7cd90c3ddd6c552f9d23b340009fe5145d67a3fc3b6d4ab9d32a4b2bf390",
+          "words": 5,
+          "mode": "deterministic-offline-not-model-inference",
+          "recorded": "2026-11-16 17:03 首爾時間 (UTC+9)"
+        },
+        "previous": "b25203e72d9ffb8bda71743e313cbce8c22dcdd1c19b9befa1ae51bccef951ed",
+        "hash": "2a1fa6bf75365af3a569a5b79ade418c5e41d8540c027c82d216d9e2678d36b1"
+      },
+      {
+        "seq": 8,
+        "task": "69eff638-52f2-4c64-9a74-74a227ed5b9e",
+        "kind": "remembered",
+        "payload": {
+          "id": "5d8708cc-15f0-4e7c-be1f-811016ab901b",
+          "text_sha256": "cd4d5541d1567a115ab5c364e5ea614a5482f04fa3158f7d0e94b7a36dfe1030"
+        },
+        "previous": "2a1fa6bf75365af3a569a5b79ade418c5e41d8540c027c82d216d9e2678d36b1",
+        "hash": "b6e0dec45ae96969cd7d63dd4d77de2571792d5beba0649b704ef3d0fea7f041"
+      }
+    ]
+  },
+  "assertions": {
+    "guiServer": true,
+    "offline": true,
+    "liveModelInference": false
+  }
+}

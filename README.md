@@ -1,51 +1,75 @@
-# 晏銘湛箴_湛箴（ymzz-zhanzhen）
+# 湛箴_ymzz
 
-**我的本機 VibeCoding 智能體：三十輻共一轂，Skill 是可換的輻。**
+<img src="runtime/ui/brand/icon-128.png" width="88" alt="使用者提供的湛箴_ymzz產品圖標">
 
-> 首個可執行整合切片，並非完整產品交付。原有程式碼／功能／頁面／連結全部保留。新碼 MIT；第三方維持原授權。
+**在完整 DeepSeek Harness 上維護的本機編碼智能體：保留原生聊天、工作區與面板配置，以真正 DSH 插件增加技能、逐次授權、驗證閘與人工驗收。**
 
-- **真的會運作**：DSH 官方 MIT Cordis 插件內核 → 明確權限 → 無用之用規則調度 → 鎖定技能池 → Rust 文件驗證 → SQLite 任務與證據鏈 → 人工驗收 → 確認後記憶。
-- **先離線驗證，再談智能**：20 項新 runtime/支付測試、4 項新 Rust gate 測試與原倉庫回歸；離線文件任務不冒稱模型推論。四套溫潤配色、暱稱先行、檔案選擇器、48px 熱區。
-- **Windows 已有真實證據**：[CI 通過](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570)（`ee20094`，2026-11-16 16:24 KST）；搬至中文／空白目錄後真 GUI 啟動、點暱稱引導、bundled Rust 任務與證據驗證成功。[下載 x64 portable ZIP artifact](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570/artifacts/14205472160)。不是 MSI／公開 release，不安裝 Node/Python；需既有 WebView2。尚無手機發行包。
-- **有界限的 DSH 衍生**：已核實 [官方原碼](https://github.com/deepseek-ai/deepseek-harness)，本切片實際編譯其 Cordis/Cosmokit，不假裝移植了完整 DSH Agent Loop。
-- **來源完整可追**：Loop `product` 318 檔＋獨立 `main` 103 檔，另外保留三個模組；[逐檔來源 SHA、排除清單](docs/integration/sources.lock.json)。原目標實際是 Rust/React，不是規格所述 FastAPI/Vue。
-- **支付不作假**：本機靜態收款碼 GUI＋可選 Alipay sandbox 簽名 adapter；無假 QR、無前端 paid 權威、無真實交易、無費率零元承諾。
+> 深淵的清澈的水，纂刻于竹篾上的痕，珍重微小，有所依據，立傳傳世
 
-### 你可以直接驗收
+[Windows Releases](https://github.com/Ya-MiC/ymzz-zhanzhen/releases) · [執行／開發](applications/dsh/README.md) · [全部來源與要求](docs/integration/COVERAGE.md) · [真實測試證據](applications/dsh/evidence/) · [上游 DSH](https://github.com/deepseek-ai/deepseek-harness)
 
-[操作與誠實狀態、Windows 驗收、已完成／未完成（繁中 → English）](docs/integration/README.md) · [全部要求覆蓋表與完整原連結](docs/integration/COVERAGE.md) · [九技能鎖檔](core-skills.lock.json) · [授權掃描](docs/integration/dependency-licenses.json) · [支付官方依據](docs/integration/PAYMENTS.md)
+**下載狀態：尚無符合「全 permissive」要求的完整 DSH Windows Release。** 已產生真正 Electron EXE 並執行 GUI 任務，但 stock Electron FFmpeg（LGPL-2.1+）及 LibreOffice（MPL-2.0）阻止發佈；不能拿舊獨立 Tauri 包冒充本產品。影像管線 Sharp 已用真正 permissive 實作替代，沒有刪除影像功能。未繞過授權 gate。
 
-[稟冊引導／下載](https://bingce.yanmingx0215.filegear-sg.me/#onboarding) · [每日復盤與設定教學](https://ya-mic.github.io/ymzz-loop/) · [官網](https://ya-mic.github.io/yanming-official-website/) · [無用之用](https://ya-mic.github.io/ymzz-wuyong-zhi-yong/) · [無無即無](https://ya-mic.github.io/ymzz-wuwong-ji-wung/)
+![真實完整 DSH Windows 工作區；舊候選版，最新名稱與原生品牌 slot 重驗中](applications/dsh/evidence/windows-297caa0f/full-dsh-native-workspace.png)
 
-外部 Pages 的 `product` 分支部署仍被既有環境保護規則擋住；本次沒有修改規則、網域或路由，未假稱跨站反向入口已全部部署。Office 參考插件為 AGPL，只研究公開介面，不納入 MIT runtime；官網缺 LICENSE，僅原碼存檔不打包。
+上圖為完整 DSH 的真實 Windows runner 截圖，不是設計稿；**改名及原生 slot 品牌前的歷史候選版**。[該次實證與失敗界線](applications/dsh/evidence/windows-297caa0f/)。最終下載須以 Releases 的完整 GUI／任務／授權合格版本為準，目前沒有冒稱可下載的合格包。
 
-![Windows CI 實際啟動的暱稱引導畫面](docs/integration/evidence/windows-onboarding.png)
+## 三步開始（原碼預覽）
 
-截圖來自 Windows runner（畫面系統鐘為 UTC）；上方驗收時間已換算 KST。未簽章的開發版可能出現 SmartScreen 提示；不保證所有 Windows 電腦皆已驗收。
+需要 Node 24.22.1、Corepack／pnpm 11.28.5、Rust 1.100.0 與本平台 C/C++ 建置工具。Windows CI 使用官方完整 Electron 打包鏈；不是 WebView2/Tauri。
 
-### English
+```sh
+cd applications/dsh
+pnpm install:upstream
+pnpm build && pnpm start
+```
 
-A runnable first vertical slice of a local-first, DSH-kernel-derived plugin agent runtime, not merely a redesigned site. It preserves all original target files plus pinned source snapshots, and executes a deterministic offline task with real Rust evidence, human acceptance and explicit memory consent. This is **not** a completed autonomous coding agent, live model test, production payment system, or already-verified multi-platform release. See the linked README for exact executable proof, Windows CI/artifacts, source hashes and remaining gaps. No releases/packages are published here.
+1. 第一次填暱稱，選 **雲箋淺／暗、陶土淺／暗**；原生 DSH 導覽、面板位置不變。
+2. 用附加任務插件執行離線修復示例，逐次核准真實讀檔／patch／測試。先失敗再修正，檢查差異後**驗收或還原**，另行確認才記憶。示例 transport **明確是假模型，不是 live 推論**。
+3. 在 DSH 原生 **Account menu → Settings → Models** 設定自己的模型；原生工作區選擇器／聊天／插件管理保留。**未配置模型 ≠ 模型已可用**；本次沒有付費／NIM 推論。
 
----
+合格 portable 發佈後：從 Releases 下載完整 ZIP、解壓整個資料夾、啟動 `湛箴_ymzz.exe`。資料仍放 `湛箴資料`，身分 ID 保持 `me.yanming.zhanzhen`，不因改名另建使用者身分。不使用 NSIS／MSI、無自訂 protocol／registry persistence；不保證作業系統完全不寫 registry／快取。
 
-## 原 README（完整保留）
+## 真正載入什麼
 
-# 晏銘湛箴 — README
+| 模組 | 實作與目前界線 |
+|---|---|
+| 完整 DSH | 官方 `39163dd30f703a79079e2d2446545cff3c453738`，407 原版＋2 本產品 workspace；CLI、Web、Electron、Desktop Host，不是只取 Cordis |
+| 湛箴主機插件 | `@yanming/dsh-zhanzhen`：真正 `ctx.agents.create`、Agent Loop、工具／ApprovalService、持久任務、差異／驗收／還原／證據鏈 |
+| 湛箴原生 UI 插件 | 上游 `clientBundle`／`ctx.slots`；只填既有 sidebar brand／footer slot，不重排 DSH 聊天與面板 |
+| 產品技能池 | 9 個固定 commit／checksum／license 技能註冊至 `ctx.skills`，不寫共享／全域 skills |
+| 影像 adapter | Rust image-rs／moxcms、BSD libwebp、CC0 CMYK profile；真解碼、EXIF／ICC／CMYK、resize、JPEG／WebP，Sharp 只用於開發 fixture |
+| 維護者更新 | 實作 Ed25519、相容性／review／license/hash 驗證、原生選檔、一鍵**暫存**與暫存還原；尚無正式公鑰／通道，不安裝／執行／輪詢遠端 |
+| 既有來源與功能 | 原目標、Loop product＋main、無用之用／無無即無／官網等均保留；舊獨立 runtime 是相容歷史，不是主產品 |
 
-晏銘湛箴 — 支付寶 PAYATHON 2026 · Vibe Pay 參賽作品。
+## 開發／驗收
 
-把人說過的話當作「潑出去的水」，用量化分數、標籤、來源索引為每一句做注解，再與 AI 的輸出和思維鏈做星雲匹配。
+```sh
+cd applications/dsh
+pnpm dev                  # 完整 DSH 官方 pnpm 開發入口
+pnpm test                 # 來源／邊界／簽署更新回歸
+pnpm desktop              # 官方 Electron 開發入口
+pnpm package:windows      # Windows 官方 unsigned directory package；不是發佈授權
+```
 
-## 品牌（第 1 節，逐字不得動）
-- 名稱：晏銘湛箴
-- 簡介：無無即無，zhanranchangji（清靜經原文）
+[完整 DSH 文件與證據](applications/dsh/README.md) · [Windows qualification workflow](.github/workflows/full-dsh.yml) · [影像實作／授權](applications/dsh/image-codec/README.md)
 
-## 技術棧
-Rust + Tauri v2 + React 18 + TypeScript + Vite + pnpm
+**誠實界線：**新插件完整示例流程已實跑；通用使用者專案的專屬 bounded task flow、無用之用／無無即無／REA 的深層原生協作尚未全部接通。DSH 原生工作區／聊天不是該自訂有界流程的等價證明。更新只有驗證暫存，尚不是正式一鍵安裝；未提供簽章／遠端更新通道。沒有任意插件 OS 隔離宣稱。支付寶由使用者自行接入，既有手動／sandbox 程式保留，不繼續支付工作。
 
-## 階段
-P0 腳手架 → P1 核心與 Web 本地版 → P2 星雲 + 紅藍 + MockPay 閉環 + Web 公網 → P3 真實 Vibe Pay + 桌面三平台 → P4 手機與收尾 → P5 凍結
+## 授權與上游
 
-## 授權
-程式碼 MIT；設計系統參考 ymzz-wenrun-design-skill（MIT）。
+本產品新增碼 MIT；[完整官方 DSH MIT／原始 notices](applications/dsh/upstream/LICENSE) 完整保留。**不把上游第三方一律改標 MIT。** 全量 DSH 21,632 個追蹤項目原樣固定，含 dotfiles／symlink，衍生修改只在 build copy；[逐檔 pin](applications/dsh/upstream.lock.json)。禁止／未明授權來源僅保留可允許的來源參考或存檔，不進 distributed runtime。[來源與排除清單](docs/integration/sources.lock.json) · [實際打包授權 blocker](applications/dsh/evidence/windows-297caa0f/packaged-production-license-report.json)。
+
+已實際研讀 [Archify](https://github.com/tt-a1i/archify) 的 README／結構，採用「產品一句話 → 真實畫面 → 開始使用 → 能力與證據」的清晰說明順序，沒有複製其 UI 或付費服務宣稱。
+
+[Loop](https://ya-mic.github.io/ymzz-loop/) · [稟冊](https://bingce.yanmingx0215.filegear-sg.me/#onboarding) · [官網](https://ya-mic.github.io/yanming-official-website/) · [無用之用](https://ya-mic.github.io/ymzz-wuyong-zhi-yong/) · [無無即無](https://ya-mic.github.io/ymzz-wuwong-ji-wung/)
+
+[全部原連結／規格覆蓋表](docs/integration/COVERAGE.md) · [原 README 與先前結果完整存檔](docs/history/README-before-t171-20261116.md)。外部 Pages 的 product 分支環境保護阻擋仍未變更；沒有改規則、網域或路由。
+
+## English
+
+**湛箴_ymzz is a maintained full DeepSeek Harness distribution with genuine plugins, not a replacement shell or a standalone Cordis/Tauri verifier.** Native chat/workspace/settings placement is retained. The exact user-supplied icon and four Wenrun palettes remain. Start from source with `cd applications/dsh`, `pnpm install:upstream`, then `pnpm build && pnpm start` (Node/pnpm/Rust/C++ prerequisites above).
+
+Real deterministic fake-transport tasks execute genuine DSH agents, per-tool approval, file edits, failing→repaired passing unit tests, human diff review, explicit memory and rollback. This is not live inference. Configure your own provider in native Models settings. General-project bounded integration, imported module collaboration and production one-click installation remain incomplete; the reviewed updater only verifies/stages/rolls back opaque signed bytes, with no configured key/channel or background polling.
+
+**No qualified full-DSH Windows Release is available yet:** actual native FFmpeg LGPL and LibreOffice MPL conflict with the required permissive-only acceptance. The real permissive image replacement does not fix those separate native licenses. The workflow blocks binary distribution instead of waiving the gate. Old Tauri binaries are compatibility history, never the current deliverable. Parent/maintainer will merge into `master` and publish only a qualified exact commit. No live payment/model service was used; Alipay setup is user-managed.

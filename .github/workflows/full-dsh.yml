@@ -1,0 +1,84 @@
+name: Full DSH application qualification
+on:
+  push:
+    branches: [master, 'feat/zhanzhen-coding-loop-20261116']
+    paths: ['applications/dsh/**', 'runtime/**', 'runtime-desktop/assets/**', '.github/workflows/full-dsh.yml', 'core-skills.lock.json', '!applications/dsh/evidence/**', '!applications/dsh/README.md', '!applications/dsh/image-codec/README.md']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: full-dsh-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  windows-full-application:
+    runs-on: windows-latest
+    timeout-minutes: 70
+    env:
+      CI: 'true'
+      DSH_TELEMETRY_DISABLED: '1'
+      DSH_CLIENT_TITLE: '湛箴_ymzz'
+      DSH_GATE_CONCURRENCY: '1'
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Enable official pinned pnpm through Corepack
+        shell: pwsh
+        run: |
+          npm install --global corepack@0.35.1
+          corepack enable
+      - name: Verify all pinned upstream bytes and prepare additive derivative
+        run: node applications/dsh/scripts/prepare.mjs
+      - name: Install FULL 409-project upstream workspace with reviewed lifecycle scripts disabled
+        id: install
+        working-directory: applications/dsh/.worktree
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.100.0'
+      - name: Build real permissive image codec and retain locked native dependency notices
+        run: node applications/dsh/scripts/build-image-codec.mjs
+      - name: Real image codec and full upstream attachment regression tests
+        shell: pwsh
+        run: |
+          node --test applications/dsh/image-codec/codec.test.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Push-Location applications/dsh/.worktree
+          pnpm exec vitest run packages/attachment/attachment-local/tests --testTimeout=20000 --maxWorkers=1
+          $code=$LASTEXITCODE;Pop-Location;exit $code
+      - name: Source pin and Windows checkout adversarial tests
+        run: node --test applications/dsh/tests/*.test.mjs
+      - name: Real full DSH Electron Windows directory packaging (unsigned, no NSIS installer, no publishing)
+        working-directory: applications/dsh/.worktree
+        run: pnpm run package:desktop:win:x64:dir --unsigned
+      - name: Record actual EXE hashes, embedded icon and bundled Node/notices even if upstream smoke fails
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        shell: pwsh
+        run: ./applications/dsh/scripts/collect-package.ps1 -BuildRoot applications/dsh/.worktree
+      - name: Actual packaged FULL DSH GUI + real agent/task/gate workflow in Chinese-space portable path
+        shell: pwsh
+        run: ./applications/dsh/scripts/windows-smoke.ps1 -BuildRoot applications/dsh/.worktree
+      - name: Scan actual full production dependency graph
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: node applications/dsh/scripts/licenses.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-dsh-qualification-${{ github.sha }}
+          path: |
+            applications/dsh/evidence/windows/
+          if-no-files-found: error
+      - name: Fail closed before distributing any restricted native runtime
+        shell: pwsh
+        run: |
+          node applications/dsh/scripts/licenses.mjs --enforce
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node applications/dsh/scripts/packaged-licenses.mjs --enforce
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: 湛箴_ymzz-full-dsh-portable-windows-${{ github.sha }}
+          path: ${{ env.FULL_DSH_PORTABLE }}
+          if-no-files-found: error

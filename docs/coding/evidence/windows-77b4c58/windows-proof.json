@@ -1,0 +1,8 @@
+{
+  "guiWindow": true,
+  "registryInstaller": false,
+  "guiNicknameClick": true,
+  "portableRelocation": true,
+  "core": "ymzz-core/integrity",
+  "nodeFromBundle": true
+}
