@@ -1,3 +1,38 @@
+# 湛箴 · 你的本機編碼工作區
+
+<img src="runtime/ui/brand/icon-128.png" alt="使用者提供的湛箴產品圖標" width="96">
+
+**不是只有文件盤點：現在可以讓模型提出程式修改，逐批授權，執行真實單元測試，根據失敗修正，再由你驗收或還原。**
+
+- Windows portable：本次編碼 GUI／原生資料夾選擇器與實際任務驗收正在 CI 執行；最新成功產物會在此更新，不以舊盤點包冒充新版。
+- 無需安裝 Node/Python；需要現有 **WebView2**。無 MSI／NSIS、無自訂註冊表持久化、無遙測；尚未簽章，SmartScreen 可能提示。
+- 產品圖標使用你提供的原圖，未另畫替代品；四套精確溫潤主題。UI 使用原生表單／dialog 與固定 commit 的 **Lucide ISC** 圖示，原 React MIT 工作區仍保留。
+
+### 打開後就能做
+
+1. 填暱稱，啟用「編碼工作區」。
+2. 按「建立離線程式修復示例」：新建中文／空白工作資料夾，**明確是假模型**；讀檔、修改、故意失敗測試、回饋修正、通過測試都走真實工具管線。
+3. 每批審查檔案及工具；執行程式碼另行同意。通過後檢查完整前後差異，**驗收保留或還原**；想記住結果再明確確認。
+4. 連接自己的模型：在「模型設定」啟用本機連線，填 Ollama／LM Studio 的 OpenAI 相容 base URL 與已下載模型名；用原生資料夾選擇器選專案，再輸入需求。**未設定模型會清楚阻止執行，不假裝已推論。** 本次沒有付費／NIM／live inference。
+
+### 誠實的能力範圍
+
+支援已選工作區的讀取／新增檔案／精確 patch、固定 Node `node:test`、失敗回饋再規劃、持久任務、差異審查／衝突保護／未驗收還原、確認後記憶。DSH 官方 MIT Cordis 真正擁有插件生命週期；這是自有 bounded coding loop，**不是完整上游 DSH／REA 的重包裝宣稱**。
+
+首版每工作區最多 64 個文字檔、每檔 32 KiB，最多 6 輪／16 工具／8 次寫入；測試 3 秒／輸出 16 KiB，只接受 `.test.mjs` 使用 `node:test`。不自動安裝 npm、不開任意 shell、不提供任意插件隔離。Node 權限與路徑檢查**不是 OS 安全沙盒，也沒有網路隔離**；只核准你信任的測試。防止一般路徑穿越、symlink/junction/hardlink、已審查檔案遭變更；不能保證對抗同帳號惡意程式的競態或惡意測試偽造輸出。
+
+支付寶接入現在由你自行完成；既有手動設定與 sandbox 原碼只保留，不繼續付款範圍，不收款、不入駐。其他完整 Loop 功能／多端發行／MCP 分析引擎／Office 預覽仍見原覆蓋表，沒有把保留原碼當成全數完成。
+
+[編碼工具與安全設計](docs/coding/README.md) · [完整歷史要求／全部連結](docs/integration/COVERAGE.md) · [圖標來源](docs/integration/product-icon.lock.json) · [UI 授權](docs/integration/ui-components.lock.json)
+
+### English
+
+A usable bounded local coding workspace: provider plan → explicit workspace selection → per-batch tool approval → real file read/write/patch → bounded Node unit tests → failure feedback and repair → human diff acceptance or rollback → optional confirmed memory. The offline demonstration uses a clearly labeled deterministic fake model through the same provider/tool pipeline, not live inference. Bring your own local OpenAI-compatible model. Native Windows picker, supplied product icon, exact Wenrun themes, no custom registry persistence or telemetry. This is not an OS/network sandbox or an unrestricted coding agent. Alipay is now user-managed; no new payment implementation.
+
+---
+
+## 第一階段整合紀錄（原文、連結及原 README 完整保留）
+
 # 晏銘湛箴_湛箴（ymzz-zhanzhen）
 
 **我的本機 VibeCoding 智能體：三十輻共一轂，Skill 是可換的輻。**

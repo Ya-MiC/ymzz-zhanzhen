@@ -1,9 +1,21 @@
 {
- "$schema":"https://schema.tauri.app/config/2",
- "productName":"湛箴 Zhanzhen",
- "version":"0.2.0",
- "identifier":"com.ymzz.zhanzhen.runtime",
- "build":{"frontendDist":"assets"},
- "app":{"windows":[],"security":{"csp":"default-src 'self'; object-src 'none'; base-uri 'none'"}},
- "bundle":{"active":false,"icon":["assets/icon.ico"]}
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "湛箴 Zhanzhen",
+  "version": "0.2.0",
+  "identifier": "com.ymzz.zhanzhen.runtime",
+  "build": {
+    "frontendDist": "assets"
+  },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; object-src 'none'; base-uri 'none'"
+    }
+  },
+  "bundle": {
+    "active": false,
+    "icon": [
+      "assets/product.ico"
+    ]
+  }
 }

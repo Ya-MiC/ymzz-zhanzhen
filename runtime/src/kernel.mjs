@@ -7,14 +7,16 @@ import {spawnSync} from 'node:child_process';
 import {assert,sha} from './store.mjs';
 import {human} from '../../imports/ymzz-loop/product/scripts/time.mjs';
 import {infer,validateProvider} from './provider.mjs';
+import {createCodingAgent} from './coding/agent.mjs';
 const definitions=[
  {id:'skills',title:'技能池',permissions:['pool.read']},
  {id:'dispatch',title:'無用之用 · 調度',permissions:['pool.read','rules.read']},
  {id:'memory',title:'無無即無 · 記憶',permissions:['memory.read','memory.write.confirmed']},
  {id:'audit',title:'Rust 核心 · 文件驗證',permissions:['task.read','core.execute.fixed']},
+ {id:'coding',title:'編碼智能體 · 逐批授權',permissions:['workspace.selected.read-write','test.fixed-node.explicit-consent','provider.loopback.explicit-opt-in']},
  {id:'provider',title:'本機模型（預設停用）',permissions:['network.loopback.opt-in']},
 ];
-export async function createKernel({store,root,coreExecutable}){
+export async function createKernel({store,root,coreExecutable,dataDir,workspacePicker,codingTransport}){
  const ctx=new Context(), mounted=new Map(), services=new Map();
  const lock=JSON.parse(readFileSync(resolve(root,'core-skills.lock.json'),'utf8'));
  const readPool=(id)=>{
@@ -24,7 +26,7 @@ export async function createKernel({store,root,coreExecutable}){
  };
  const expose=(id,api)=>({name:'ymzz-'+id,apply(pluginCtx){
   pluginCtx.provide('ymzz_'+id,api);
-  pluginCtx.effect(()=>{services.set(id,api);return()=>services.delete(id);},'ymzz: bounded capabilities '+id);
+  pluginCtx.effect(()=>{services.set(id,api);return()=>{api.cancelAll?.();services.delete(id);};},'ymzz: bounded capabilities '+id);
  }});
  const requireService=id=>{assert(mounted.has(id)&&services.has(id),'PLUGIN_DISABLED');return services.get(id);};
  const api={
@@ -44,6 +46,7 @@ export async function createKernel({store,root,coreExecutable}){
   }},
   provider:{configure:c=>store.set('provider',validateProvider(c)),config:()=>store.get('provider'),infer:(prompt,opts)=>infer(store.get('provider'),prompt,opts)},
  };
+ api.coding=createCodingAgent({store,dataDir,workspacePicker,permission:()=>requireService('coding'),providerAllowed:()=>requireService('provider'),providerTransport:codingTransport});
  async function enable(id,consent){assert(consent===true,'PLUGIN_PERMISSION_CONFIRMATION_REQUIRED');assert(definitions.some(p=>p.id===id),'UNKNOWN_PLUGIN');if(mounted.has(id))return;
   const fiber=await ctx.plugin(expose(id,api[id]));mounted.set(id,fiber);store.set('plugin:'+id,true);
  }

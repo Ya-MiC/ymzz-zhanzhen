@@ -7,8 +7,8 @@ import {fileURLToPath} from 'node:url';
 import {Store,assert} from './store.mjs';
 import {createKernel} from './kernel.mjs';
 const HERE=dirname(fileURLToPath(import.meta.url));
-export async function start({root=HERE,dataDir=process.env.YMZZ_DATA_DIR,coreExecutable=process.env.YMZZ_CORE_EXECUTABLE,port=0}={}){
- assert(dataDir,'DATA_DIR_REQUIRED');const store=new Store(join(dataDir,'zhanzhen.sqlite'));const kernel=await createKernel({store,root,coreExecutable});
+export async function start({root=HERE,dataDir=process.env.YMZZ_DATA_DIR,coreExecutable=process.env.YMZZ_CORE_EXECUTABLE,port=0,workspacePicker,codingTransport}={}){
+ assert(dataDir,'DATA_DIR_REQUIRED');const store=new Store(join(dataDir,'zhanzhen.sqlite'));const kernel=await createKernel({store,root,coreExecutable,dataDir,workspacePicker,codingTransport});
  const token=randomBytes(32).toString('hex');let origin;
  const safeEqual=(a,b)=>typeof a==='string'&&a.length===b.length&&timingSafeEqual(Buffer.from(a),Buffer.from(b));
  const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.woff2':'font/woff2'};
@@ -23,7 +23,8 @@ export async function start({root=HERE,dataDir=process.env.YMZZ_DATA_DIR,coreExe
    if(u.pathname.startsWith('/api/')){
     assert(safeEqual(req.headers.authorization,'Bearer '+token),'AUTH_REQUIRED');
     if(req.method==='GET'){
-     if(u.pathname==='/api/state')return json(200,{profile:store.get('profile'),tasks:store.tasks(),plugins:kernel.plugins(),integrity:store.verify(),provider:store.get('provider'),payment:store.get('payment'),skills:kernel.plugins().find(p=>p.id==='skills').enabled?kernel.require('skills').list():[],memory:kernel.plugins().find(p=>p.id==='memory').enabled?kernel.require('memory').list(''):[]});
+     if(u.pathname==='/api/coding/state')return json(200,kernel.require('coding').state());
+     if(u.pathname==='/api/state')return json(200,{coding:kernel.plugins().find(p=>p.id==='coding').enabled?kernel.require('coding').state():null,profile:store.get('profile'),tasks:store.tasks(),plugins:kernel.plugins(),integrity:store.verify(),provider:store.get('provider'),payment:store.get('payment'),skills:kernel.plugins().find(p=>p.id==='skills').enabled?kernel.require('skills').list():[],memory:kernel.plugins().find(p=>p.id==='memory').enabled?kernel.require('memory').list(''):[]});
      if(u.pathname==='/api/skill')return json(200,kernel.require('skills').load(u.searchParams.get('id')));
      if(u.pathname==='/api/evidence')return json(200,{valid:store.verify(),events:store.evidence(u.searchParams.get('id'))});
      throw new Error('NOT_FOUND');
@@ -31,12 +32,19 @@ export async function start({root=HERE,dataDir=process.env.YMZZ_DATA_DIR,coreExe
     assert(req.method==='POST','METHOD_NOT_ALLOWED');assert((req.headers['content-type']||'').startsWith('application/json'),'JSON_REQUIRED');
     const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;assert(size<=1_500_000,'BODY_TOO_LARGE');chunks.push(chunk);}const b=JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');
     switch(u.pathname){
+     case '/api/coding/pick':return json(200,await kernel.require('coding').pick());
+     case '/api/coding/example':return json(200,kernel.require('coding').example());
+     case '/api/coding/create':return json(200,kernel.require('coding').create(b));
+     case '/api/coding/plan':return json(200,await kernel.require('coding').plan(b.id));
+     case '/api/coding/approve':return json(200,await kernel.require('coding').approve(b));
+     case '/api/coding/review':return json(200,await kernel.require('coding').review(b));
+     case '/api/coding/rollback':return json(200,await kernel.require('coding').rollback(b));
      case '/api/onboarding':assert(typeof b.nickname==='string'&&b.nickname.trim()&&b.nickname.length<=60,'NICKNAME_REQUIRED');store.set('profile',{nickname:b.nickname.trim()});return json(200,{saved:true});
      case '/api/plugins':if(b.enabled)await kernel.enable(b.id,b.consent);else await kernel.disable(b.id);return json(200,kernel.plugins());
      case '/api/tasks':return json(200,store.create(b.title,b.input));
      case '/api/claim':return json(200,store.claim(b.id,'local-agent'));
      case '/api/run':return json(200,await kernel.run(b.id,'local-agent'));
-     case '/api/review':return json(200,store.review(b.id,b.accepted));
+     case '/api/review':assert(!store.get('coding:'+b.id),'CODING_REVIEW_REQUIRED');return json(200,store.review(b.id,b.accepted));
      case '/api/remember':return json(200,{id:kernel.require('memory').remember(b.id,b.text,b.consent)});
      case '/api/provider':kernel.require('provider').configure(b);return json(200,{saved:true});
      case '/api/infer':assert(b.consent===true,'INFERENCE_CONFIRMATION_REQUIRED');return json(200,await kernel.require('provider').infer(b.prompt));
@@ -57,7 +65,7 @@ export async function start({root=HERE,dataDir=process.env.YMZZ_DATA_DIR,coreExe
  });
  server.headersTimeout=10000;server.requestTimeout=20000;
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});origin='http://127.0.0.1:'+server.address().port;
- return {server,store,kernel,origin,token,url:origin+'/#token='+token,async close(){await new Promise(r=>server.close(r));await kernel.close();store.close();}};
+ return {server,store,kernel,origin,token,url:origin+'/#token='+token,async close(){const stopped=new Promise(r=>server.close(r));await kernel.close();await stopped;store.close();}};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const app=await start();process.stdout.write(JSON.stringify({url:app.url})+'\n');

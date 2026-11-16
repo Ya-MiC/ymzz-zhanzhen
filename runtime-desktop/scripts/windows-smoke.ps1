@@ -48,6 +48,7 @@ try {
  $env:YMZZ_SMOKE_TOKEN=$token
  node runtime/scripts/installed-smoke.mjs
  if ($LASTEXITCODE -ne 0) { throw 'Installed runtime offline task failed' }
+ ./runtime-desktop/scripts/coding-ui-smoke.ps1 -Element $element -Origin $env:YMZZ_SMOKE_ORIGIN -Token $token -Data $data
  if (!(Test-Path "$data/zhanzhen.sqlite")) { throw 'No persistent database' }
  # Verify the window is still alive after the true Rust evaluation and evidence checks.
  $process.Refresh(); if ($process.HasExited -or $process.MainWindowHandle -eq 0) { throw 'GUI did not survive offline task' }
