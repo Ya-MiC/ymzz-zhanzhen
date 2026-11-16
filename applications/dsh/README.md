@@ -4,14 +4,24 @@
 
 這裡是完整官方 **DeepSeek Harness**，不是只抽 Cordis，也不是重新做一個 Tauri 外殼。原有 `apps/cli`、`apps/web`、`apps/desktop`（Electron）、`apps/desktop-host` 與全部上游套件一起建置。舊 `runtime/`、`runtime-desktop/` 和原始審計／React／Rust 工作區只增不減，保留為相容模組，不拿舊 Windows 成果冒充本產品。
 
+## 最新實況：不能把 npm clean 當完整 binary clean
+
+Run [43839058173](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43839058173) 已完成：**真正官方 Windows 打包＋原版 runtime／Office smoke 通過**，不是舊 Tauri。實體 EXE 246,425,600 bytes，SHA256 `998ad3ca4e7566d2e33ef9b52426b4eBA2ea05db99eaeb7973f8204639831258`（大小寫無意義）；[原始 metadata／實體 EXE 提取原圖 icon](evidence/windows-27d05e41/)。GUI step 被本地 harness 的 boxed `IntPtr.Zero` truthiness 錯誤阻斷，並非已證明應用程式無法啟動；已改成顯式零值檢查並增加 regression，等待真正 GUI 重驗。不假稱 GUI pass、不提供未合格 EXE。
+
+已功能性替換唯一 production Sharp consumer：**16 codec 實測＋原版 attachment 98 pass／1 inherited skip**，完整四格式、EXIF、ICC、CMYK、alpha、resize、JPEG/WebP 仍工作。原版 Sharp fixtures 仍保留為 dev-only，完整上游 archive 一字未改。[替代實作／授權](image-codec/README.md)。[本輪實測與 OOM 界線](evidence/image-integration-linux.json)：changed attachment typecheck 通過；保留既有 dev server/watchers 時，額外 full host aggregate 曾 exit 137，未冒稱本輪完整 host aggregate 已過。
+
+目前 Linux npm closure 660／0 blocked／0 unresolved；47 Cargo dependencies 依實際 SPDX AND/OR 選 permissive grant、逐份 notices/checksum 隨包保留。
+
+**分發仍不合格：**完整 stock Electron 帶 LGPL FFmpeg，LibreOffice kit/engine 帶 MPL-2.0，不能因為替換 Sharp 就說「全部 MIT」。新 gate 另讀真正打包的 `app.asar`、unpacked image EXE、`ffmpeg.dll` 與 Chromium 原始 notices；有上述衝突就 fail closed，不上傳 binary。沒有移除影像、Office、Agent 或影音功能去讓 gate 變綠。以下較早的 Sharp 阻擋段落是歷史，以上最新證據優先。
+
 ## 真實來源／建置
 
 - 官方來源：https://github.com/deepseek-ai/deepseek-harness
 - 固定 SHA：`39163dd30f703a79079e2d2446545cff3c453738`，原版 `0.2.2-rc.3`。
 - [`upstream/`](upstream/)：完整 **21,632** 追蹤檔，含 dotfiles、13 個 Git symlink；每個 Git blob／mode／SHA256 見 [`upstream.lock.json`](upstream.lock.json)。Windows 依原版 `.gitattributes` 將 `.cmd` 實體化為 CRLF，校驗時還原成 Git canonical LF；Git symlink 的文字替代只在建置副本安全實體化。不含 `.git`、未追蹤資料或歷史 Git 物件；並沒有聲稱搬入整個歷史資料庫。
-- 原始來源不修改。`scripts/prepare.mjs` 驗證所有來源位元組，才在忽略的 `.worktree/` 建立可重現衍生副本。新增真正的 `@yanming/dsh-zhanzhen` production workspace package，408 個 workspace（原版 407）。
+- 原始來源不修改。`scripts/prepare.mjs` 驗證所有來源位元組，才在忽略的 `.worktree/` 建立可重現衍生副本。新增真正的 `@yanming/dsh-zhanzhen` production workspace package，409 個 workspace（原版 407＋湛箴插件＋影像替代）。
 - 原版 MIT／THIRD_PARTY_NOTICES 原樣保留。新程式 MIT；使用者圖標不是重新授權為 MIT。
-- 需要完整 **Node.js 24.9+ SDK**（含開發 headers；已驗證 24.22.1）與 **pnpm 11.28.5**。只使用產品資料夾，不改 bot 全域技能／`~/.agents`。
+- 需要完整 **Node.js 24.9+ SDK**（含開發 headers；已驗證 24.22.1）、**Rust 1.100.0**（C/C++ compiler；用於真實 image helper）與 **pnpm 11.28.5**。只使用產品資料夾，不改 bot 全域技能／`~/.agents`。
 
 ```sh
 cd applications/dsh
@@ -43,7 +53,7 @@ pnpm start            # 真正 pnpm dsh web；本機 URL 由官方 launcher 輸�
 ## 證據與界線
 
 - [`evidence/full-dsh-web-task.json`](evidence/full-dsh-web-task.json)：真正完整 DSH Web host、原生 Agent Loop、真實 Node 測試與人工 gate 的 API 整合證據。可重跑 `scripts/smoke-web.py --launch-log <這次自己啟動的官方輸出檔>`；不要將其中一次性本機 token 提交 Git。
-- `pnpm test`：9 項來源／資源／封裝契約檢查；不拿靜態 contract tests 冒充 GUI 或模型推論。
+- `pnpm test`：16 項來源／資源／封裝／SPDX 契約檢查；不拿靜態 contract tests 冒充 GUI 或模型推論。
 - [Windows workflow](../../.github/workflows/full-dsh.yml)：原版 Electron Windows directory packaging，再以 Windows UIAutomation 操作**真正打包的完整應用**（不是瀏覽器腳本），在中文／空白 portable 路徑驗證暱稱、原生插件、任務、失敗→修復→通過、驗收／記憶與還原。**目前尚未以成功 CI 證據宣稱此完整 DSH Windows 包完成。**
 - 舊 Windows Tauri artifact 仍在根 README 歷史段，但不是這裡的完整 DSH 下載。
 

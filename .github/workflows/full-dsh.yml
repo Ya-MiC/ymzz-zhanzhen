@@ -30,10 +30,23 @@ jobs:
           corepack enable
       - name: Verify all pinned upstream bytes and prepare additive derivative
         run: node applications/dsh/scripts/prepare.mjs
-      - name: Install FULL 408-project upstream workspace with reviewed lifecycle scripts disabled
+      - name: Install FULL 409-project upstream workspace with reviewed lifecycle scripts disabled
         id: install
         working-directory: applications/dsh/.worktree
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.100.0'
+      - name: Build real permissive image codec and retain locked native dependency notices
+        run: node applications/dsh/scripts/build-image-codec.mjs
+      - name: Real image codec and full upstream attachment regression tests
+        shell: pwsh
+        run: |
+          node --test applications/dsh/image-codec/codec.test.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Push-Location applications/dsh/.worktree
+          pnpm exec vitest run packages/attachment/attachment-local/tests
+          $code=$LASTEXITCODE;Pop-Location;exit $code
       - name: Source pin and Windows checkout adversarial tests
         run: node --test applications/dsh/tests/*.test.mjs
       - name: Real full DSH Electron Windows directory packaging (unsigned, no NSIS installer, no publishing)
@@ -57,7 +70,11 @@ jobs:
             applications/dsh/evidence/windows/
           if-no-files-found: error
       - name: Fail closed before distributing any restricted native runtime
-        run: node applications/dsh/scripts/licenses.mjs --enforce
+        shell: pwsh
+        run: |
+          node applications/dsh/scripts/licenses.mjs --enforce
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node applications/dsh/scripts/packaged-licenses.mjs --enforce
       - uses: actions/upload-artifact@v4
         if: success()
         with:

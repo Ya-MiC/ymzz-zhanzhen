@@ -8,14 +8,15 @@
 
 **[完整 DSH 應用、操作方法、真實證據與未完成界線 → applications/dsh/README.md](applications/dsh/README.md)**
 
-- 官方 https://github.com/deepseek-ai/deepseek-harness ，固定 `39163dd30f703a79079e2d2446545cff3c453738`，**21,632 原始檔完整保留**；CLI／Web／Electron Desktop／Desktop Host 一起建置，原版 407＋湛箴插件＝408 workspace。
+- 官方 https://github.com/deepseek-ai/deepseek-harness ，固定 `39163dd30f703a79079e2d2446545cff3c453738`，**21,632 原始檔完整保留**；CLI／Web／Electron Desktop／Desktop Host 一起建置，原版 407＋湛箴插件＋實際影像替代套件＝409 workspace。
 - 已實際通過 Linux **8 個 artifacts build gates** 與 [Windows 完整 build **10 個 gates**](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43836410889)（含 host/client aggregate checks）；真正 `ctx.agents.create`／Agent Loop／Tool registry／ApprovalService／`ctx.skills`，不是另一套示範 shell。真實離線修復：讀檔→人工逐工具核准→修改→測試失敗→修復→測試通過→差異驗收／記憶。[實測證據](applications/dsh/evidence/full-dsh-web-task.json)。假模型明確標示，沒有 live／付費／NIM 推論。
 - `cd applications/dsh` → `pnpm install:upstream` → `pnpm build` → `pnpm start`。保留完整原生聊天、工作區、模型設定、插件管理；先填暱稱、四套溫潤主題、使用你提供的原圖。
-- **尚不提供冒稱已通過的完整 DSH Windows 下載。** [新 Windows qualification](.github/workflows/full-dsh.yml) 以原版 `package:desktop:win:x64:dir --unsigned` 打包並做真正 GUI 任務測試；2026-11-16 18:17 KST 已由官方 Electron packager 真正組出 `晏銘湛箴.exe`，但最後上游 smoke 還硬編碼舊 EXE 名稱而失敗，GUI 尚未驗收；修正後重驗，不把 build-only 當完成。
-- **具體授權阻擋：**[完整 production 掃描](applications/dsh/evidence/full-production-license-report.json) 664 個 package 找到 sharp/libvips 的 LGPL-3.0-or-later native runtime。這可依法商用，但不是 MIT／permissive，嚴格分發 gate 在替代或明確合規決策前阻止 EXE artifact 上傳。MPL-2.0 LibreOffice 亦保留原義務。先前「386／0 blocked」只屬下方舊相容層，不能套用完整 DSH。
+- **尚不提供冒稱已通過的完整 DSH Windows 下載。** [新 Windows qualification](.github/workflows/full-dsh.yml) 以原版 `package:desktop:win:x64:dir --unsigned` 打包並做真正 GUI 任務測試；[run 43839058173](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43839058173) 已真正通過官方打包與 runtime／Office smoke，產出 246,425,600-byte EXE；[實體 PE／原圖圖標／Node／notices 證據](applications/dsh/evidence/windows-27d05e41/packaged-exe-metadata.json)。GUI harness 在 HWND 尚為零時因 PowerShell IntPtr 判斷出錯，未完成 GUI 驗收；已修正真實等待，待重驗，不能把此包宣稱完成。
+- **Sharp 已有真正替代，不是刪功能／改 license：**自有 MIT Rust image-rs＋BSD libwebp helper 提供四格式完整 decode、EXIF、ICC/CMYK、16-bit/alpha、resize、JPEG/WebP。**16 項實作測試＋原版 attachment 98 通過／1 既有 skip**；實際 npm production graph **660／0 blocked／0 unresolved，無 sharp／@img**；另保留 47 個 Cargo 套件及 native notices/checksum。[影像替代與界線](applications/dsh/image-codec/README.md)。
+- **但這不等於整個 EXE 已全 permissive：**原版 LibreOffice kit/engine 是 MPL-2.0；stock Electron 的實際 FFmpeg 是 LGPL-2.1。新增獨立 **已打包 ASAR／native** gate 取實檔、hash、原版 Chromium notices，若仍帶這些元件就阻止 EXE artifact；不偷偷放行、移除 Office／影音或改標 MIT。嚴格「完整 stock DSH＋全 permissive」仍有上游 native 授權衝突，只有證據 artifact 可上傳。
 - 完整 DSH 版是 Electron，自帶 Chromium；不沿用舊 Tauri 的 WebView2 宣稱。不用 NSIS、不註冊 dsh://、不做自訂 registry persistence；不保證 Windows 本身零系統寫入。支付寶由你自行處理。
 
-English: Primary product = the complete pinned official DSH app plus genuine plugins. Real build/agent/tool evidence is linked above. The native image-engine license gate currently blocks binary distribution; no successful full-DSH Windows package is claimed. Earlier Tauri results below are retained compatibility history, not the current product.
+English: Primary product = the complete pinned official DSH app plus genuine plugins. Real build/agent/tool evidence is linked above. The real permissive image replacement passes 16 dedicated and 98 upstream tests (1 existing skip); the npm closure is clean, but stock Electron FFmpeg/LibreOffice native licenses remain an independent distribution blocker. Actual Windows packaging passed; GUI qualification is not yet claimed. Earlier Tauri results below are retained compatibility history, not the current product.
 
 ---
 

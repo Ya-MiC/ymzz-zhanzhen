@@ -23,8 +23,8 @@ function Find-Control([string]$name,$pattern=$null){
 function Click([string]$name){$c=Find-Control $name ([System.Windows.Automation.InvokePattern]::Pattern);$c.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern).Invoke();Start-Sleep -Milliseconds 250}
 function Screenshot([string]$name){$b=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds;$i=[System.Drawing.Bitmap]::new($b.Width,$b.Height);$g=[System.Drawing.Graphics]::FromImage($i);$g.CopyFromScreen($b.Location,[System.Drawing.Point]::Empty,$b.Size);$i.Save((Join-Path $proof "$name.png"));$g.Dispose();$i.Dispose()}
 try{
- $end=(Get-Date).AddSeconds(90);do{$p.Refresh();if($p.HasExited){throw 'FULL DSH EXE exited during GUI startup'};if(!$p.MainWindowHandle){Start-Sleep -Milliseconds 300}}until($p.MainWindowHandle -or (Get-Date) -gt $end)
- if(!$p.MainWindowHandle){throw 'Full Electron main window never started'};$Element=[System.Windows.Automation.AutomationElement]::FromHandle($p.MainWindowHandle)
+ $end=(Get-Date).AddSeconds(90);do{$p.Refresh();if($p.HasExited){throw 'FULL DSH EXE exited during GUI startup'};if($p.MainWindowHandle -eq [IntPtr]::Zero){Start-Sleep -Milliseconds 300}}until($p.MainWindowHandle -ne [IntPtr]::Zero -or (Get-Date) -gt $end)
+ if($p.MainWindowHandle -eq [IntPtr]::Zero){throw 'Full Electron main window never started'};$Element=[System.Windows.Automation.AutomationElement]::FromHandle($p.MainWindowHandle)
  $nick=Find-Control '怎麼稱呼你？' ([System.Windows.Automation.ValuePattern]::Pattern);$nick.GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern).SetValue('湛箴 Windows 完整 DSH 驗收');Click '以暱稱開始使用完整 DSH'
  Screenshot 'full-dsh-onboarding'
  $approvals=0
@@ -50,7 +50,7 @@ try{
  $models=$null;foreach($label in @('Models','模型')){try{$models=Find-Control $label ([System.Windows.Automation.InvokePattern]::Pattern);break}catch{}}
  if(!$models){throw 'Original full DSH Models settings navigation missing'};$models.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern).Invoke();Start-Sleep -Seconds 1
  Screenshot 'full-dsh-native-model-settings'
- @{fullUpstreamApp=$true;engine='FULL official DeepSeek Harness Electron';upstream='39163dd30f703a79079e2d2446545cff3c453738';nativeGUI=$true;pluginLoadedViaProductionAssembly=$true;nicknameViaGUI=$true;approvals=$approvals;accepted=$accepted;rollback=$rollback;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativeModelSettingsOpened=$true;providerConfigured=$false;modelWorking=$false;unicodeSpacePortablePath=$true;exeSHA256=(Get-FileHash $exe -Algorithm SHA256).Hash;exeBytes=(Get-Item $exe).Length;actualUserIcon='Embedded by official electron-builder from original supplied PNG; resource file checked separately';customProtocolRegistration=$false;binaryDistribution='Blocked until strict image-engine license gate clears'}|ConvertTo-Json -Depth 30|Set-Content -Encoding utf8 (Join-Path $proof 'full-dsh-gui.json')
+ @{fullUpstreamApp=$true;engine='FULL official DeepSeek Harness Electron';upstream='39163dd30f703a79079e2d2446545cff3c453738';nativeGUI=$true;pluginLoadedViaProductionAssembly=$true;nicknameViaGUI=$true;approvals=$approvals;accepted=$accepted;rollback=$rollback;actualNodeTests=$true;deterministicFakeTransport=$true;liveInference=$false;nativeModelSettingsOpened=$true;providerConfigured=$false;modelWorking=$false;unicodeSpacePortablePath=$true;exeSHA256=(Get-FileHash $exe -Algorithm SHA256).Hash;exeBytes=(Get-Item $exe).Length;actualUserIcon='Embedded by official electron-builder from original supplied PNG; resource file checked separately';customProtocolRegistration=$false;binaryDistribution='Blocked until BOTH workspace and actual portable/native permissive-license gates clear'}|ConvertTo-Json -Depth 30|Set-Content -Encoding utf8 (Join-Path $proof 'full-dsh-gui.json')
  "FULL_DSH_PORTABLE=$portable"|Out-File -Append -Encoding utf8 $env:GITHUB_ENV
 }catch{
  Screenshot 'full-dsh-failure'

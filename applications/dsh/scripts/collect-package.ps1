@@ -7,6 +7,8 @@ $record=@{run=$env:GITHUB_RUN_ID;commit=$env:GITHUB_SHA;fullUpstream='39163dd30f
 if($built){
  $exe=Join-Path $built.FullName '晏銘湛箴.exe'
  if(Test-Path $exe){
+  & node (Join-Path $PSScriptRoot 'packaged-licenses.mjs') $built.FullName
+  if($LASTEXITCODE -ne 0){throw 'Actual packaged dependency/license evidence collection failed'}
   $record.binaryAssembled=$true;$record.exeSHA256=(Get-FileHash $exe -Algorithm SHA256).Hash;$record.exeBytes=(Get-Item $exe).Length
   $stream=[System.IO.File]::OpenRead($exe);try{$record.isWindowsPE=($stream.ReadByte() -eq 77 -and $stream.ReadByte() -eq 90)}finally{$stream.Dispose()}
   $icon=Join-Path $built.FullName 'resources/icon.png';$expected=Join-Path (Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent) 'runtime/ui/brand/icon-512.png'

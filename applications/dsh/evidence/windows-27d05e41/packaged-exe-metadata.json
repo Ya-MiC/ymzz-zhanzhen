@@ -1,0 +1,17 @@
+{
+  "nativeGUIVerified": false,
+  "primaryNodeBundled": true,
+  "commit": "27d05e41b13dac03dcfb641368b60d422a58f954",
+  "run": "43839058173",
+  "binaryDistributed": false,
+  "binaryAssembled": true,
+  "originalDshLicenseBundled": true,
+  "actualPEIconExtracted": true,
+  "exeSHA256": "998AD3CA4E7566D2E33EF9B52426B4EBA2EA05DB99EAEB7973F8204639831258",
+  "fullUpstream": "39163dd30f703a79079e2d2446545cff3c453738",
+  "scope": "artifact metadata only; GUI proof is a separate file",
+  "exeBytes": 246425600,
+  "originalDshNoticesBundled": true,
+  "isWindowsPE": true,
+  "originalUserDerivedResourceIconMatches": true
+}

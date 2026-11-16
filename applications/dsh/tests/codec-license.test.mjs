@@ -1,0 +1,3 @@
+// MIT. No builds/network/fixture execution during license-expression unit tests.
+import test from'node:test';import assert from'node:assert/strict';import {selectPermissive}from'../scripts/codec-license.mjs';
+test('license alternatives select genuine permissive grant; AND never launders LGPL',()=>{assert.deepEqual(selectPermissive('MIT OR Apache-2.0 OR LGPL-2.1-or-later'),['MIT']);assert.deepEqual(selectPermissive('(MIT OR Apache-2.0) AND Unicode-3.0'),['MIT','Unicode-3.0']);for(const x of ['MIT AND LGPL-3.0-or-later','(MIT OR Apache-2.0) AND GPL-3.0','LGPL-2.1-or-later','MIT WITH invented-exception','Commons-Clause','LicenseRef-Private','', 'MIT OR'])assert.throws(()=>selectPermissive(x),x)});

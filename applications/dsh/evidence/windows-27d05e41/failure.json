@@ -1,0 +1,6 @@
+{
+  "binaryDistributed": false,
+  "liveInference": false,
+  "error": "Exception calling \"FromHandle\" with \"1\" argument(s): \"hwnd cannot be IntPtr.Zero or null.\"",
+  "fullUpstreamApp": true
+}
