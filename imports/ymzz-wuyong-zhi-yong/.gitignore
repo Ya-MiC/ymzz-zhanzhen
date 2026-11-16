@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+
+# 運行時狀態（一律不入 git）
+state/
+
+# skills CLI 安裝產物（第三方內容，由 bootstrap 重建；lock 檔記錄了它們的來源）
+skills/core/
+skills/pool/
+skills/find-skills/
+skills/local-made/*
+!skills/local-made/.gitkeep
+skills-lock.json
+
+# npx skills 安裝到各 agent 目錄的產物（不屬本專案原始碼）
+.agents/skills/
+.claude/skills/
+.codebuddy/skills/
+.hermes/skills/
+.windsurf/skills/
+.zcode/skills/
+skills/agent-browser/
+skills/grill-me/
+skills/hyperframes-cli/
+
+# 研究暫存
+_research/

@@ -1,0 +1,10 @@
+{
+  "id": "vercel-labs/skills/find-skills",
+  "source": "vercel-labs/skills",
+  "slug": "find-skills",
+  "installs": 4400000,
+  "hash": "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "files": [
+    { "path": "SKILL.md", "contents": "---\nname: Find Skills\n...\n" }
+  ]
+}

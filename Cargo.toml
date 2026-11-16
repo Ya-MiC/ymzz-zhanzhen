@@ -5,6 +5,7 @@ members = [
   "crates/ymzz-pay",
   "crates/ymzz-redblue",
   "crates/ymzz-server",
+  "crates/ymzz-runtime-core",
 ]
 # "apps/desktop/src-tauri" 暫時排除（需完整 Tauri 工具鏈與網路，列為阻塞項）
 exclude = []

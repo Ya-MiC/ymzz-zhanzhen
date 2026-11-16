@@ -1,0 +1,45 @@
+{
+  "codeCommit": "ee2009406a25ae71d7e79516b4f3d9ec69d32a72",
+  "ciRun": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570",
+  "completedAtKST": "2026-11-16T16:24:56+09:00",
+  "proofArtifact": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570/artifacts/14205985370",
+  "portableArtifact": "https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570/artifacts/14205472160",
+  "artifactExpiresAtKST": "2027-02-14T16:18:04+09:00",
+  "portableZip": {
+    "bytes": 42883400,
+    "sha256": "d66d51f1d26239f5d5c16f432cd19b52a59582b956b4000bac56e04ca80cc4be",
+    "entries": 1095,
+    "licenseFiles": 453
+  },
+  "executables": [
+    {
+      "path": "ymzz-zhanzhen.exe",
+      "bytes": 9080320,
+      "sha256": "31d710cd5e7cb2281924c47fbacfeabc3ed7263e042dceb346e36887e4c673b2",
+      "peMachine": "AMD64"
+    },
+    {
+      "path": "node.exe",
+      "bytes": 93915464,
+      "sha256": "d702daa815eabbff763c7d3808e235cf031cf2ca70211b56847bc72f51e240e5",
+      "peMachine": "AMD64"
+    }
+  ],
+  "offlineEvidence": {
+    "chainValid": true,
+    "engine": "ymzz-core/integrity",
+    "rowHash": "439a7cd90c3ddd6c552f9d23b340009fe5145d67a3fc3b6d4ab9d32a4b2bf390",
+    "eventKinds": [
+      "created",
+      "claimed",
+      "running",
+      "dispatch",
+      "gate",
+      "review",
+      "done",
+      "remembered"
+    ],
+    "liveModelInference": false
+  },
+  "caveat": "Actual relocated Windows GUI + nickname InvokePattern + bundled Rust task passed on windows-latest. Not all Windows PCs, code-signing, workerd, mobile or live-model proof."
+}

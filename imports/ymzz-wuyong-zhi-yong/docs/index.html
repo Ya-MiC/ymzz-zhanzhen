@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="晏銘湛箴_無用之用 —— 本地 MCP 常駐子代理（高權限技能）。三十輻共一轂：Agent 本體是轂（空），skill 是輻（可換）。動態檢測 skills.sh 最被認可的 skill；本地製作過的跨對話 skill；動態監測。DSH 插件。零遙測。MIT。">
+<title>晏銘湛箴_無用之用 — 本地 MCP 常駐子代理</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0c10;
+    --card: #12141d;
+    --text: #e8eaed;
+    --muted: #9aa3b2;
+    --accent: #7c3aed;
+    --accent-glow: rgba(124, 58, 237, 0.35);
+    --skill: #f59e0b;
+    --ok: #10b981;
+    --warn: #f59e0b;
+    --border: #232a3a;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans TC", "微軟正黑體", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  header {
+    padding: 48px 20px 32px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .subtitle { font-size: 1.125rem; color: var(--muted); max-width: 640px; margin: 0 auto 24px; }
+  .tagline { font-style: italic; color: #6b7280; margin-bottom: 24px; }
+
+  /* Hub illustration (svg canvas) */
+  .hub { margin: 32px auto 0; width: min(600px, 92vw); height: 300px; position: relative; display: block; }
+  .hub svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); }
+  .hub-caption { margin-top: 12px; font-size: 0.875rem; color: var(--muted); text-align: center; }
+
+  /* Sections */
+  section { padding: 56px 20px; max-width: 900px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  section h2 { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
+  .card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+  .card code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.85rem; color: var(--accent); background: rgba(124,58,237,0.1); padding: 2px 6px; border-radius: 4px; }
+
+  /* Commands */
+  pre { background: #0d0f16; border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-size: 0.85rem; overflow-x: auto; margin: 12px 0; }
+  code.cmd { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.85rem; }
+
+  /* Footer */
+  footer { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.875rem; border-top: 1px solid var(--border); }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .btn:hover { background: #6d28d9; }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+  }
+  .chip.accent { border-color: var(--accent); color: var(--accent); }
+
+  h1 small { font-weight: 400; font-size: 0.55em; opacity: 0.7; margin-left: 8px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">DSH Plugin · Local MCP Resident Sub-Agent · MIT</div>
+  <h1>晏銘湛箴_無用之用 <small>wuyong</small></h1>
+  <div class="subtitle">三十輻共一轂；當其無，有車之用。Agent 本體是轂（空），skill 是輻（可換）。</div>
+  <div class="tagline">動態檢測 skills.sh 最被認可的 skill · 本地製作過的跨對話 skill · 動態監測 · 零遙測</div>
+
+  <div class="hub">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hubGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7c3aed"/>
+          <stop offset="100%" stop-color="#4f46e5"/>
+        </linearGradient>
+      </defs>
+      <!-- 輻條（spokes） -->
+      <line x1="100" y1="30" x2="100" y2="10" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="100" y1="170" x2="100" y2="190" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="30" y1="100" x2="10" y2="100" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="170" y1="100" x2="190" y2="100" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="40" y1="40" x2="18" y2="18" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="160" y1="40" x2="182" y2="18" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="40" y1="160" x2="18" y2="182" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="160" y1="160" x2="182" y2="182" stroke="url(#hubGrad)" stroke-width="3" stroke-linecap="round"/>
+      <!-- 轂（hub，空心圓環） -->
+      <circle cx="100" cy="100" r="28" fill="none" stroke="url(#hubGrad)" stroke-width="4"/>
+      <circle cx="100" cy="100" r="6" fill="#7c3aed"/>
+      <!-- 技能點 -->
+      <circle cx="100" cy="30" r="5" fill="#10b981"/>
+      <circle cx="100" cy="170" r="5" fill="#f59e0b"/>
+      <circle cx="30" cy="100" r="5" fill="#3b82f6"/>
+      <circle cx="170" cy="100" r="5" fill="#ec4899"/>
+    </svg>
+  </div>
+  <div class="hub-caption">轂＝Agent 本體（空） · 輻＝Skill（可換，由 skills.sh 排行榜與本地製作歷史動態算出）</div>
+</header>
+
+<section>
+  <h2>🌀 什麼是「無用之用」</h2>
+  <p>老子《道德經》：「三十輻共一轂，當其無，有車之用。」把這個比喻套進 Agent：<strong>Agent 本體是空的轂，skill 是可換的輻。</strong> 正因為 Agent 本體不寫死任何業務技能，它才能隨時換上不同的 skill。</p>
+  <p>這個倉庫<strong>不內置任何業務 skill</strong>，只內置「找 skill、管 skill 池」的能力。Skill 池不是手寫清單——它由 <strong>skills.sh 排行榜（按調用量由上往下取）＋ 本地製作歷史</strong> 動態算出。</p>
+  <div class="chips">
+    <span class="chip accent">本地優先</span>
+    <span class="chip">跨對話索引</span>
+    <span class="chip accent">安全閘</span>
+    <span class="chip">零遙測</span>
+    <span class="chip">Python ≥3.11</span>
+    <span class="chip">零第三方依賴</span>
+    <span class="chip accent">DSH 插件</span>
+  </div>
+</section>
+
+<section>
+  <h2>🎯 核心行為</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1. 雙通道即時判別</h3>
+      <p>同時觀察「用戶說了什麼」與「模型思考（Thinking/Reasoning Trace）」，兩者任一暗示需要外部能力就行動。輸出完整 <code>Decision</code> JSON。</p>
+    </div>
+    <div class="card">
+      <h3>2. 本地優先路由</h3>
+      <p>嚴格按順序：<code>local → pool → online → none</code>。未命中時誠實回報缺口，並協助起草 <code>SKILL.md</code>。</p>
+    </div>
+    <div class="card">
+      <h3>3. 動態技能池</h3>
+      <p>從 skills.sh 抓取排行榜，安裝量嚴格大於 1,000,000 才入池；過濾副本；連續 2 次低於門檻才標記；本地自製永不自動刪除。</p>
+    </div>
+    <div class="card">
+      <h3>4. 安全閘（不可省略）</h3>
+      <p>第三方 <code>SKILL.md</code> 與附帶腳本視為不可信資料；審計 <code>fail</code> 拒絕入池，<code>warn</code> 標記 <code>review</code>，不自動執行腳本。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🚀 快速開始</h2>
+  <pre><code class="cmd"># 1. Clone
+git clone https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong.git
+cd ymzz-wuyong-zhi-yong
+
+# 2. 初始化（安裝核心源 find-skills，首次監控）
+python -m wuyong bootstrap
+
+# 3. 驗證環境
+python -m wuyong doctor
+
+# 4. 單條決策（預設 dry-run，不動磁碟）
+python -m wuyong hint --text "幫我找一個現成的 react 技能" --mode advise --dry-run
+
+# 5. 技能池同步
+python -m wuyong monitor --once</code></pre>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>CLI 指令</h3>
+      <ul style="list-style:none; padding-left:0; font-size:0.9rem;">
+        <li><code>doctor</code> — 檢查環境與核心 skill</li>
+        <li><code>bootstrap</code> — 初始化 + 安裝 find-skills</li>
+        <li><code>monitor --once / --daemon</code> — 技能池同步</li>
+        <li><code>pool list / show / sync</code> — 查看與同步池</li>
+        <li><code>local harvest / register / list / search</code> — 本地索引</li>
+        <li><code>hint</code> — 產出 Decision JSON</li>
+        <li><code>watch</code> — 從 stdin 逐條輸出 Decision</li>
+        <li><code>uninstall</code> — 乾淨卸載</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>DSH 插件</h3>
+      <p>以 <code>dsh-bundle/wuyong</code> 安裝進 DSH，暴露 <code>wuyong.doctor</code>、<code>wuyong.hint</code>、<code>wuyong.pool.*</code>、<code>wuyong.local.*</code> 六個工具，作為本地 MCP 常駐子代理（高權限技能）使用。</p>
+      <a href="#install" class="btn">查看安裝方式</a>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <h2>📦 安裝四個核心 skill（底層認可）</h2>
+  <pre><code class="cmd">npx skills add https://github.com/vercel-labs/skills --skill find-skills --yes --copy --json
+npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser --yes --copy --json
+npx skills add https://github.com/mattpocock/skills --skill grill-me --yes --copy --json
+npx skills add https://github.com/heygen-com/hyperframes --skill hyperframes-cli --yes --copy --json
+
+# 收錄進本地索引（跨對話可重用）
+python -m wuyong local harvest</code></pre>
+  <p>這四個已鎖進 <code>config/core-skills.lock.json</code>（<code>required: true</code>），<code>bootstrap</code> 會冪等安裝，失敗標記 <code>degraded</code> 並自動重試，不假裝成功。</p>
+</section>
+
+<footer>
+  <p>晏銘湛箴_無用之用 (wuyong) · MIT License · <a href="https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong" target="_blank" rel="noopener">GitHub 倉庫</a></p>
+  <p style="margin-top:8px; font-size:0.8rem;">零遙測 · 不改註冊表 · 用戶文字與思考內容絕不外傳 · 線上搜索只送抽象關鍵詞（≤8 詞，不送原文）</p>
+</footer>
+
+</body>
+</html>

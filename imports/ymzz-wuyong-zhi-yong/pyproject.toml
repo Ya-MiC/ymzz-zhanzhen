@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wuyong"
+version = "0.1.0"
+description = "三十輻共一轂——skills.sh 動態 skill 池 × 本地優先路由的常駐子代理（晏銘湛箴_無用之用）"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "晏銘湛箴 (Ya-MiC)", url = "https://github.com/Ya-MiC" }]
+keywords = ["agent", "skills", "skills-sh", "subagent", "skill-pool", "wuyong"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: Chinese (Traditional)",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong"
+Issues = "https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong/issues"
+
+[project.scripts]
+wuyong = "wuyong.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# 真實聯網的整合測試標記為 integration，預設不跑；要跑：pytest -m integration
+addopts = "-m 'not integration'"
+markers = [
+  "integration: 需要真實聯網/真實 npx 的整合測試（預設不跑）",
+]

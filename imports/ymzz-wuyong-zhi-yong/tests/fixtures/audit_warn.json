@@ -1,0 +1,9 @@
+{
+  "id": "anthropics/skills/skill-creator",
+  "source": "anthropics/skills",
+  "slug": "skill-creator",
+  "audits": [
+    { "provider": "Gen Agent Trust Hub", "slug": "agent-trust-hub", "status": "pass", "summary": "No risks detected", "auditedAt": "2026-04-15T12:00:00.000Z", "riskLevel": "LOW" },
+    { "provider": "Snyk", "slug": "snyk", "status": "warn", "summary": "Risk: MEDIUM · 1 issue", "auditedAt": "2026-04-15T12:03:00.000Z", "riskLevel": "MEDIUM" }
+  ]
+}

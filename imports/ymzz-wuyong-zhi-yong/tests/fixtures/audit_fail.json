@@ -1,0 +1,8 @@
+{
+  "id": "bad-owner/bad-repo/duplicate-skill",
+  "source": "bad-owner/bad-repo",
+  "slug": "duplicate-skill",
+  "audits": [
+    { "provider": "Socket", "slug": "socket", "status": "fail", "summary": "Likely dangerous: exfiltration detected", "auditedAt": "2026-04-15T12:05:00.000Z", "riskLevel": "CRITICAL" }
+  ]
+}

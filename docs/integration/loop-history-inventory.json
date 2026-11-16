@@ -1,0 +1,820 @@
+{
+  "repository": "https://github.com/Ya-MiC/ymzz-loop",
+  "scope": "Complete reachable commit metadata inventory for both pinned heads; NOT a Git-object/history-content mirror. Only current tracked files are snapshotted, not deleted historic secrets or exports.",
+  "mergeBase": null,
+  "unrelatedHistories": true,
+  "branches": {
+    "product": {
+      "ref": "origin/product",
+      "head": "92a4a299a9b89084026af460770afed85c13f6bc",
+      "commitCount": 22,
+      "commits": [
+        {
+          "sha": "92a4a299a9b89084026af460770afed85c13f6bc",
+          "parents": [
+            "d84e239b745b6a0dd21202faaff73938795d3a1b",
+            "04bcf7819c59d43969533a84a55085b0664aaf69"
+          ],
+          "committedAtKST": "2026-11-16T15:14:36+09:00",
+          "subject": "Merge pull request #18 from Ya-MiC/cursor/site-mutual-nav-20261116"
+        },
+        {
+          "sha": "04bcf7819c59d43969533a84a55085b0664aaf69",
+          "parents": [
+            "d84e239b745b6a0dd21202faaff73938795d3a1b"
+          ],
+          "committedAtKST": "2026-11-16T15:10:43+09:00",
+          "subject": "Connect the 稟冊 and daily-review sites as one product"
+        },
+        {
+          "sha": "d84e239b745b6a0dd21202faaff73938795d3a1b",
+          "parents": [
+            "c4dcc284b9ccf2a709eec824085cedab9d4d80d2",
+            "aef65a6b61fdc418521efe26b440357a65714190"
+          ],
+          "committedAtKST": "2026-11-11T15:19:28+09:00",
+          "subject": "Merge pull request #17 from Ya-MiC/cursor/v0211-mobile-core-e023"
+        },
+        {
+          "sha": "aef65a6b61fdc418521efe26b440357a65714190",
+          "parents": [
+            "7b87469f9c6ed17c7b854e97b50afb972414738f"
+          ],
+          "committedAtKST": "2026-11-11T15:00:03+09:00",
+          "subject": "Point the phone core at the bundled scripts."
+        },
+        {
+          "sha": "7b87469f9c6ed17c7b854e97b50afb972414738f",
+          "parents": [
+            "78cdab8a907ca1b4f592adf05cd2179c348260ec"
+          ],
+          "committedAtKST": "2026-11-11T14:40:14+09:00",
+          "subject": "Record the emulator screenshots and stop the Edge driver download."
+        },
+        {
+          "sha": "78cdab8a907ca1b4f592adf05cd2179c348260ec",
+          "parents": [
+            "82ba1a669f290edbcf4ff150cd729bc236115842"
+          ],
+          "committedAtKST": "2026-11-11T14:17:49+09:00",
+          "subject": "Fix the phone and desktop smoke checks that failed in CI."
+        },
+        {
+          "sha": "82ba1a669f290edbcf4ff150cd729bc236115842",
+          "parents": [
+            "c4dcc284b9ccf2a709eec824085cedab9d4d80d2"
+          ],
+          "committedAtKST": "2026-11-11T13:49:06+09:00",
+          "subject": "Link the phone core in-process for 稟冊 0.21.1."
+        },
+        {
+          "sha": "c4dcc284b9ccf2a709eec824085cedab9d4d80d2",
+          "parents": [
+            "537ba848f03ca6708f66df37d3b4ba91c0e2242a",
+            "362362084414e80a7c6fda9c734e8d1435f71f31"
+          ],
+          "committedAtKST": "2026-11-11T13:34:46+09:00",
+          "subject": "Merge pull request #16 from Ya-MiC/cursor/v021-integrated-app-e023"
+        },
+        {
+          "sha": "362362084414e80a7c6fda9c734e8d1435f71f31",
+          "parents": [
+            "91f563892e5ef7a25e4169e20468499f04bde6e9"
+          ],
+          "committedAtKST": "2026-11-10T20:14:51+09:00",
+          "subject": "Point the README at the installer run that includes the new pages."
+        },
+        {
+          "sha": "91f563892e5ef7a25e4169e20468499f04bde6e9",
+          "parents": [
+            "4d59b866db00a4cb8e8e05253772dcdc49ae988e"
+          ],
+          "committedAtKST": "2026-11-10T20:01:13+09:00",
+          "subject": "Route 稟冊 like a product and stop asking for typed paths."
+        },
+        {
+          "sha": "4d59b866db00a4cb8e8e05253772dcdc49ae988e",
+          "parents": [
+            "3d0c60a2c03c06d5a9a5a9ac15cd42d92cf785b8"
+          ],
+          "committedAtKST": "2026-11-10T19:08:57+09:00",
+          "subject": "Record the desktop, Android, and iOS artifact locations."
+        },
+        {
+          "sha": "3d0c60a2c03c06d5a9a5a9ac15cd42d92cf785b8",
+          "parents": [
+            "3ba5d8985ed42817aef1ca2c72130203c662fddc"
+          ],
+          "committedAtKST": "2026-11-10T18:52:55+09:00",
+          "subject": "Keep the phone build off the desktop path API."
+        },
+        {
+          "sha": "3ba5d8985ed42817aef1ca2c72130203c662fddc",
+          "parents": [
+            "bd6f9badb5d9d7ee42b45bd688577dc1ce2426c6"
+          ],
+          "committedAtKST": "2026-11-10T18:43:50+09:00",
+          "subject": "Give the phone builds a library target and record the desktop downloads."
+        },
+        {
+          "sha": "bd6f9badb5d9d7ee42b45bd688577dc1ce2426c6",
+          "parents": [
+            "ebdceed819f61ca30676ead0c56c46dd2d230064"
+          ],
+          "committedAtKST": "2026-11-10T18:41:01+09:00",
+          "subject": "Read the whole loopback request before answering."
+        },
+        {
+          "sha": "ebdceed819f61ca30676ead0c56c46dd2d230064",
+          "parents": [
+            "4c3b4d0964f83025dfc1912da742b02b9ac9e70b"
+          ],
+          "committedAtKST": "2026-11-10T18:35:44+09:00",
+          "subject": "Keep the loopback connector mock listening for retries."
+        },
+        {
+          "sha": "4c3b4d0964f83025dfc1912da742b02b9ac9e70b",
+          "parents": [
+            "ceb0e7805efc365f2be194490fe53a660eea6c95"
+          ],
+          "committedAtKST": "2026-11-10T18:30:53+09:00",
+          "subject": "Fix the Windows core tests and the Android SDK setup."
+        },
+        {
+          "sha": "ceb0e7805efc365f2be194490fe53a660eea6c95",
+          "parents": [
+            "b92ce0fb46db030b8eed7de528e68b756797442d"
+          ],
+          "committedAtKST": "2026-11-10T18:26:59+09:00",
+          "subject": "Install GTK before the Linux installer compiles the core."
+        },
+        {
+          "sha": "b92ce0fb46db030b8eed7de528e68b756797442d",
+          "parents": [
+            "1c13dcfba8224f69c2755246a105634a6b9a19a1"
+          ],
+          "committedAtKST": "2026-11-10T18:26:12+09:00",
+          "subject": "Make CI see the product ref and open the Tauri steward window."
+        },
+        {
+          "sha": "1c13dcfba8224f69c2755246a105634a6b9a19a1",
+          "parents": [
+            "b379c86604d08e472e54873f1a7a93893f341030"
+          ],
+          "committedAtKST": "2026-11-10T13:34:17+09:00",
+          "subject": "Add a Linux GTK window and a consented HTTPS path."
+        },
+        {
+          "sha": "b379c86604d08e472e54873f1a7a93893f341030",
+          "parents": [
+            "3c3c9ee2d591e6ec3491ff2fc1793f1df5d5feab"
+          ],
+          "committedAtKST": "2026-11-10T13:03:37+09:00",
+          "subject": "Pin PaddleOCR recognition and keep sandbox payment unsigned until a signed event."
+        },
+        {
+          "sha": "3c3c9ee2d591e6ec3491ff2fc1793f1df5d5feab",
+          "parents": [
+            "537ba848f03ca6708f66df37d3b4ba91c0e2242a"
+          ],
+          "committedAtKST": "2026-11-10T12:40:00+09:00",
+          "subject": "Add the v0.21 local app beside the Node daily review."
+        },
+        {
+          "sha": "537ba848f03ca6708f66df37d3b4ba91c0e2242a",
+          "parents": [],
+          "committedAtKST": "2026-11-06T23:23:57+09:00",
+          "subject": "product-only tree from 217341a (no site, no pages)"
+        }
+      ]
+    },
+    "main": {
+      "ref": "origin/main",
+      "head": "217341a7d1643859af681f6a4e93c36e5ece8496",
+      "commitCount": 46,
+      "commits": [
+        {
+          "sha": "217341a7d1643859af681f6a4e93c36e5ece8496",
+          "parents": [
+            "8df1849dfb11bc66da97e5d3961e68d7a886805b"
+          ],
+          "committedAtKST": "2026-11-06T23:23:43+09:00",
+          "subject": "v0.20.4: i18n spy refresh + ar keys + ko vs table (#14)"
+        },
+        {
+          "sha": "8df1849dfb11bc66da97e5d3961e68d7a886805b",
+          "parents": [
+            "e586e08dd83ec7f9a6e480016e4edf1fa78030de"
+          ],
+          "committedAtKST": "2026-11-06T23:04:24+09:00",
+          "subject": "v0.20.3: Pricing ($0) + Quick start + Use cases (#13)"
+        },
+        {
+          "sha": "e586e08dd83ec7f9a6e480016e4edf1fa78030de",
+          "parents": [
+            "3e0ff2591351a54d5c48964f0f4580594f533279"
+          ],
+          "committedAtKST": "2026-11-06T21:26:54+09:00",
+          "subject": "v0.20.2: GEO harden — denser JSON-LD, llms.txt citation facts, FAQ/HowTo (#12)"
+        },
+        {
+          "sha": "3e0ff2591351a54d5c48964f0f4580594f533279",
+          "parents": [
+            "719c9366fe120cb8d517402e3bf10125564d71dc"
+          ],
+          "committedAtKST": "2026-11-06T21:18:53+09:00",
+          "subject": "v0.20.1: fix sticky-nav covering titles + restore How it flows (#11)"
+        },
+        {
+          "sha": "719c9366fe120cb8d517402e3bf10125564d71dc",
+          "parents": [
+            "a44352ffaa282f0fa42fa4fbdc4af82bab19f7d9"
+          ],
+          "committedAtKST": "2026-11-06T21:09:40+09:00",
+          "subject": "v0.20.0: early-version reset, start guide, contest-safe support page (#10)"
+        },
+        {
+          "sha": "a44352ffaa282f0fa42fa4fbdc4af82bab19f7d9",
+          "parents": [
+            "854e8cb762c0176a88bb621bbdb01ae1e510f80a"
+          ],
+          "committedAtKST": "2026-11-06T20:44:47+09:00",
+          "subject": "showcase v1.19.0: hero rebalance, trust layer, squircle corners (#9)"
+        },
+        {
+          "sha": "854e8cb762c0176a88bb621bbdb01ae1e510f80a",
+          "parents": [
+            "f63399fce09b41b97f6a31f19b4b496e8e4993dd"
+          ],
+          "committedAtKST": "2026-11-06T09:07:03+09:00",
+          "subject": "v1.18.1: GEO/SEO stack — llms.txt, robots anti-train, ai.txt, sitemap"
+        },
+        {
+          "sha": "f63399fce09b41b97f6a31f19b4b496e8e4993dd",
+          "parents": [
+            "73ebd8d8af98214c62b18066b4346695df8702ae"
+          ],
+          "committedAtKST": "2026-11-05T19:45:05+09:00",
+          "subject": "v1.18.0: Ludi skill polish — clock tabular excellence (final)"
+        },
+        {
+          "sha": "73ebd8d8af98214c62b18066b4346695df8702ae",
+          "parents": [
+            "fd9fe92633f731131f082fc22a6eb1b671b7390d"
+          ],
+          "committedAtKST": "2026-11-05T19:11:34+09:00",
+          "subject": "v1.17.3: editorial hero rebalance — calm holdings view, fit first screen"
+        },
+        {
+          "sha": "fd9fe92633f731131f082fc22a6eb1b671b7390d",
+          "parents": [
+            "c2df2c0493725e33fb1b64aa8156f0da3d060156"
+          ],
+          "committedAtKST": "2026-11-05T19:02:30+09:00",
+          "subject": "v1.17.2: restore loved hero/nav elastic; glass section progress (no %)"
+        },
+        {
+          "sha": "c2df2c0493725e33fb1b64aa8156f0da3d060156",
+          "parents": [
+            "49fbcab791dac0bc82522b7d41b08c627396941a"
+          ],
+          "committedAtKST": "2026-11-05T18:54:01+09:00",
+          "subject": "v1.17.1: equal hero height, product-only CTA, glass spy, dial rhythm"
+        },
+        {
+          "sha": "49fbcab791dac0bc82522b7d41b08c627396941a",
+          "parents": [
+            "14d98305f3ee632c93af27fd2ff5e9284607b2f3"
+          ],
+          "committedAtKST": "2026-11-05T18:42:51+09:00",
+          "subject": "v1.17.0: dark AA date/holdings text + 4 editable hold sliders"
+        },
+        {
+          "sha": "14d98305f3ee632c93af27fd2ff5e9284607b2f3",
+          "parents": [
+            "73e8d9ea9401ebeb3f7b877eee3971888d5fdeeb"
+          ],
+          "committedAtKST": "2026-11-05T18:33:53+09:00",
+          "subject": "v1.16.1: to-do slots 03–08 (max 6) + clearer dark dividers"
+        },
+        {
+          "sha": "73e8d9ea9401ebeb3f7b877eee3971888d5fdeeb",
+          "parents": [
+            "ac8d3272d176b61a07867547a53327ab077c0054"
+          ],
+          "committedAtKST": "2026-11-05T18:19:19+09:00",
+          "subject": "v1.16.0: dayp todo+holdings, hero-width nav, spy 0–100"
+        },
+        {
+          "sha": "ac8d3272d176b61a07867547a53327ab077c0054",
+          "parents": [
+            "15f2870a02dce2295f806986baffa9b21e41fe87"
+          ],
+          "committedAtKST": "2026-11-05T18:04:19+09:00",
+          "subject": "v1.15.1: restore holdings 彩蛋 card (zh-CN+UTC8 → 600519.SH)"
+        },
+        {
+          "sha": "15f2870a02dce2295f806986baffa9b21e41fe87",
+          "parents": [
+            "3417e78379fe69d73266d1535d7d2f1f93504948"
+          ],
+          "committedAtKST": "2026-11-05T17:54:03+09:00",
+          "subject": "v1.15.0: dial hero, --content-w align, value-contrast no rest borders"
+        },
+        {
+          "sha": "3417e78379fe69d73266d1535d7d2f1f93504948",
+          "parents": [
+            "500d3a63e05c106aee7541220a1adbf596284e24"
+          ],
+          "committedAtKST": "2026-11-05T17:44:03+09:00",
+          "subject": "v1.14.2: dark contrast, cut redundancy, section spy, reactbits nav"
+        },
+        {
+          "sha": "500d3a63e05c106aee7541220a1adbf596284e24",
+          "parents": [
+            "dbcaa79a7640ffe572ad608b631b927e4f7f05e8"
+          ],
+          "committedAtKST": "2026-11-05T14:31:22+09:00",
+          "subject": "v1.14.1: calm urgency copy; mock chapter chip; Trending launch pack"
+        },
+        {
+          "sha": "dbcaa79a7640ffe572ad608b631b927e4f7f05e8",
+          "parents": [
+            "273fb9dbe28703d95a4ce9987133f1f3562e37fa"
+          ],
+          "committedAtKST": "2026-11-05T14:19:09+09:00",
+          "subject": "v1.14.0: outcome benefits; honest open-source comparison; product hero"
+        },
+        {
+          "sha": "273fb9dbe28703d95a4ce9987133f1f3562e37fa",
+          "parents": [
+            "6588deb2a327b191d8e91a613d386bebe7a63898"
+          ],
+          "committedAtKST": "2026-11-05T13:53:46+09:00",
+          "subject": "v1.13.1: hug-content mock cards; donate QR caption air; calm section rhythm"
+        },
+        {
+          "sha": "6588deb2a327b191d8e91a613d386bebe7a63898",
+          "parents": [
+            "533e5249d47456bcefbcb971151cf096ed1536ab"
+          ],
+          "committedAtKST": "2026-11-05T13:53:45+09:00",
+          "subject": "v1.13.0: 600-day chapter → summary framing; Grail denser layout"
+        },
+        {
+          "sha": "533e5249d47456bcefbcb971151cf096ed1536ab",
+          "parents": [
+            "19238285fba126aec2239e4aee0ccd3609ede08b"
+          ],
+          "committedAtKST": "2026-11-05T13:35:15+09:00",
+          "subject": "v1.12.0: lifespan messaging 600→0 annihilate; differentiation section"
+        },
+        {
+          "sha": "19238285fba126aec2239e4aee0ccd3609ede08b",
+          "parents": [
+            "4ef2eb66bf47bd36883982a8f692689366a3d798"
+          ],
+          "committedAtKST": "2026-11-05T13:28:50+09:00",
+          "subject": "v1.11.2: holdings copy without IBKR; zh-CN A-share ticker easter egg"
+        },
+        {
+          "sha": "4ef2eb66bf47bd36883982a8f692689366a3d798",
+          "parents": [
+            "fadbdcd8f979a97b6f966351cf18e7ae8f8a477d"
+          ],
+          "committedAtKST": "2026-11-05T13:25:22+09:00",
+          "subject": "v1.11.1: remove How it works / 運作方式 sticky story section"
+        },
+        {
+          "sha": "fadbdcd8f979a97b6f966351cf18e7ae8f8a477d",
+          "parents": [
+            "7ee9bbb743c6d444db3d50841ba36b8b0989da80"
+          ],
+          "committedAtKST": "2026-11-05T13:22:11+09:00",
+          "subject": "v1.11.0: product framing, Grail-feel motion, foldable cards"
+        },
+        {
+          "sha": "7ee9bbb743c6d444db3d50841ba36b8b0989da80",
+          "parents": [
+            "920d4f1d7d9a540390884f25cc136d1b05b4fec9"
+          ],
+          "committedAtKST": "2026-11-05T13:07:04+09:00",
+          "subject": "v1.10.0: four locked palettes, readbar, full-bleed, responsive, fonts locked"
+        },
+        {
+          "sha": "920d4f1d7d9a540390884f25cc136d1b05b4fec9",
+          "parents": [
+            "d1de0bf7fd20211d4b739f37828220dbe796b834"
+          ],
+          "committedAtKST": "2026-11-05T12:52:25+09:00",
+          "subject": "v1.9.1: restore pastel 光斑; soft calendar/git/marquee (never charcoal)"
+        },
+        {
+          "sha": "d1de0bf7fd20211d4b739f37828220dbe796b834",
+          "parents": [
+            "b6e586f109b82a4417e6aefc763dee1d3e19cb79"
+          ],
+          "committedAtKST": "2026-11-05T12:40:32+09:00",
+          "subject": "v1.9.0: soft Morandi paper only — no black cards, value contrast, Inter + tabular"
+        },
+        {
+          "sha": "b6e586f109b82a4417e6aefc763dee1d3e19cb79",
+          "parents": [
+            "fb98d2aeb8cbf06fa35ce3dab3c876336f102ea6"
+          ],
+          "committedAtKST": "2026-11-05T12:29:23+09:00",
+          "subject": "v1.8.0: paper how-it-works, one-axis layout, scroll nav opacity"
+        },
+        {
+          "sha": "fb98d2aeb8cbf06fa35ce3dab3c876336f102ea6",
+          "parents": [
+            "12114ad9b3b0c2e43ddd5bcff57474d96b3b35a6"
+          ],
+          "committedAtKST": "2026-11-05T11:54:58+09:00",
+          "subject": "v1.7.1: Donate / 贊助 — USDC on Arbitrum One (receive-only)"
+        },
+        {
+          "sha": "12114ad9b3b0c2e43ddd5bcff57474d96b3b35a6",
+          "parents": [
+            "bceaad46176dc69c867f4fbb965154dd645812e6"
+          ],
+          "committedAtKST": "2026-11-05T11:54:57+09:00",
+          "subject": "v1.7.0: Feishu/Lark sink, CREDITS audit, keep 600-day stop"
+        },
+        {
+          "sha": "bceaad46176dc69c867f4fbb965154dd645812e6",
+          "parents": [
+            "8593e6e65ea565d81b73fbbb68543ea42bcef921"
+          ],
+          "committedAtKST": "2026-11-05T11:54:56+09:00",
+          "subject": "v1.6.0: wenrun four palettes, surface cards, hard 600-day lifespan"
+        },
+        {
+          "sha": "8593e6e65ea565d81b73fbbb68543ea42bcef921",
+          "parents": [
+            "572d1ab9d4f0a82aa5412e02741c92284b8e69a4"
+          ],
+          "committedAtKST": "2026-11-05T10:26:04+09:00",
+          "subject": "v1.5.1: loop section — layered brand gradients, glow orbs, mesh + grain, depth, hover lift, gradient connectors, dark variant"
+        },
+        {
+          "sha": "572d1ab9d4f0a82aa5412e02741c92284b8e69a4",
+          "parents": [
+            "d32e555e89a2353f18dd4785fd5eb2221084cfee"
+          ],
+          "committedAtKST": "2026-11-05T10:26:02+09:00",
+          "subject": "v1.5.0: design system — strict fluid type scale (2 families + code mono), 12-col grid, 8-pt rhythm, unified 2-digit tabular numerals, single-family loop palette; signup owner guide"
+        },
+        {
+          "sha": "d32e555e89a2353f18dd4785fd5eb2221084cfee",
+          "parents": [
+            "f64b64eb56348cc45a6ad4b5c95a9a7829842e92"
+          ],
+          "committedAtKST": "2026-11-05T09:43:19+09:00",
+          "subject": "v1.4.0: rename ymzz-notion → ymzz-loop; 'How the loop works' (README mermaid + site 3-step loop); new tagline in 5 locales"
+        },
+        {
+          "sha": "f64b64eb56348cc45a6ad4b5c95a9a7829842e92",
+          "parents": [
+            "d1021e972fc0cb55f8cfbc83ff50342066f83391"
+          ],
+          "committedAtKST": "2026-11-05T09:31:11+09:00",
+          "subject": "v1.3.0: today-page hero (clock removed), browser-relative mockup dates, intro preloader, marquee, email+tags signup with Cloudflare Worker→Notion backend"
+        },
+        {
+          "sha": "d1021e972fc0cb55f8cfbc83ff50342066f83391",
+          "parents": [
+            "d3ad3b58a42eab35c18cf91785e42cd52bfded57"
+          ],
+          "committedAtKST": "2026-11-05T09:17:14+09:00",
+          "subject": "v1.2.0: site redesign — framed panels, live dial hero, bento with real mockups, sticky story, tilt/glow, self-hosted OFL fonts; design study"
+        },
+        {
+          "sha": "d3ad3b58a42eab35c18cf91785e42cd52bfded57",
+          "parents": [
+            "d9516324b6da1f27d9004733b929ac77739e933a"
+          ],
+          "committedAtKST": "2026-11-04T22:42:51+09:00",
+          "subject": "v1.1.0: UTC default, i18n README (en/zh-Hant/zh-CN/ko), site rebuild (intro, mockups, FAQ, 5 locales, RTL-ready, Tabler icons, CSP), Pages enablement"
+        },
+        {
+          "sha": "d9516324b6da1f27d9004733b929ac77739e933a",
+          "parents": [
+            "86280a82923ec7a1025ba7b89a77a54803a47162"
+          ],
+          "committedAtKST": "2026-11-04T21:47:52+09:00",
+          "subject": "v1.0.0: productize — any time zone (hourly gate + dedupe), sink interface, website + guided setup, community files, CI/Pages"
+        },
+        {
+          "sha": "86280a82923ec7a1025ba7b89a77a54803a47162",
+          "parents": [
+            "7612876eecbd4faee4dca2e130a9e0a117225be8"
+          ],
+          "committedAtKST": "2026-11-04T18:24:05+09:00",
+          "subject": "rework: KPT daily review template, 07:00 Seoul create+remind, sync yesterday → Sheet + notion/YYYY/MMDD_HHMM_seoul.md, unified names"
+        },
+        {
+          "sha": "7612876eecbd4faee4dca2e130a9e0a117225be8",
+          "parents": [
+            "65d9407a145d4f55b95522cec5ae6ca70318ca69",
+            "01fd76276eb0eb803f45d8ab93aa62977e08b25c"
+          ],
+          "committedAtKST": "2026-11-04T18:14:53+09:00",
+          "subject": "merge initial commit"
+        },
+        {
+          "sha": "65d9407a145d4f55b95522cec5ae6ca70318ca69",
+          "parents": [
+            "2211b5c06ca035d75bff988638cceda2aa6ec05e"
+          ],
+          "committedAtKST": "2026-11-04T17:26:44+09:00",
+          "subject": "600-day unattended: keepalive, timeout, failure email"
+        },
+        {
+          "sha": "01fd76276eb0eb803f45d8ab93aa62977e08b25c",
+          "parents": [],
+          "committedAtKST": "2026-11-04T17:26:23+09:00",
+          "subject": "Initial commit"
+        },
+        {
+          "sha": "2211b5c06ca035d75bff988638cceda2aa6ec05e",
+          "parents": [
+            "c395d3978bfa07fa1eb306f5d387b2377292fff8"
+          ],
+          "committedAtKST": "2026-11-04T11:31:53+09:00",
+          "subject": "daily review + holdings: setup.sh, daily blank row, email reminder, sheet/md sync"
+        },
+        {
+          "sha": "c395d3978bfa07fa1eb306f5d387b2377292fff8",
+          "parents": [
+            "d7384e6412badbf4b6070daeb4d18d22f0e3c4be"
+          ],
+          "committedAtKST": "2026-11-04T11:20:57+09:00",
+          "subject": "daily 09:00 KST + append-only Notion Sync Log"
+        },
+        {
+          "sha": "d7384e6412badbf4b6070daeb4d18d22f0e3c4be",
+          "parents": [],
+          "committedAtKST": "2026-11-04T11:09:54+09:00",
+          "subject": "init: Notion → GitHub + Google Sheets sync (1102 template)"
+        }
+      ]
+    }
+  },
+  "mainOnlyPaths": [
+    ".github/description-ready.txt",
+    ".github/workflows/sync-product.yml",
+    "LAUNCH.md"
+  ],
+  "productOnlyPaths": [
+    ".github/workflows/installers.yml",
+    ".github/workflows/publish-packages.yml",
+    ".github/workflows/smoke.yml",
+    ".github/workflows/v021.yml",
+    "PRODUCT_BRANCH",
+    "app/Cargo.lock",
+    "app/Cargo.toml",
+    "app/fixtures/expected_queries.json",
+    "app/fixtures/metadata.synthetic.json",
+    "app/ocr/paddle_worker.py",
+    "app/ocr/pins.json",
+    "app/ocr/requirements-ocr-hashed.txt",
+    "app/ocr/requirements-ocr.txt",
+    "app/src/capabilities.rs",
+    "app/src/connectors.rs",
+    "app/src/dates.rs",
+    "app/src/decisions.rs",
+    "app/src/engine.rs",
+    "app/src/fonts.rs",
+    "app/src/http.rs",
+    "app/src/https.rs",
+    "app/src/inventory.rs",
+    "app/src/keyring.rs",
+    "app/src/lib.rs",
+    "app/src/main.rs",
+    "app/src/mcp.rs",
+    "app/src/net.rs",
+    "app/src/ocrflow.rs",
+    "app/src/paths.rs",
+    "app/src/pay.rs",
+    "app/src/pdf.rs",
+    "app/src/query.rs",
+    "app/src/scan.rs",
+    "app/src/shell.rs",
+    "app/src/store.rs",
+    "app/src/t3bridge.rs",
+    "app/src/util.rs",
+    "app/ui/app.css",
+    "app/ui/app.js",
+    "app/ui/fonts.css",
+    "app/ui/fonts/OFL.txt",
+    "app/ui/fonts/SOURCE.txt",
+    "app/ui/fonts/n00.woff2",
+    "app/ui/fonts/n01.woff2",
+    "app/ui/fonts/n02.woff2",
+    "app/ui/fonts/n03.woff2",
+    "app/ui/fonts/n04.woff2",
+    "app/ui/fonts/n05.woff2",
+    "app/ui/fonts/n06.woff2",
+    "app/ui/fonts/n07.woff2",
+    "app/ui/fonts/n08.woff2",
+    "app/ui/fonts/n09.woff2",
+    "app/ui/fonts/n10.woff2",
+    "app/ui/fonts/n11.woff2",
+    "app/ui/fonts/n12.woff2",
+    "app/ui/fonts/n13.woff2",
+    "app/ui/fonts/n14.woff2",
+    "app/ui/fonts/n15.woff2",
+    "app/ui/fonts/n16.woff2",
+    "app/ui/fonts/n17.woff2",
+    "app/ui/fonts/n18.woff2",
+    "app/ui/fonts/n19.woff2",
+    "app/ui/fonts/n20.woff2",
+    "app/ui/fonts/n21.woff2",
+    "app/ui/fonts/n22.woff2",
+    "app/ui/fonts/n23.woff2",
+    "app/ui/fonts/n24.woff2",
+    "app/ui/fonts/n25.woff2",
+    "app/ui/fonts/n26.woff2",
+    "app/ui/fonts/n27.woff2",
+    "app/ui/fonts/n28.woff2",
+    "app/ui/fonts/n29.woff2",
+    "app/ui/fonts/n30.woff2",
+    "app/ui/fonts/n31.woff2",
+    "app/ui/fonts/n32.woff2",
+    "app/ui/fonts/n33.woff2",
+    "app/ui/fonts/n34.woff2",
+    "app/ui/fonts/n35.woff2",
+    "app/ui/fonts/n36.woff2",
+    "app/ui/fonts/n37.woff2",
+    "app/ui/fonts/n38.woff2",
+    "app/ui/fonts/n39.woff2",
+    "app/ui/fonts/n40.woff2",
+    "app/ui/fonts/n41.woff2",
+    "app/ui/fonts/n42.woff2",
+    "app/ui/fonts/n43.woff2",
+    "app/ui/fonts/n44.woff2",
+    "app/ui/fonts/n45.woff2",
+    "app/ui/fonts/n46.woff2",
+    "app/ui/fonts/n47.woff2",
+    "app/ui/fonts/n48.woff2",
+    "app/ui/fonts/n49.woff2",
+    "app/ui/fonts/n50.woff2",
+    "app/ui/fonts/n51.woff2",
+    "app/ui/fonts/n52.woff2",
+    "app/ui/fonts/n53.woff2",
+    "app/ui/fonts/n54.woff2",
+    "app/ui/fonts/n55.woff2",
+    "app/ui/fonts/n56.woff2",
+    "app/ui/fonts/n57.woff2",
+    "app/ui/fonts/n58.woff2",
+    "app/ui/fonts/n59.woff2",
+    "app/ui/fonts/n60.woff2",
+    "app/ui/fonts/n61.woff2",
+    "app/ui/fonts/n62.woff2",
+    "app/ui/fonts/n63.woff2",
+    "app/ui/fonts/n64.woff2",
+    "app/ui/index.html",
+    "app/ui/recovery.html",
+    "app/ui/tokens.css",
+    "bingce-site/.gitignore",
+    "bingce-site/DEPLOY.md",
+    "bingce-site/gen2.mjs",
+    "bingce-site/public/favicon.svg",
+    "bingce-site/public/img/00-tauri-window.png",
+    "bingce-site/public/img/01-nickname.png",
+    "bingce-site/public/img/01-phone-hint.png",
+    "bingce-site/public/img/01-phone-invalid.png",
+    "bingce-site/public/img/02-folder.png",
+    "bingce-site/public/img/03-privacy.png",
+    "bingce-site/public/img/04-ocr.png",
+    "bingce-site/public/img/05-connectors.png",
+    "bingce-site/public/img/06-finish.png",
+    "bingce-site/public/img/07-dashboard.png",
+    "bingce-site/public/index.html",
+    "bingce-site/public/robots.txt",
+    "bingce-site/public/site.css",
+    "bingce-site/public/tokens.css",
+    "bingce-site/wrangler.jsonc",
+    "docs/LICENSE-BOUNDARY.md",
+    "docs/clickthrough/01-nickname.png",
+    "docs/clickthrough/02-places.png",
+    "docs/clickthrough/03-home.png",
+    "docs/clickthrough/04-file.png",
+    "docs/clickthrough/05-palette.png",
+    "docs/clickthrough/06-talk.png",
+    "docs/clickthrough/07-mobile-home.png",
+    "docs/clickthrough/08-mobile-drawer.png",
+    "docs/clickthrough/clicked.json",
+    "docs/clickthrough/page-device.png",
+    "docs/clickthrough/page-files.png",
+    "docs/clickthrough/page-home.png",
+    "docs/clickthrough/page-links.png",
+    "docs/clickthrough/page-ocr.png",
+    "docs/clickthrough/page-pay.png",
+    "docs/clickthrough/page-review.png",
+    "docs/clickthrough/page-settings.png",
+    "docs/clickthrough/page-talk.png",
+    "docs/mobile/01-nickname.png",
+    "docs/mobile/02-dashboard.png",
+    "docs/mobile/03-ios-nickname.png",
+    "docs/onboarding/00-tauri-window.png",
+    "docs/onboarding/01-nickname.png",
+    "docs/onboarding/01-phone-hint.png",
+    "docs/onboarding/01-phone-invalid.png",
+    "docs/onboarding/02-folder.png",
+    "docs/onboarding/03-privacy.png",
+    "docs/onboarding/04-ocr.png",
+    "docs/onboarding/05-connectors.png",
+    "docs/onboarding/06-finish.png",
+    "docs/onboarding/07-dashboard.png",
+    "docs/v021-adversarial.md",
+    "docs/v021-run.md",
+    "packages/ymzz-py/README.md",
+    "packages/ymzz-py/pyproject.toml",
+    "packages/ymzz-py/src/ymzz/__init__.py",
+    "packages/ymzz-py/tests/test_ymzz.py",
+    "packages/ymzz/README.md",
+    "packages/ymzz/bin/ymzz.mjs",
+    "packages/ymzz/lib/steward.mjs",
+    "packages/ymzz/package.json",
+    "packages/ymzz/test.test.mjs",
+    "packaging/ymzz-loop.desktop",
+    "scripts/android-smoke.mjs",
+    "scripts/linux-launch-smoke.sh",
+    "scripts/macos-launch-smoke.sh",
+    "scripts/package-deb.sh",
+    "scripts/prepare-tauri-core.sh",
+    "scripts/windows-install-smoke.ps1",
+    "scripts/windows-webdriver.mjs",
+    "scripts/ymzz-desktop.sh",
+    "scripts/ymzz-v021.sh",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/app-icon.png",
+    "src-tauri/build.rs",
+    "src-tauri/capabilities/default.json",
+    "src-tauri/icons/128x128.png",
+    "src-tauri/icons/128x128@2x.png",
+    "src-tauri/icons/32x32.png",
+    "src-tauri/icons/icon.icns",
+    "src-tauri/icons/icon.ico",
+    "src-tauri/icons/icon.png",
+    "src-tauri/permissions/core-http.toml",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/main.rs",
+    "src-tauri/tauri.conf.json",
+    "test/clickthrough.mjs",
+    "test/product-only-gate.mjs",
+    "test/site-mutual-nav.test.mjs",
+    "test/v021-t3-reuse.test.mjs",
+    "test/v021-tokens.test.mjs",
+    "third_party/t3code/LICENSE",
+    "third_party/t3code/NOTICE.md",
+    "third_party/t3code/bridge.mjs",
+    "third_party/t3code/package-lock.json",
+    "third_party/t3code/package.json",
+    "third_party/t3code/src/cliArgs.ts",
+    "third_party/t3code/src/gitPatchPath.ts",
+    "third_party/t3code/src/hostClassification.ts",
+    "third_party/t3code/src/mergeMessage.ts",
+    "third_party/t3code/src/modelShortName.ts",
+    "third_party/t3code/src/path.ts",
+    "third_party/t3code/src/searchRanking.ts",
+    "third_party/t3code/src/semver.ts",
+    "third_party/t3code/src/threadSearch.ts",
+    "third_party/t3code/upstream/collectStreamText.ts",
+    "third_party/t3code/upstream/processGroup.ts"
+  ],
+  "samePathDifferentBlob": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/pages.yml",
+    ".gitignore",
+    "CHANGELOG.md",
+    "PRODUCT_NOTES.md",
+    "README.ko.md",
+    "README.md",
+    "README.zh-CN.md",
+    "README.zh-Hant.md",
+    "THIRD_PARTY.md",
+    "docs/product-only.md",
+    "scripts/lint.mjs",
+    "site/i18n/ar.json",
+    "site/i18n/en.json",
+    "site/i18n/ko.json",
+    "site/i18n/zh-CN.json",
+    "site/i18n/zh-Hant.json",
+    "site/index.html",
+    "site/llms.txt",
+    "site/start.html",
+    "site/support.html",
+    "test/nav-elastic.test.mjs",
+    "test/product-branch.test.mjs",
+    "test/todos-ttl.test.mjs",
+    "test/v020-hackathon.test.mjs",
+    "test/v0201-ui-fix.test.mjs",
+    "test/v0202-geo.test.mjs",
+    "test/v0203-pricing-quickstart.test.mjs",
+    "test/v0204-i18n.test.mjs"
+  ]
+}

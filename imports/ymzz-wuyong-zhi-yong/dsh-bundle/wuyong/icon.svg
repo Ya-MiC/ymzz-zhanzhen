@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+  <defs>
+    <linearGradient id="hub" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+  <!-- 轂（空心圓環，代表 Agent 本體為空） -->
+  <circle cx="12" cy="12" r="5" fill="none" stroke="url(#hub)" stroke-width="2.5"/>
+  <!-- 三根輻條（代表可換技能） -->
+  <line x1="12" y1="7" x2="12" y2="2" stroke="url(#hub)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="7.6" y1="7.6" x2="3.2" y2="3.2" stroke="url(#hub)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="16.4" y1="7.6" x2="20.8" y2="3.2" stroke="url(#hub)" stroke-width="2" stroke-linecap="round"/>
+  <!-- 小圓點：本地技能 / 池內技能 -->
+  <circle cx="12" cy="17" r="1.2" fill="#10B981"/>
+  <circle cx="8" cy="8" r="0.9" fill="#F59E0B"/>
+  <circle cx="16" cy="8" r="0.9" fill="#3B82F6"/>
+</svg>

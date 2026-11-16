@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "id": "low-owner/low-repo/low-skill",
+      "slug": "low-skill",
+      "name": "low-skill",
+      "source": "low-owner/low-repo",
+      "installs": 999999,
+      "sourceType": "github",
+      "installUrl": "https://github.com/low-owner/low-repo",
+      "url": "https://skills.sh/low-owner/low-repo/low-skill"
+    },
+    {
+      "id": "low-owner/low-repo/low-skill-2",
+      "slug": "low-skill-2",
+      "name": "low-skill-2",
+      "source": "low-owner/low-repo",
+      "installs": 500000,
+      "sourceType": "github",
+      "installUrl": "https://github.com/low-owner/low-repo",
+      "url": "https://skills.sh/low-owner/low-repo/low-skill-2"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "perPage": 500,
+    "total": 5,
+    "hasMore": true
+  }
+}
