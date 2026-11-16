@@ -1,74 +1,75 @@
 {
-  "tested_at": "2026-11-16T06:57:16.931Z",
-  "timezone": "Asia/Seoul",
-  "platform": "linux",
-  "mode": "offline-deterministic-no-model",
-  "result": {
-    "id": "c395e34c-3820-48a3-856e-fca1447e58cb",
-    "title": "請使用 find-skills 技能",
-    "input": "晏銘湛箴：三十輻共一轂。\nKeep data local. Verify evidence before review.",
-    "state": "review",
+  "codeCommit": "c415cb44fd15d8b33798749306b3b9a943467676",
+  "verifiedAtKST": "2026-11-16 16:09:00 KST",
+  "assertions": {
+    "offline": true,
+    "liveModelInference": false,
+    "realRustCore": true,
+    "realDSHKernel": true,
+    "explicitHumanReview": true,
+    "explicitMemoryConsent": true
+  },
+  "task": {
+    "id": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
+    "title": "find-skills 離線盤點與修正驗證",
+    "input": "﻿湛箴 local-first task\r\nExplicit consent and evidence\r\n",
+    "state": "done",
     "owner": "local-agent",
     "result": {
       "engine": "ymzz-core/integrity",
       "gate_passed": true,
-      "input_hash": "6c66f05a35dc02ad17a91421e92d6c5bbce774eaef43df428ea90dc720c91bb8",
+      "gate_reason": "PASS",
+      "input_hash": "45a5e39acbd438d158bc9f5dd3eb433592710f1adc40189c7b42cd84ed60f8a1",
       "kind": "offline-text-inventory",
       "lines": 2,
-      "row_hash": "e3c25127df64d0fd5cb4b60bb261342a70a898ba3b957fcf72f9c11cc38a8fea",
-      "words": 8,
+      "row_hash": "eaf6d66d9d4b1c3061dd0f63245e7047be635c73993ec3e14f369984b4308680",
+      "words": 7,
       "mode": "deterministic-offline-not-model-inference",
-      "recorded": "2026-11-16 06:57 UTC (UTC+0)"
+      "recorded": "2026-11-16 07:09 UTC (UTC+0)"
     }
   },
-  "proof": {
+  "chain": {
     "valid": true,
     "events": [
       {
         "seq": 1,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "created",
         "payload": {
-          "input_sha256": "9c27405781e8baf5808603c00bc5b591de1a2c5bd0c2c7dd9021935f536a0e18"
+          "input_sha256": "50ec8d0b22e44473e397539ce6d6aa9fa70a2079929d75c2aa0a38cd415189ce"
         },
         "previous": "",
-        "hash": "729ed39033491646d5e0fdc86bf950ca32f711c3d52ed166667081774668dfac"
+        "hash": "594df3eab2854b171133a39226a2d209894ae135587a72005e46cdbdd3ed71b8"
       },
       {
         "seq": 2,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "claimed",
         "payload": {
           "owner": "local-agent"
         },
-        "previous": "729ed39033491646d5e0fdc86bf950ca32f711c3d52ed166667081774668dfac",
-        "hash": "4c478f0f17ccb878a8060175f64cd29a865ed3796ddda31278c0353706c01f4a"
+        "previous": "594df3eab2854b171133a39226a2d209894ae135587a72005e46cdbdd3ed71b8",
+        "hash": "c6a88ccf33ca1e202544d3458c0c8b7ebe392e4fae9ce30ac9710abfa99c4484"
       },
       {
         "seq": 3,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "running",
         "payload": {
           "owner": "local-agent"
         },
-        "previous": "4c478f0f17ccb878a8060175f64cd29a865ed3796ddda31278c0353706c01f4a",
-        "hash": "8f866e3592639ccd51d06765cacdecdfd56e4b1e9df0bf1e9250683527c85274"
+        "previous": "c6a88ccf33ca1e202544d3458c0c8b7ebe392e4fae9ce30ac9710abfa99c4484",
+        "hash": "83b58da1187f816ba748a41d16ee3e111e773b8d55c127901ee1a2b97f09501f"
       },
       {
         "seq": 4,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "dispatch",
         "payload": {
           "route": "local",
           "source": "ymzz-wuyong-zhi-yong/signals",
           "thinking_available": false,
-          "triggers": [
-            {
-              "id": "zh_skill_word",
-              "score": 0.3,
-              "hint": "提到 skill／技能"
-            }
-          ],
+          "triggers": [],
           "candidates": [
             {
               "id": "find-skills",
@@ -83,215 +84,106 @@
             "text_sha256": "c00eeea0e13e74fe4a9d84ba0a8542205a1b736d65f13134fe1a6647eb14976f"
           }
         },
-        "previous": "8f866e3592639ccd51d06765cacdecdfd56e4b1e9df0bf1e9250683527c85274",
-        "hash": "ba346cdd41d7d2621e52181478de2a52e412e6aad80350349e926ec7903d0337"
+        "previous": "83b58da1187f816ba748a41d16ee3e111e773b8d55c127901ee1a2b97f09501f",
+        "hash": "a79e584913fc138edf72eec56911b5571d9848c1c68c7beff84746b718d3bae7"
       },
       {
         "seq": 5,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "gate",
         "payload": {
           "attempt": 1,
           "result": {
             "engine": "ymzz-core/integrity",
-            "gate_passed": true,
-            "input_hash": "6c66f05a35dc02ad17a91421e92d6c5bbce774eaef43df428ea90dc720c91bb8",
+            "gate_passed": false,
+            "gate_reason": "NORMALIZATION_REQUIRED",
+            "input_hash": "2c2838a5429c61fe678d5e3277380e6fd62ec1977cb5735cae537f48524f8391",
             "kind": "offline-text-inventory",
             "lines": 2,
-            "row_hash": "e3c25127df64d0fd5cb4b60bb261342a70a898ba3b957fcf72f9c11cc38a8fea",
-            "words": 8
+            "row_hash": "73108a48434a3ffa1803d51cdfcfcb7334b8a14ab86b02d5ddfae47933d9f5b2",
+            "words": 7
           }
         },
-        "previous": "ba346cdd41d7d2621e52181478de2a52e412e6aad80350349e926ec7903d0337",
-        "hash": "8e0e71056ea09f14cb0801e7c4a6f2381936c8a604278c1a8f56245b4a5d69c4"
+        "previous": "a79e584913fc138edf72eec56911b5571d9848c1c68c7beff84746b718d3bae7",
+        "hash": "ed3036325b7ee187a4e986725832e0a6be631ef11b95c5efb45e62c61414db50"
       },
       {
         "seq": 6,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
+        "kind": "gate",
+        "payload": {
+          "attempt": 2,
+          "result": {
+            "engine": "ymzz-core/integrity",
+            "gate_passed": true,
+            "gate_reason": "PASS",
+            "input_hash": "45a5e39acbd438d158bc9f5dd3eb433592710f1adc40189c7b42cd84ed60f8a1",
+            "kind": "offline-text-inventory",
+            "lines": 2,
+            "row_hash": "eaf6d66d9d4b1c3061dd0f63245e7047be635c73993ec3e14f369984b4308680",
+            "words": 7
+          }
+        },
+        "previous": "ed3036325b7ee187a4e986725832e0a6be631ef11b95c5efb45e62c61414db50",
+        "hash": "1929ea395db9cc23945ae24d61e247d1dcac6168141a3c38ca14d5cc23b9e8ec"
+      },
+      {
+        "seq": 7,
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "review",
         "payload": {
           "engine": "ymzz-core/integrity",
           "gate_passed": true,
-          "input_hash": "6c66f05a35dc02ad17a91421e92d6c5bbce774eaef43df428ea90dc720c91bb8",
+          "gate_reason": "PASS",
+          "input_hash": "45a5e39acbd438d158bc9f5dd3eb433592710f1adc40189c7b42cd84ed60f8a1",
           "kind": "offline-text-inventory",
           "lines": 2,
-          "row_hash": "e3c25127df64d0fd5cb4b60bb261342a70a898ba3b957fcf72f9c11cc38a8fea",
-          "words": 8,
+          "row_hash": "eaf6d66d9d4b1c3061dd0f63245e7047be635c73993ec3e14f369984b4308680",
+          "words": 7,
           "mode": "deterministic-offline-not-model-inference",
-          "recorded": "2026-11-16 06:57 UTC (UTC+0)"
+          "recorded": "2026-11-16 07:09 UTC (UTC+0)"
         },
-        "previous": "8e0e71056ea09f14cb0801e7c4a6f2381936c8a604278c1a8f56245b4a5d69c4",
-        "hash": "c4bf21e51af1bc020a2971a0fe9633353f2fbc1ef214c5fe691d3b05f20ec156"
+        "previous": "1929ea395db9cc23945ae24d61e247d1dcac6168141a3c38ca14d5cc23b9e8ec",
+        "hash": "da577845f513c491cf62f16f3aebeb20d712c66f74329ac8bc21e7275c4c96fd"
       },
       {
-        "seq": 7,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "seq": 8,
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "done",
         "payload": {
           "engine": "ymzz-core/integrity",
           "gate_passed": true,
-          "input_hash": "6c66f05a35dc02ad17a91421e92d6c5bbce774eaef43df428ea90dc720c91bb8",
+          "gate_reason": "PASS",
+          "input_hash": "45a5e39acbd438d158bc9f5dd3eb433592710f1adc40189c7b42cd84ed60f8a1",
           "kind": "offline-text-inventory",
           "lines": 2,
-          "row_hash": "e3c25127df64d0fd5cb4b60bb261342a70a898ba3b957fcf72f9c11cc38a8fea",
-          "words": 8,
+          "row_hash": "eaf6d66d9d4b1c3061dd0f63245e7047be635c73993ec3e14f369984b4308680",
+          "words": 7,
           "mode": "deterministic-offline-not-model-inference",
-          "recorded": "2026-11-16 06:57 UTC (UTC+0)"
+          "recorded": "2026-11-16 07:09 UTC (UTC+0)"
         },
-        "previous": "c4bf21e51af1bc020a2971a0fe9633353f2fbc1ef214c5fe691d3b05f20ec156",
-        "hash": "1aba20326eb80ef7aee96e4adba9acbc747bead3f8ba5c17dfb5fa7ada1df18b"
+        "previous": "da577845f513c491cf62f16f3aebeb20d712c66f74329ac8bc21e7275c4c96fd",
+        "hash": "7cea6d93341a1dffd0a71cb32267492afec73bc60f0cc472a5e2b89965d7cb12"
       },
       {
-        "seq": 8,
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
+        "seq": 9,
+        "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
         "kind": "remembered",
         "payload": {
-          "id": "59290049-04e2-4997-ae54-03bf2d9e56bb",
-          "text_sha256": "bede6decd9d317b7f59797c0c77d2ce6a20c915c09b9d7297748aa7db03d30b3"
+          "id": "9c71bf14-8131-4f9a-88d8-277b13b92a35",
+          "text_sha256": "c9d40aca45307f1435803230fab5c661377bf5ed68ed03f1d6ab19abea89bff7"
         },
-        "previous": "1aba20326eb80ef7aee96e4adba9acbc747bead3f8ba5c17dfb5fa7ada1df18b",
-        "hash": "e23f7c5d4d9071e48ed4090c11517e61e4fe1e110f7ecb4a5453752db1e25208"
+        "previous": "7cea6d93341a1dffd0a71cb32267492afec73bc60f0cc472a5e2b89965d7cb12",
+        "hash": "1020805c645c0b2bb608a45e62ff207e10ce379c6aea6c762a5bf16b446feb1f"
       }
     ]
   },
-  "state": {
-    "profile": null,
-    "tasks": [
-      {
-        "id": "c395e34c-3820-48a3-856e-fca1447e58cb",
-        "title": "請使用 find-skills 技能",
-        "input": "晏銘湛箴：三十輻共一轂。\nKeep data local. Verify evidence before review.",
-        "state": "done",
-        "owner": "local-agent",
-        "result": {
-          "engine": "ymzz-core/integrity",
-          "gate_passed": true,
-          "input_hash": "6c66f05a35dc02ad17a91421e92d6c5bbce774eaef43df428ea90dc720c91bb8",
-          "kind": "offline-text-inventory",
-          "lines": 2,
-          "row_hash": "e3c25127df64d0fd5cb4b60bb261342a70a898ba3b957fcf72f9c11cc38a8fea",
-          "words": 8,
-          "mode": "deterministic-offline-not-model-inference",
-          "recorded": "2026-11-16 06:57 UTC (UTC+0)"
-        }
-      }
-    ],
-    "plugins": [
-      {
-        "id": "skills",
-        "title": "技能池",
-        "permissions": [
-          "pool.read"
-        ],
-        "enabled": true,
-        "implementation": "trusted built-in, lifecycle owned by official DSH Cordis"
-      },
-      {
-        "id": "dispatch",
-        "title": "無用之用 · 調度",
-        "permissions": [
-          "pool.read",
-          "rules.read"
-        ],
-        "enabled": true,
-        "implementation": "trusted built-in, lifecycle owned by official DSH Cordis"
-      },
-      {
-        "id": "memory",
-        "title": "無無即無 · 記憶",
-        "permissions": [
-          "memory.read",
-          "memory.write.confirmed"
-        ],
-        "enabled": true,
-        "implementation": "trusted built-in, lifecycle owned by official DSH Cordis"
-      },
-      {
-        "id": "audit",
-        "title": "Rust 核心 · 文件驗證",
-        "permissions": [
-          "task.read",
-          "core.execute.fixed"
-        ],
-        "enabled": true,
-        "implementation": "trusted built-in, lifecycle owned by official DSH Cordis"
-      },
-      {
-        "id": "provider",
-        "title": "本機模型（預設停用）",
-        "permissions": [
-          "network.loopback.opt-in"
-        ],
-        "enabled": false,
-        "implementation": "trusted built-in, lifecycle owned by official DSH Cordis"
-      }
-    ],
-    "integrity": true,
-    "provider": null,
-    "payment": null,
-    "skills": [
-      {
-        "id": "find-skills",
-        "license": "MIT",
-        "commit": "af860243b8c68053b3b5151e3732b9322933674d",
-        "excluded": 0
-      },
-      {
-        "id": "agent-browser",
-        "license": "Apache-2.0",
-        "commit": "53384771fbafc261ba67608ac806dd5aa70b84f0",
-        "excluded": 0
-      },
-      {
-        "id": "grill-me",
-        "license": "MIT",
-        "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
-        "excluded": 0
-      },
-      {
-        "id": "hyperframes-cli",
-        "license": "Apache-2.0",
-        "commit": "1b29623f18b5e7e8970605405a7b2a34ddbe6aea",
-        "excluded": 0
-      },
-      {
-        "id": "hyperframes",
-        "license": "Apache-2.0",
-        "commit": "1b29623f18b5e7e8970605405a7b2a34ddbe6aea",
-        "excluded": 40
-      },
-      {
-        "id": "modern-web-guidance",
-        "license": "Apache-2.0",
-        "commit": "4dd968349e54ca45a05dd5c818fb035c9054b022",
-        "excluded": 0
-      },
-      {
-        "id": "impeccable",
-        "license": "Apache-2.0",
-        "commit": "d41d9860b0094dcb68030657da63461212835aaa",
-        "excluded": 13
-      },
-      {
-        "id": "hallmark",
-        "license": "MIT",
-        "commit": "04977e15f3dfd6ee4b74c887dac3eb52665d6c92",
-        "excluded": 82
-      },
-      {
-        "id": "taste-skill",
-        "license": "MIT",
-        "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
-        "excluded": 1473
-      }
-    ],
-    "memory": [
-      {
-        "id": "59290049-04e2-4997-ae54-03bf2d9e56bb",
-        "task": "c395e34c-3820-48a3-856e-fca1447e58cb",
-        "text": "Explicitly confirmed synthetic evidence",
-        "created": "2026-11-16T06:57:16.929Z"
-      }
-    ]
-  }
+  "memory": [
+    {
+      "id": "9c71bf14-8131-4f9a-88d8-277b13b92a35",
+      "task": "6ddf861f-8d45-4aeb-8e81-f5701995d2bd",
+      "text": "使用者明確同意保存的測試結論",
+      "created": "2026-11-16T07:09:00.402Z"
+    }
+  ]
 }

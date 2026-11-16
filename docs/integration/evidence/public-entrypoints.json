@@ -10,7 +10,13 @@
     },
     {
       "url": "https://bingce.yanmingx0215.filegear-sg.me/#onboarding",
-      "error": "HTTPError: HTTP Error 403: Forbidden"
+      "error": "HTTPError: HTTP Error 403: Forbidden",
+      "secondary_check": {
+        "client": "curl GET from box",
+        "status": 200,
+        "bytes": 10102,
+        "note": "Python urllib first read was 403; this is client-dependent reachability, not a missing page."
+      }
     },
     {
       "url": "https://ya-mic.github.io/yanming-official-website/",
