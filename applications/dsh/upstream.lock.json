@@ -16756,7 +16756,8 @@
       "path": ".agents/notes/implemented/CLAUDE.md",
       "mode": "120000",
       "gitBlob": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
-      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+      "linkTarget": "AGENTS.md"
     },
     {
       "path": ".agents/notes/implemented/architecture/2026-06-11-dev-invariants-over-deep-readonly.i18n.yaml",
@@ -25072,7 +25073,8 @@
       "path": ".claude/skills",
       "mode": "120000",
       "gitBlob": "2b7a412b8fa0fb7e985b0793321bd4e698f2b6cd",
-      "sha256": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874"
+      "sha256": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874",
+      "linkTarget": "../.agents/skills"
     },
     {
       "path": ".editorconfig",
@@ -25558,7 +25560,8 @@
       "path": "CLAUDE.md",
       "mode": "120000",
       "gitBlob": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
-      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+      "linkTarget": "AGENTS.md"
     },
     {
       "path": "CONTRIBUTING.i18n.yaml",
@@ -25972,7 +25975,8 @@
       "path": "apps/cli/tests/profiles/acp/cordis.yml",
       "mode": "120000",
       "gitBlob": "8a6e191c8e97ad8f581569c74f922c60aa5797c0",
-      "sha256": "e66c4cb7a6f5869ab070c7784114815b12e8366ed2a401d969312892aa39a3be"
+      "sha256": "e66c4cb7a6f5869ab070c7784114815b12e8366ed2a401d969312892aa39a3be",
+      "linkTarget": "../../../../../snapshots/acp/escalation-approved/cordis.yml"
     },
     {
       "path": "apps/cli/tests/profiles/acp/tests/acp.e2e.ts",
@@ -43396,7 +43400,8 @@
       "path": "packages/CLAUDE.md",
       "mode": "120000",
       "gitBlob": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
-      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+      "linkTarget": "AGENTS.md"
     },
     {
       "path": "packages/README.i18n.yaml",
@@ -117178,13 +117183,15 @@
       "path": "snapshots/acp/escalation-approved/system-prompt.expected.md",
       "mode": "120000",
       "gitBlob": "bb85c10476f74cedd0285da78a06cdd6246ae8f9",
-      "sha256": "12640ae132cdc6b4f4d4a2074392fa61e246af096304f1336dc6398af3fc7fae"
+      "sha256": "12640ae132cdc6b4f4d4a2074392fa61e246af096304f1336dc6398af3fc7fae",
+      "linkTarget": "../../session/text-turn/system-prompt.expected.md"
     },
     {
       "path": "snapshots/acp/escalation-approved/tool-schemas.expected.json",
       "mode": "120000",
       "gitBlob": "c77f354b59928be0fc5371c4a14aee8e85a10a25",
-      "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e"
+      "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e",
+      "linkTarget": "../../session/text-turn/tool-schemas.expected.json"
     },
     {
       "path": "snapshots/acp/escalation-rejected/input.json",
@@ -117388,7 +117395,8 @@
       "path": "snapshots/acp/image-compaction/system-prompt.expected.md",
       "mode": "120000",
       "gitBlob": "7d5e489c58e4975138807a6955d21cce9eca8138",
-      "sha256": "a69f942fb36eb0472339da37c0e0e7296075c3ba1a23ac22c2fb030f936427ef"
+      "sha256": "a69f942fb36eb0472339da37c0e0e7296075c3ba1a23ac22c2fb030f936427ef",
+      "linkTarget": "../../session/read-image/system-prompt.expected.md"
     },
     {
       "path": "snapshots/acp/reject-extra-dirs/input.json",
@@ -117472,13 +117480,15 @@
       "path": "snapshots/sdk/account-provider-signout/system-prompt.expected.md",
       "mode": "120000",
       "gitBlob": "4ca0dd39b2abbfbf8d5bbb8ba56efdc36a0621f7",
-      "sha256": "9d1983b66ed868d1f880f974d2f631390fbdc69b52e92d4d0b0dce95c9d686b8"
+      "sha256": "9d1983b66ed868d1f880f974d2f631390fbdc69b52e92d4d0b0dce95c9d686b8",
+      "linkTarget": "../text-turn/system-prompt.expected.md"
     },
     {
       "path": "snapshots/sdk/account-provider-signout/tool-schemas.expected.json",
       "mode": "120000",
       "gitBlob": "c77f354b59928be0fc5371c4a14aee8e85a10a25",
-      "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e"
+      "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e",
+      "linkTarget": "../../session/text-turn/tool-schemas.expected.json"
     },
     {
       "path": "snapshots/sdk/approval/runtime.cordis.yml",
@@ -119560,7 +119570,8 @@
       "path": "snapshots/session/agent-instructions/workspace/AGENTS.md",
       "mode": "120000",
       "gitBlob": "83624c92b714a954e3b43d12785ceb222f3f4828",
-      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb",
+      "linkTarget": "AGENTS.canonical.md"
     },
     {
       "path": "snapshots/session/agent-instructions/workspace/nested/AGENTS.canonical.md",
@@ -119572,7 +119583,8 @@
       "path": "snapshots/session/agent-instructions/workspace/nested/AGENTS.md",
       "mode": "120000",
       "gitBlob": "83624c92b714a954e3b43d12785ceb222f3f4828",
-      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb",
+      "linkTarget": "AGENTS.canonical.md"
     },
     {
       "path": "snapshots/session/agent-instructions/workspace/nested/task.txt",
@@ -129046,7 +129058,8 @@
       "path": "vendor/CLAUDE.md",
       "mode": "120000",
       "gitBlob": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
-      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+      "linkTarget": "AGENTS.md"
     },
     {
       "path": "vendor/README.md",

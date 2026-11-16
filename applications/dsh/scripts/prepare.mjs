@@ -1,11 +1,17 @@
+import {pinnedBytes} from './pinned-source.mjs';
 // MIT. Reproducible derivative BUILD COPY. The complete pinned upstream remains immutable.
 import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';import {createHash} from 'node:crypto';
 const base=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),product=path.resolve(base,'../..'),source=path.join(base,'upstream'),work=path.join(base,'.worktree'),data=path.join(base,'.data');
 const lock=JSON.parse(fs.readFileSync(path.join(base,'upstream.lock.json'),'utf8'));
-for(const f of lock.files){const p=path.join(source,f.path),b=f.mode==='120000'&&fs.lstatSync(p).isSymbolicLink()?Buffer.from(fs.readlinkSync(p)):fs.readFileSync(p);const h=b=>createHash('sha256').update(b).digest('hex');if(h(b)!==f.sha256&&!(process.platform==='win32'&&f.path.endsWith('.cmd')&&h(Buffer.from(b.toString('utf8').replaceAll('\r\n','\n')))===f.sha256))throw new Error('UPSTREAM_CHANGED: '+f.path)}
+for(const f of lock.files)pinnedBytes(source,f);
 if(!fs.existsSync(work))fs.cpSync(source,work,{recursive:true,verbatimSymlinks:true});fs.mkdirSync(data,{recursive:true});
 // Windows Git may check symlinks out as their exact tracked link-text bytes. Reify ONLY in the build copy.
-for(const f of lock.files.filter(f=>f.mode==='120000')){const dest=path.join(work,f.path);if(fs.lstatSync(dest).isSymbolicLink())continue;const src=path.join(source,f.path),target=fs.lstatSync(src).isSymbolicLink()?fs.readlinkSync(src):fs.readFileSync(src,'utf8'),resolved=path.resolve(path.dirname(dest),target);if(path.isAbsolute(target)||!resolved.startsWith(work+path.sep))throw new Error('EXTERNAL_UPSTREAM_LINK');fs.unlinkSync(dest);try{fs.symlinkSync(target,dest,fs.statSync(resolved).isDirectory()?'junction':'file')}catch{fs.cpSync(resolved,dest,{recursive:true})}}
+for(const f of lock.files.filter(f=>f.mode==='120000')){
+ const dest=path.join(work,f.path),target=f.linkTarget,resolved=path.resolve(path.dirname(dest),target);
+ if(path.isAbsolute(target)||!resolved.startsWith(work+path.sep))throw new Error('EXTERNAL_UPSTREAM_LINK');
+ const st=fs.lstatSync(dest);if(st.isSymbolicLink()||st.isFile())fs.unlinkSync(dest);else if(st.isDirectory())fs.rmSync(dest,{recursive:true});else throw new Error('BUILD_LINK_TYPE_INVALID');
+ try{const directory=fs.statSync(resolved).isDirectory();fs.symlinkSync(process.platform==='win32'&&directory?resolved:target,dest,directory?'junction':'file')}catch{fs.cpSync(resolved,dest,{recursive:true})}
+}
 const changes=[],texts=new Map();function edit(file,from,to,reason){const original=texts.get(file)??fs.readFileSync(path.join(source,file),'utf8');if(original.split(from).length!==2)throw new Error('PINNED_PATCH_NOT_UNIQUE: '+file);const next=original.replace(from,to);texts.set(file,next);fs.writeFileSync(path.join(work,file),next);changes.push({file,reason})}
 edit('scripts/dev-web.ts',"spawnStage(supervisor, `tsc -b ${CLIENT_TYPE_PROGRAM} --watch`, 'tsc', [","spawnStage(supervisor, `tsc -b ${CLIENT_TYPE_PROGRAM} --watch`, process.execPath, [\n    join(repoRoot, 'node_modules/typescript/bin/tsc'),",'resolve pinned upstream TypeScript explicitly; do not inherit outer monorepo compiler');
 edit('apps/desktop/scripts/pack-local-packages.ts',"import { parseArgs } from 'node:util'","import { parseArgs } from 'node:util'\nimport { execa } from 'execa'\nimport { pnpmInvocation } from '../../../scripts/pnpm-invocation.ts'",'use official pnpm tarball packer for the extra product plugin');

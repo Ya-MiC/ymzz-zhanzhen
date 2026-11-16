@@ -31,8 +31,11 @@ jobs:
       - name: Verify all pinned upstream bytes and prepare additive derivative
         run: node applications/dsh/scripts/prepare.mjs
       - name: Install FULL 408-project upstream workspace with reviewed lifecycle scripts disabled
+        id: install
         working-directory: applications/dsh/.worktree
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Source pin and Windows checkout adversarial tests
+        run: node --test applications/dsh/tests/*.test.mjs
       - name: Real full DSH Electron Windows directory packaging (unsigned, no NSIS installer, no publishing)
         working-directory: applications/dsh/.worktree
         run: pnpm run package:desktop:win:x64:dir --unsigned
@@ -40,7 +43,7 @@ jobs:
         shell: pwsh
         run: ./applications/dsh/scripts/windows-smoke.ps1 -BuildRoot applications/dsh/.worktree
       - name: Scan actual full production dependency graph
-        if: always()
+        if: ${{ always() && steps.install.conclusion == 'success' }}
         run: node applications/dsh/scripts/licenses.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -48,7 +51,6 @@ jobs:
           name: full-dsh-qualification-${{ github.sha }}
           path: |
             applications/dsh/evidence/windows/
-            applications/dsh/evidence/full-production-license-report.json
           if-no-files-found: error
       - name: Fail closed before distributing any restricted native runtime
         run: node applications/dsh/scripts/licenses.mjs --enforce

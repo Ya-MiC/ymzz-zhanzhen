@@ -43,7 +43,7 @@ pnpm start            # 真正 pnpm dsh web；本機 URL 由官方 launcher 輸�
 ## 證據與界線
 
 - [`evidence/full-dsh-web-task.json`](evidence/full-dsh-web-task.json)：真正完整 DSH Web host、原生 Agent Loop、真實 Node 測試與人工 gate 的 API 整合證據。可重跑 `scripts/smoke-web.py --launch-log <這次自己啟動的官方輸出檔>`；不要將其中一次性本機 token 提交 Git。
-- `pnpm test`：7 項來源／資源／封裝契約檢查；不拿靜態 contract tests 冒充 GUI 或模型推論。
+- `pnpm test`：9 項來源／資源／封裝契約檢查；不拿靜態 contract tests 冒充 GUI 或模型推論。
 - [Windows workflow](../../.github/workflows/full-dsh.yml)：原版 Electron Windows directory packaging，再以 Windows UIAutomation 操作**真正打包的完整應用**（不是瀏覽器腳本），在中文／空白 portable 路徑驗證暱稱、原生插件、任務、失敗→修復→通過、驗收／記憶與還原。**目前尚未以成功 CI 證據宣稱此完整 DSH Windows 包完成。**
 - 舊 Windows Tauri artifact 仍在根 README 歷史段，但不是這裡的完整 DSH 下載。
 
