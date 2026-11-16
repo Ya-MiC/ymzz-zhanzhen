@@ -25,17 +25,24 @@ export async function signedPageOrder(order,env,now=new Date()){
  const sig=new Uint8Array(await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,encoder.encode(content)));params.sign=btoa(String.fromCharCode(...sig));
  return 'https://openapi-sandbox.dl.alipaydev.com/gateway.do?'+new URLSearchParams(params);
 }
+// Bound actual streamed bytes, including requests that omit Content-Length.
+async function readBoundedNotification(request){
+ const reader=request.body?.getReader();requireValue(reader,'BODY_REQUIRED');let size=0;const chunks=[];
+ try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>16384){await reader.cancel('notification too large');throw new Error('REQUEST_TOO_LARGE');}chunks.push(value);}}finally{reader.releaseLock();}
+ const joined=new Uint8Array(size);let offset=0;for(const chunk of chunks){joined.set(chunk,offset);offset+=chunk.byteLength;}
+ return new TextDecoder('utf-8',{fatal:true}).decode(joined);
+}
 export default {
  async fetch(request,env){
   // No public create-order endpoint: a trusted server records priced orders and invokes signedPageOrder.
   const url=new URL(request.url);if(url.pathname!=='/notify'||request.method!=='POST')return new Response('Not found',{status:404});
   try{
    requireValue(env.MODE==='sandbox'&&Number(request.headers.get('content-length')||0)<=16384,'SANDBOX_ONLY');
-   const text=await request.text();requireValue(text.length<=16384,'REQUEST_TOO_LARGE');const form=new URLSearchParams(text);const params=Object.fromEntries(form);
+   const text=await readBoundedNotification(request);const form=new URLSearchParams(text);const params=Object.fromEntries(form);
    requireValue([...form.keys()].length===Object.keys(params).length,'DUPLICATE_PARAMETERS');
    const order=await env.ORDERS.prepare('SELECT * FROM alipay_orders WHERE id=?').bind(params.out_trade_no).first();
    const result=await verifyNotification(params,order,env);
-   const changed=await env.ORDERS.prepare("UPDATE alipay_orders SET state='paid',trade_no=? WHERE id=? AND state='pending'").bind(result.trade_no,order.id).run();
+   const changed=await env.ORDERS.prepare("UPDATE alipay_orders SET state='paid',trade_no=? WHERE id=? AND state='pending' AND amount=?").bind(result.trade_no,order.id,order.amount).run();
    requireValue(result.idempotent||changed.meta.changes===1,'ORDER_RACE_REJECTED');return new Response('success');
   }catch{return new Response('failure',{status:400});}
  }

@@ -46,7 +46,13 @@ YMZZ_DATA_DIR="$PWD/.local-data" YMZZ_CORE_EXECUTABLE="$PWD/target/debug/ymzz-ru
 - 檢查原生 GUI 視窗、保存 onboarding 截圖；對**此已啟動 App 的 bundled core**完成認領→Rust 執行→驗收→記憶與證據驗證。
 - 只有 smoke 通過才輸出 `zhanzhen-windows-x64-portable` artifact；`zhanzhen-windows-proof` 含截圖與真離線任務證據。不是 release，不公開發布。
 
-**只有實際 CI 綠燈與產物存在才算 Windows 證據，不把 YAML 當成已驗收。** 首次整合提交時 Windows 執行尚待 CI；當前本機 Linux 通過不等於 Windows 已正常。未提供 macOS/Linux/iOS/Android 新 runtime 發行包。
+**已完成一次真實 Windows 驗收**：[run 43822844570](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570)，code `ee2009406a25ae71d7e79516b4f3d9ec69d32a72`，2026-11-16 16:24:56 KST，Linux regression 與 Windows portable 皆 success。不是把 YAML 當驗收。
+
+- [下載已驗收 x64 portable artifact](https://github.com/Ya-MiC/ymzz-zhanzhen/actions/runs/43822844570/artifacts/14205472160)（Actions 可能要求 GitHub 登入，artifact 至 2027-02-14 16:18 KST 過期，不是永久 release）。
+- 解壓 GitHub artifact 的外層 ZIP，再解壓內層 `ymzz-zhanzhen-windows-x64-portable.zip` **整包**，雙擊 `ymzz-zhanzhen.exe`；不只複製 exe。不要解壓至唯讀／Program Files。
+- 已下載核對兩個真正 AMD64 PE（app 9,080,320 bytes、bundled Node 93,915,464 bytes），ZIP 含 1,095 entries、453 個授權文本檔，無預置使用者 data。完整 [hash／產物／執行 receipt](evidence/windows-ci-proof.json)。
+- [實際引導截圖](evidence/windows-onboarding.png)、[真 Windows Rust 任務與有效證據鏈](evidence/windows-offline-task.json)。本機 Linux 另有 [失敗閘→修正→第二次通過](evidence/linux-offline-task.json)。均無模型推論。
+- 未簽章開發版可能有 SmartScreen 提示；未提供 macOS/Linux/iOS/Android 新 runtime 發行包，也未驗收所有 Windows 版本／第一位真人的裝置。
 
 為滿足「不改註冊表」，首版是完整 ZIP 解壓即用，**不生成 MSI／NSIS**（這些正常安裝器通常需要寫註冊表）。應用本身無自啟動、服務、登錄檔操作。Windows 需已有 WebView2；本套件不會私自下載它，亦不保證 Windows／WebView2 底層永無登錄檔或快取操作。關閉後刪除可攜資料夾即移除應用資料；不要只移動 exe。
 
@@ -104,12 +110,24 @@ YMZZ_DATA_DIR="$PWD/.local-data" YMZZ_CORE_EXECUTABLE="$PWD/target/debug/ymzz-ru
 - 真正兩個外部網站與官網的全部互相入口部署：新 GUI 已同一產品家族索引，現有來源不改；Loop Pages 受 product 分支環境保護規則阻擋，未越權修改規則；不改網域／路由／設定。
 - npm/PyPI 原 package 來源保留未發布；本次未新增公開 release。
 
-# English
+## 測試矩陣
 
-This is a runnable first vertical slice, not a completed autonomous agent or a site redesign. It executes the official MIT DSH Cordis/Cosmokit plugin kernel at a pinned commit, new permission-gated YMZZ plugins, local SQLite tasks and confirmed memory, pinned Wuyong dispatch rules, and the existing Rust integrity core. A real deterministic task follows create → claim → run → gate → human review → explicitly confirmed memory. It is not live model inference.
-
-All original target files remain, and both unrelated ymzz-loop branch-head trees are preserved with file hashes. The actual target is Rust/React, not the FastAPI/Vue system described in the request. Wuwong is an upstream skeleton; its implemented memory adapter is new. See the full gap list above, exact source and skill locks, Windows CI proof requirements, license boundaries, and payment limitations. Windows portability is only claimed after the executable smoke and artifacts succeed; no release, merge, purchase, protection-rule change, or real payment is performed by this integration.
+|檢查|實際結果／限制|
+|---|---|
+|Rust workspace|28 通過（原 24 + 新 4）；Linux CI；Windows 同核心真正執行|
+|原 React UI|21 通過，TypeScript/Vite build；Linux 與 Windows CI|
+|新 runtime/provider/payment|20 本機離線通過；上列首個 Windows artifact 的 code 有 18 項，另 2 項為後續 callback 邊界／mock D1 加固|
+|原 Loop|76 通過；獨立拷貝，排除需要原 Git refs/fetch 的 product-branch 檔案|
+|來源／技能鎖|1,220 個原始檔逐檔 checksum；9 entrypoints；雙分支 68 個提交 metadata inventory|
+|授權|386 個 resolved Rust/new npm 記錄，0 blocked；另保留原前端 225 筆清單；實際收集 254 packages 的授權文本|
+|未測|真人 Windows 裝置、live LLM/NIM、真商戶／支付帳號、部署 Worker/workerd、多端發行、完整 DSH Agent Loop|
 
 ## 補充測試與授權證據
 
 原 Loop 的非 Git-ref 依賴測試在獨立拷貝跑過 **76/76**；只排除會對目前 Git origin fetch product 的 product-branch 測試檔，避免在整合倉庫誤操作 remote。原始快照無修改。另有原 UI 225 筆解析後依賴授權清單（含 dev/build），以及 portable build 實際收集的 Rust/React/Scheduler/Zustand 授權／NOTICE 文本。MPL selectors 使用原授權，並提供未修改原碼下載／固定 commit；沒有重標 MIT。某些上游 package 未附根 LICENSE，另保留其明確 SPDX 聲明與官方標準條款，見 notices.lock.json。
+
+# English
+
+This is a runnable first vertical slice, not a completed autonomous agent or a site redesign. It executes the official MIT DSH Cordis/Cosmokit plugin kernel at a pinned commit, new permission-gated YMZZ plugins, local SQLite tasks and confirmed memory, pinned Wuyong dispatch rules, and the existing Rust integrity core. A real deterministic task follows create → claim → run → gate → human review → explicitly confirmed memory. It is not live model inference.
+
+All original target files remain, and both unrelated ymzz-loop branch-head trees are preserved with file hashes. The actual target is Rust/React, not the FastAPI/Vue system described in the request. Wuwong is an upstream skeleton; its implemented memory adapter is new. See the full gap list above, exact source and skill locks, Windows CI proof requirements, license boundaries, and payment limitations. Windows executable/GUI/task proof at code ee20094 is linked above; this is an unsigned portable development artifact, not an MSI or a guarantee for every Windows PC; no release, merge, purchase, protection-rule change, or real payment is performed by this integration.
