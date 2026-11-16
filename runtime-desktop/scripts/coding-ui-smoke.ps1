@@ -3,14 +3,14 @@ param($Element,[string]$Origin,[string]$Token,[string]$Data)
 $ErrorActionPreference='Stop'
 $headers=@{Authorization="Bearer $Token"}
 function State { Invoke-RestMethod "$Origin/api/state" -Headers $headers }
-function Find-Control([string]$name) {
+function Find-Control([string]$name,$pattern=$null) {
  $condition=New-Object System.Windows.Automation.PropertyCondition([System.Windows.Automation.AutomationElement]::NameProperty,$name)
  $deadline=(Get-Date).AddSeconds(20)
- do {$found=$Element.FindFirst([System.Windows.Automation.TreeScope]::Descendants,$condition);if(!$found){Start-Sleep -Milliseconds 200}}until($found -or (Get-Date) -gt $deadline)
+ do {$found=$null;$matches=$Element.FindAll([System.Windows.Automation.TreeScope]::Descendants,$condition);foreach($candidate in $matches){if(!$pattern){$found=$candidate;break};try{$null=$candidate.GetCurrentPattern($pattern);$found=$candidate;break}catch{}};if(!$found){Start-Sleep -Milliseconds 200}}until($found -or (Get-Date) -gt $deadline)
  if(!$found){throw "Missing actual GUI control: $name"};return $found
 }
-function Click([string]$name){$control=Find-Control $name;($control.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern)).Invoke();Start-Sleep -Milliseconds 250}
-function Check([string]$name){$control=Find-Control $name;$toggle=$control.GetCurrentPattern([System.Windows.Automation.TogglePattern]::Pattern);if($toggle.Current.ToggleState -eq [System.Windows.Automation.ToggleState]::Off){$toggle.Toggle()}}
+function Click([string]$name){$control=Find-Control $name ([System.Windows.Automation.InvokePattern]::Pattern);($control.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern)).Invoke();Start-Sleep -Milliseconds 250}
+function Check([string]$name){$control=Find-Control $name ([System.Windows.Automation.TogglePattern]::Pattern);$toggle=$control.GetCurrentPattern([System.Windows.Automation.TogglePattern]::Pattern);if($toggle.Current.ToggleState -eq [System.Windows.Automation.ToggleState]::Off){$toggle.Toggle()}}
 function Wait-Round([string]$id,[int]$round,[string]$status=''){
  $deadline=(Get-Date).AddSeconds(30)
  do{$s=State;$task=$s.coding.tasks|Where-Object {$_.id -eq $id};$ready=$task.round -ge $round -and (!$status -or $task.state -eq $status);if(!$ready){Start-Sleep -Milliseconds 250}}until($ready -or (Get-Date) -gt $deadline)
@@ -20,7 +20,7 @@ function Screenshot([string]$name){$bounds=[System.Windows.Forms.Screen]::Primar
 # Configure a local endpoint through the GUI, but NEVER call inference here.
 Click '模型設定'
 Click '啟用本機模型連線權限'
-$model=Find-Control '模型名稱'
+$model=Find-Control '模型名稱' ([System.Windows.Automation.ValuePattern]::Pattern)
 ($model.GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern)).SetValue('offline-not-connected')
 Click '允許連接這台裝置上的模型'
 if((State).provider.model -ne 'offline-not-connected'){throw 'Actual GUI local-provider configuration failed'}
